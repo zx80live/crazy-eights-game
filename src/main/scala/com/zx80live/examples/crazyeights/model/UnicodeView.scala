@@ -1,16 +1,15 @@
-package com.zx80live.examples.crazyeights
+package com.zx80live.examples.crazyeights.model
 
 /**
  *
  * @author Andrew Proshkin
  */
-case class CardConsoleView(card: Card) {
+trait UnicodeView {
+  this: Card =>
 
-  override def toString: String = {
-    import Rank._
-    import Suit._
-    val suit = card.suit
-    val rank = card.rank
+  override def toString = {
+    import com.zx80live.examples.crazyeights.model.Rank._
+    import com.zx80live.examples.crazyeights.model.Suit._
 
     val s: String = suit match {
       case Spades => "\u2660"
