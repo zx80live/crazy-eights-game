@@ -1,8 +1,10 @@
 package com.zx80live.examples.crazyeights
 
-import com.zx80live.examples.crazyeights.model.{Rank, Suit, Card}
+import com.zx80live.examples.crazyeights.model.{MovePatterns, Rank, Suit, Card}
 
 import scala.util.Random
+import Rank._
+import Suit._
 
 /**
  *
@@ -20,7 +22,13 @@ object TestApp extends App {
 
 
   val deck54: List[Card] = createDeck54
-  deck54 foreach println
-  println("shuffle:")
-  Random.shuffle(deck54) foreach println
+  //  deck54 foreach println
+  //  println("shuffle:")
+  //  Random.shuffle(deck54) foreach println
+
+  val cards = List(Card(Eight, Diamonds), Card(Eight, Spades), Card(Two, Diamonds), Card(Three, Diamonds), Card(Two, Spades), Card(Ace, Clubs), Card(Two, Clubs), Card(Ace, Diamonds))
+
+  //GameLogic.findEight(cards)
+
+  cards.filter(_.rank == Two) foreach println
 }
