@@ -64,9 +64,23 @@ trait MovePatterns {
     cards.filter(_.rank == current.rank)
   }
 
-  def findEight(current: Card, cards: List[Card]): Option[Card] = ???
+  /**
+   * Find first eight
+   *
+   * @param current - current card
+   * @param cards - player's cards
+   * @return first eight option
+   */
+  def findEight(current: Card, cards: List[Card]): Option[Card] = cards.find(_.rank == Eight)
 
-  def findJoker(current: Card, cards: List[Card]): Option[Card] = ???
+  /**
+   * Find first joker
+   *
+   * @param current - current card
+   * @param cards - player's cards
+   * @return first joker option
+   */
+  def findJoker(current: Card, cards: List[Card]): Option[Card] = cards.find(_.suit == Special)
 
   def findPreferred(current: Card, cards: List[Card]): Option[List[Card]] = ???
 }
