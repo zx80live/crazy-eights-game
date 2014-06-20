@@ -1,10 +1,8 @@
 package com.zx80live.examples.crazyeights
 
-import com.zx80live.examples.crazyeights.model.{MovePatterns, Rank, Suit, Card}
-
-import scala.util.Random
-import Rank._
-import Suit._
+import com.zx80live.examples.crazyeights.model.Rank._
+import com.zx80live.examples.crazyeights.model.Suit._
+import com.zx80live.examples.crazyeights.model.{Card, Rank, Suit}
 
 /**
  *
@@ -20,8 +18,18 @@ object TestApp extends App {
     Card(Rank.BlackJoker, Suit.Special) :: Card(Rank.WhiteJoker, Suit.Special) :: deck52
   }
 
+  /**
+   * 2♦,
+   * ☆
+   *
+   * @param str - 
+   * @return
+   */
+  implicit def string2Card(str: String): Card = ???
 
-  val deck54: List[Card] = createDeck54
+  implicit def string2Cards(str: String): List[Card] = ???
+
+  lazy val deck54: List[Card] = createDeck54
   //  deck54 foreach println
   //  println("shuffle:")
   //  Random.shuffle(deck54) foreach println
