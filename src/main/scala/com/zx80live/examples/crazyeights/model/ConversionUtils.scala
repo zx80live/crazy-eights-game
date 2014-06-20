@@ -15,7 +15,7 @@ object ConversionUtils {
   /**
    * Allow to use regex into string interpolation
    *
-   * @param sc -
+   * @param sc - string context
    */
   implicit class RegexContext(sc: StringContext) {
     def r = new Regex(sc.parts.mkString, sc.parts.tail.map(_ => "x"): _*)
