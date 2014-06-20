@@ -60,7 +60,9 @@ trait MovePatterns {
    * @param cards - player's cards
    * @return preferred move pattern
    */
-  def findPreferredByRank(current: Card, cards: List[Card]): List[Card] = ???
+  def findPreferredByRank(current: Card, cards: List[Card]): List[Card] = {
+    cards.filter(_.rank == current.rank)
+  }
 
   def findEight(current: Card, cards: List[Card]): Option[Card] = ???
 
