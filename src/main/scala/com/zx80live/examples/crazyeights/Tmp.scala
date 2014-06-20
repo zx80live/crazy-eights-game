@@ -31,4 +31,7 @@ object Tmp extends App with MovePatterns {
   println("by rank:")
   println(s"current: ${Card(Ace, Spades)}")
   findPreferredByRank(Card(Ace, Spades), cards) foreach print
+  println()
+  println(s"current: ${Card(Ten, Spades)}")
+  println(findPreferredByRank(Card(Ten, Spades), cards))
 }
