@@ -21,13 +21,13 @@ object Tmp extends App with MovePatterns {
 
 
 
-  findPreferredBySuit(Card(Four, Diamonds), cards) foreach print
+  findPreferredBySuit(Card(Four, Diamonds), cards) foreach println
   println()
-  findPreferredBySuit(Card(Four, Clubs), cards) foreach print
+  findPreferredBySuit(Card(Four, Clubs), cards) foreach println
   println()
-  findPreferredBySuit(Card(Four, Spades), cards) foreach print
+  findPreferredBySuit(Card(Four, Spades), cards) foreach println
   println()
-  findPreferredBySuit(Card(Four, Spades), cards2) foreach print
+  findPreferredBySuit(Card(Four, Spades), cards2) foreach println
   println()
 
 }

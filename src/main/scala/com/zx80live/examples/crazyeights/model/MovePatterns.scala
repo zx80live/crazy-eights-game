@@ -28,22 +28,19 @@ trait MovePatterns {
    * @param cards - player's cards
    * @return preferred move patterns sorted by priority
    */
-  def findPreferredBySuit(current: Card, cards: List[Card]): Option[List[List[Card]]] = {
+  def findPreferredBySuit(current: Card, cards: List[Card]): List[List[Card]] = {
     val preferredCardsBySuit = cards.filter(c => c.suit == current.suit && c.rank != Eight && c.suit != Special)
     val cardsGroupedByRank = cards.groupBy(_.rank).toList.sortBy(-_._2.size)
 
     val byCurrentSuitSorter: (Card, Card) => Boolean = (c1, _) => c1.suit == current.suit
 
-    val result = for {
+    val result: List[List[Card]] = for {
       c <- cardsGroupedByRank
       pc <- preferredCardsBySuit
       if c._1 == pc.rank
     } yield c._2 sortWith byCurrentSuitSorter
 
-    result match {
-      case List() => None
-      case _ => Some(result)
-    }
+    result
   }
 
   def findPreferredByRank(current: Card, cards: List[Card]): Option[List[Card]] = ???
