@@ -90,7 +90,7 @@ trait MovePatterns {
 
 
   /**
-   * Find best preferred move pattern
+   * Find best preferred move pattern from available patterns
    *
    * example {{
    * //TODO example
@@ -100,13 +100,18 @@ trait MovePatterns {
    * @param cards - player's cards
    * @return best preferred move pattern
    */
-  def findPreferred(curr: Card, cards: List[Card]): Any = {
+  def findPreferred(curr: Card, cards: List[Card]): List[Card] = {
     // create aliases for shorts names
-    def f1 = findPreferredBySuit _
-    def f2 = findPreferredByRank _
-    def f3 = findEight _
-    def f4 = findJoker _
+    val f1 = findPreferredBySuit _
+    val f2 = findPreferredByRank _
+    val f3 = findEight _
+    val f4 = findJoker _
 
-    f1(curr, cards).headOption orElse f2(curr, cards) orElse f3(cards) orElse f4(cards) orElse None
+    val result = f1(curr, cards).headOption orElse f2(curr, cards) orElse f3(cards) orElse f4(cards)
+    result match {
+      //TODO warning
+      case Some(xs: List[Card]) => xs
+      case _ => List()
+    }
   }
 }
