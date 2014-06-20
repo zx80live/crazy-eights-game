@@ -11,16 +11,17 @@ trait MovePatterns {
 
   /**
    * Find preferred move patterns by current suit.
-   * Special cards (e.g. "eights", "jokers" will be filtered)
+   * Special cards (e.g. "eights", "jokers" will be filtered).
    *
    * @example {{
    *
    *          cards:   [ 2♦][ 3♣][ 2♣][ A♦][ 8♦][ 8♠][ 2♠][ A♣][ ☆ ]
-   *          current: [ 4♦]
+   *          current: [ 4♣]
    *
    *          preferred move patterns:
-   *          (0) [ 2♦], [ 2♣], [ 2♠]   <- highest priority (because there are maximum cards for move)
-   *          (1) [ A♦], [ A♣]
+   *          (0) [ 2♣][ 2♦][ 2♠]   <- highest priority (because there are maximum cards for move)
+   *          (1) [ A♣][ A♦]
+   *          (2) [ 3♣]             <- lowest priority
    *
    *          }}
    *
@@ -43,7 +44,23 @@ trait MovePatterns {
     result
   }
 
-  def findPreferredByRank(current: Card, cards: List[Card]): Option[List[Card]] = ???
+  /**
+   * Find preferred move pattern by current rank.
+   * Special cards (e.g. "eights", "jokers" will be filtered).
+   *
+   * @example {{
+   *
+   *          cards:   [ 2♦][ 3♣][ 2♣][ A♦][ 8♦][ 8♠][ 2♠][ A♣][ ☆ ]
+   *          current: [ A♠]
+   *
+   *          preferred move pattern: [ A♦][ A♣]
+   *          }}
+   *
+   * @param current - current card
+   * @param cards - player's cards
+   * @return preferred move pattern
+   */
+  def findPreferredByRank(current: Card, cards: List[Card]): List[Card] = ???
 
   def findEight(current: Card, cards: List[Card]): Option[Card] = ???
 
