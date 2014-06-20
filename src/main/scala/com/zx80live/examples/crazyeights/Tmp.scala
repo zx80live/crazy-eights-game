@@ -2,6 +2,8 @@ package com.zx80live.examples.crazyeights
 
 import com.zx80live.examples.crazyeights.model._
 
+import scala.collection.immutable.Iterable
+
 /**
  *
  * @author Andrew Proshkin
@@ -19,16 +21,19 @@ object Tmp extends App with MovePatterns {
 
 
   def printPreferredPatternsBySuit(current: Card, cards: List[Card]) = {
-    println(s"\n$current <- current\npreferred:")
+    println(s"\n$current <- current\npreferred by suit:")
     val preferredBySuit = cards.filter(c => c.suit == current.suit && c.rank != Eight)
-    preferredBySuit foreach { c =>
-      val movePattern = cards.filter(_.rank == c.rank) sortWith ((c1, _) => c1.suit == current.suit)
-      movePattern foreach print
-      println()
-    }
+    val byCurrentSuit: (Card, Card) => Boolean = (c1, _) => c1.suit == current.suit
+
+
+    val preferredPatterns = for (g <- cards.groupBy(_.rank).toList.sortBy(-_._2.size); ps <- preferredBySuit; if g._1 == ps.rank) yield g._2 sortWith byCurrentSuit
+
+    preferredPatterns foreach println
+    println()
   }
 
   printPreferredPatternsBySuit(Card(Four, Diamonds), cards)
   printPreferredPatternsBySuit(Card(Four, Clubs), cards)
+  printPreferredPatternsBySuit(Card(Four, Spades), cards)
 
 }
