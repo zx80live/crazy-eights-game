@@ -47,5 +47,8 @@ trait MovePatterns {
 
   def findPreferableByRank(current: Card, cards: List[Card]): Option[List[Card]] = ???
 
+  def findEight(current: Card, cards: List[Card]):Option[Card] = ???
+
+  def findJoker(current: Card, cards: List[Card]):Option[Card] = ???
 
 }
