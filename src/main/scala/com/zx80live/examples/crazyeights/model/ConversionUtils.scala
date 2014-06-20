@@ -2,6 +2,7 @@ package com.zx80live.examples.crazyeights.model
 
 import com.zx80live.examples.crazyeights.model.Rank._
 import com.zx80live.examples.crazyeights.model.Suit._
+
 import scala.language.implicitConversions
 import scala.util.matching.Regex
 
