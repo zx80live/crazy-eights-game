@@ -1,6 +1,7 @@
 package com.zx80live.examples.crazyeights.model
 
 /**
+ * Search move patterns
  *
  * @author Andrew Proshkin
  */
@@ -63,27 +64,49 @@ trait MovePatterns {
    * @param cards - player's cards
    * @return preferred move pattern
    */
-  def findPreferredByRank(current: Card, cards: List[Card]): List[Card] = {
-    cards.filter(_.rank == current.rank)
-  }
+  def findPreferredByRank(current: Card, cards: List[Card]): Option[List[Card]] =
+    cards.filter(_.rank == current.rank) match {
+      case List() => None
+      case xs => Some(xs)
+    }
+
 
   /**
    * Find first eight
    *
-   * @param current - current card
    * @param cards - player's cards
    * @return first eight option
    */
-  def findEight(current: Card, cards: List[Card]): Option[Card] = cards.find(_.rank == Eight)
+  def findEight(cards: List[Card]): Option[Card] = cards.find(_.rank == Eight)
+
 
   /**
    * Find first joker
    *
-   * @param current - current card
    * @param cards - player's cards
    * @return first joker option
    */
-  def findJoker(current: Card, cards: List[Card]): Option[Card] = cards.find(_.suit == Special)
+  def findJoker(cards: List[Card]): Option[Card] = cards.find(_.suit == Special)
 
-  def findPreferred(current: Card, cards: List[Card]): Option[List[Card]] = ???
+
+  /**
+   * Find best preferred move pattern
+   *
+   * example {{
+   * //TODO example
+   * }}
+   *
+   * @param curr - current card
+   * @param cards - player's cards
+   * @return best preferred move pattern
+   */
+  def findPreferred(curr: Card, cards: List[Card]): Any = {
+    // create aliases for shorts names
+    def f1 = findPreferredBySuit _
+    def f2 = findPreferredByRank _
+    def f3 = findEight _
+    def f4 = findJoker _
+
+    f1(curr, cards).headOption orElse f2(curr, cards) orElse f3(cards) orElse f4(cards) orElse None
+  }
 }
