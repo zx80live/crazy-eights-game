@@ -13,7 +13,7 @@ import scala.util.matching.Regex
 object ConversionUtils {
 
   /**
-   * Allow to use regex into string interpolation
+   * Allow to use string interpolation into regex
    *
    * @param sc - string context
    */
