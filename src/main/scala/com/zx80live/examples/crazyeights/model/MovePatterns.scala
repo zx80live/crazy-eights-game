@@ -30,11 +30,14 @@ trait MovePatterns {
    * @return preferred move patterns sorted by priority
    */
   def findPreferredBySuit(current: Card, cards: List[Card]): List[List[Card]] = {
+    // select player's cards by current suit (without eights and jokers)
     val preferredCardsBySuit = cards.filter(c => c.suit == current.suit && c.rank != Eight && c.suit != Special)
+    // group player's cards by rank and sort by max group size
     val cardsGroupedByRank = cards.groupBy(_.rank).toList.sortBy(-_._2.size)
-
+    // lambda for sorter (current card suit will be first)
     val byCurrentSuitSorter: (Card, Card) => Boolean = (c1, _) => c1.suit == current.suit
 
+    // join user cards and preferred cards with equal ranks
     val result: List[List[Card]] = for {
       c <- cardsGroupedByRank
       pc <- preferredCardsBySuit
