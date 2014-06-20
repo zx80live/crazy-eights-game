@@ -18,7 +18,7 @@ object Tmp extends App with MovePatterns {
   println()
 
 
-  def findPreferredPatternsBySuit(current: Card, cards: List[Card]) = {
+  def printPreferredPatternsBySuit(current: Card, cards: List[Card]) = {
     println(s"\n$current <- current")
     val preferredBySuit = cards.filter(c => c.suit == current.suit && c.rank != Eight)
     preferredBySuit foreach { c =>
@@ -28,7 +28,7 @@ object Tmp extends App with MovePatterns {
     }
   }
 
-  findPreferredPatternsBySuit(Card(Four, Diamonds), cards)
-  findPreferredPatternsBySuit(Card(Four, Clubs), cards)
+  printPreferredPatternsBySuit(Card(Four, Diamonds), cards)
+  printPreferredPatternsBySuit(Card(Four, Clubs), cards)
 
 }
