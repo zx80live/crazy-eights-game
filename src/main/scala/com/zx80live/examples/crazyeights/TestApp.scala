@@ -75,6 +75,14 @@ object TestApp extends App {
     case _ => None
   }
 
+  implicit def string2CardsList(str: String): Option[List[Card]] = {
+    val xs: List[Option[Card]] = str.split(",").toList.map(c => c: Option[Card])
+    (xs.flatten: List[Card]) match {
+      case (List()) => None
+      case (value) => Some(value)
+    }
+  }
+
   val r: Option[Rank.Value] = "WJ"
   println(r)
 
@@ -82,6 +90,12 @@ object TestApp extends App {
   val d: Option[Card] = "BJ"
   println(c)
   println(d)
+
+  //println(List[Option[Card]]("2D", "3S", "BJ", "UNKNOWN", "WJ").flatten)
+  println("2D, 3S, BJ, UNKNOWN, WJ": Option[List[Card]])
+  println("ABCD,A": Option[List[Card]])
+
+  //println("2D,3D,4S": Option[List[Card]])
 
   //  val a: Option[Rank.Value] = " A "
   //  val b: Option[Suit.Value] = " D "
