@@ -49,5 +49,5 @@ trait MovePatterns {
 
   def findJoker(current: Card, cards: List[Card]): Option[Card] = ???
 
-  def findPreferrable(current: Card, cards: List[Card]): Option[List[Card]] = ???
+  def findPreferred(current: Card, cards: List[Card]): Option[List[Card]] = ???
 }
