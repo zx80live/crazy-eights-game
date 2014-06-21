@@ -272,5 +272,29 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       ("A♦": Option[Card]) shouldEqual Some(Card(Ace, Diamonds))
       ("A♣": Option[Card]) shouldEqual Some(Card(Ace, Clubs))
     }
+
+    "converts wrong card strings into None" in {
+      string2Card("") shouldEqual None
+      string2Card(" ") shouldEqual None
+      string2Card("123") shouldEqual None
+      string2Card("1 2 3") shouldEqual None
+      string2Card("♥") shouldEqual None
+      string2Card("2") shouldEqual None
+      string2Card("22") shouldEqual None
+      string2Card("♥♥") shouldEqual None
+      string2Card("♥ ♥") shouldEqual None
+    }
+
+    "converts wrong card strings into None implicitly" in {
+      ("": Option[Card]) shouldEqual None
+      (" ": Option[Card]) shouldEqual None
+      ("123": Option[Card]) shouldEqual None
+      ("1 2 3": Option[Card]) shouldEqual None
+      ("♥": Option[Card]) shouldEqual None
+      ("2": Option[Card]) shouldEqual None
+      ("22": Option[Card]) shouldEqual None
+      ("♥♥": Option[Card]) shouldEqual None
+      ("♥ ♥": Option[Card]) shouldEqual None
+    }
   }
 }
