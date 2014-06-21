@@ -1,5 +1,6 @@
 package com.zx80live.examples.crazyeights.model
 
+
 /**
  * Search move patterns
  *
@@ -9,6 +10,7 @@ trait MovePatterns {
 
   import com.zx80live.examples.crazyeights.model.Rank.Eight
   import com.zx80live.examples.crazyeights.model.Suit.Special
+  import com.zx80live.examples.crazyeights.CollectionUtils._
 
   /**
    * Find preferred move patterns by current suit.
@@ -101,19 +103,11 @@ trait MovePatterns {
    * @return best preferred move pattern
    */
   def findPreferred(curr: Card, cards: List[Card]): List[Card] = {
-    // create aliases for shorts names
-    val f1 = findPreferredBySuit _
-    val f2 = findPreferredByRank _
-    val f3 = findEight _
-    val f4 = findJoker _
-
     val preferredBySuit: Option[List[Card]] = findPreferredBySuit(curr, cards).headOption
     val preferredByRank: Option[List[Card]] = findPreferredByRank(curr, cards)
+    val maxPreferred: Option[Seq[Card]] = maxSeq(preferredBySuit, preferredByRank)
 
-
-
-
-    val result = preferredBySuit orElse preferredByRank orElse findEight(cards) orElse findJoker(cards)
+    val result = maxPreferred orElse findEight(cards) orElse findJoker(cards)
 
     result match {
       //TODO warning

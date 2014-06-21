@@ -1,13 +1,13 @@
 package com.zx80live.examples.crazyeights.model
 
-import com.zx80live.examples.crazyeights.SeqUtils._
+import com.zx80live.examples.crazyeights.CollectionUtils._
 import org.scalatest.{Matchers, WordSpec}
 
 /**
  *
  * @author Andrew Proshkin
  */
-class SeqUtilsSpec extends WordSpec with Matchers {
+class CollectionUtilsSpec extends WordSpec with Matchers {
 
   "maxSeq" in {
     maxSeq(None, None) shouldEqual None

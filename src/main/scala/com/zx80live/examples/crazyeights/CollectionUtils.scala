@@ -4,7 +4,7 @@ package com.zx80live.examples.crazyeights
  *
  * @author Andrew Proshkin
  */
-object SeqUtils {
+object CollectionUtils {
 
   /**
    * Returns longest collection into option
@@ -14,7 +14,7 @@ object SeqUtils {
    * @tparam T - type of collection
    * @return
    */
-  def maxSeq[T](opt1: Option[Seq[T]], opt2: Option[Seq[T]]): Option[Seq[T]] = {
+  def maxSeq[T](opt1: Option[List[T]], opt2: Option[List[T]]): Option[List[T]] = {
     //TODO refactoring
     Seq(opt1, opt2).flatten match {
       case Seq(Nil, Nil) => None
