@@ -30,4 +30,8 @@ class MovePatternsSpec extends WordSpec with Matchers with MovePatterns {
     findPreferredByRank(card"2♣".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(Some(cards"2♦, 2♣, 2♠".get))
     findPreferredByRank(card"7♣".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(None)
   }
+
+  "findPreferredBySuit" in {
+
+  }
 }

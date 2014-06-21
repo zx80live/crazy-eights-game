@@ -16,13 +16,13 @@ trait MovePatterns {
    *
    * @example {{
    *
-   *          cards:   [ 2♦][ 3♣][ 2♣][ A♦][ 8♦][ 8♠][ 2♠][ A♣][ ☆ ]
-   *          current: [ 4♣]
+   *          cards:   2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆
+   *          current: 4♣
    *
    *          preferred move patterns:
-   *          (0) [ 2♣][ 2♦][ 2♠]   <- highest priority (because there are maximum cards for move)
-   *          (1) [ A♣][ A♦]
-   *          (2) [ 3♣]             <- lowest priority
+   *          (0) 2♣, 2♦, 2♠   <- highest priority (because there are maximum cards for move)
+   *          (1) A♣, A♦
+   *          (2) 3♣           <- lowest priority
    *
    *          }}
    *
@@ -54,10 +54,10 @@ trait MovePatterns {
    *
    * @example {{
    *
-   *          cards:   [ 2♦][ 3♣][ 2♣][ A♦][ 8♦][ 8♠][ 2♠][ A♣][ ☆ ]
-   *          current: [ A♠]
+   *          cards:   2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆
+   *          current: A♠
    *
-   *          preferred move pattern: [ A♦][ A♣]
+   *          preferred move pattern: A♦, A♣
    *          }}
    *
    * @param current - current card
