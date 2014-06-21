@@ -297,4 +297,20 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       ("♥ ♥": Option[Card]) shouldEqual None
     }
   }
+
+  "string2CardsList" when {
+    "converts correct cards into Some(List[Card]) with filtered wrong cards elements" in {
+      string2CardsList("2♠, 3♥, K♣, Q♥, ☆") should equal(Some(List(Card(Two, Spades), Card(Three, Hearts), Card(King, Clubs), Card(Queen, Hearts), Card(WhiteJoker))))
+      string2CardsList("2♠, U5, C, Q♥, ☆") should equal(Some(List(Card(Two, Spades), Card(Queen, Hearts), Card(WhiteJoker))))
+      string2CardsList("11♠, B♥, 0♣, A♦") should equal(Some(List(Card(Ace, Diamonds))))
+      string2CardsList("11♠, B♥, 0♣, ☆♦") should equal(None)
+    }
+
+    "converts correct cards into Some(List[Card]) with filtered wrong cards elements implicitly" in {
+      ("2♠, 3♥, K♣, Q♥, ☆": Option[List[Card]]) should equal(Some(List(Card(Two, Spades), Card(Three, Hearts), Card(King, Clubs), Card(Queen, Hearts), Card(WhiteJoker))))
+      ("2♠, U5, C, Q♥, ☆": Option[List[Card]]) should equal(Some(List(Card(Two, Spades), Card(Queen, Hearts), Card(WhiteJoker))))
+      ("11♠, B♥, 0♣, A♦": Option[List[Card]]) should equal(Some(List(Card(Ace, Diamonds))))
+      ("11♠, B♥, 0♣, ☆♦": Option[List[Card]]) should equal(None)
+    }
+  }
 }
