@@ -12,7 +12,7 @@ object Tmp extends App with MovePatterns {
   import com.zx80live.examples.crazyeights.model.Suit._
 
   // 2D, 3C, 2C, AD,
-  val cards = Card(Two, Diamonds) :: Card(Three, Clubs) :: Card(Two, Clubs) :: Card(Ace, Diamonds) :: Card(Eight, Diamonds) :: Card(Eight, Spades) :: Card(Two, Spades) :: Card(Ace, Clubs) :: Card(WhiteJoker) :: Nil
+  val cards = Card(Two, Diamonds) :: Card(Three, Clubs) :: Card(Two, Clubs) :: Card(Ace, Diamonds) :: Card(Eight, Diamonds) :: Card(Eight, Spades) :: Card(Two, Spades) :: Card(Ace, Clubs) :: Card(WhiteJoker) :: Card(BlackJoker)  :: Nil
   val cards2 = Card(Two, Diamonds) :: Card(Three, Clubs) :: Card(Two, Clubs) :: Card(Ace, Diamonds) :: Card(Eight, Diamonds) :: Card(Ace, Hearts) :: Nil
 
   cards foreach print
