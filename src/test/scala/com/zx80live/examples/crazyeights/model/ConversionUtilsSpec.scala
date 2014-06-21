@@ -102,5 +102,30 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       string2Suit("DD") shouldEqual None
       string2Suit("CC") shouldEqual None
     }
+
+    "converts correct string values into Some(Suit.Value) implicitly" in {
+      ("S": Option[Suit.Value]) shouldEqual Some(Spades)
+      ("♠": Option[Suit.Value]) shouldEqual Some(Spades)
+      ("H": Option[Suit.Value]) shouldEqual Some(Hearts)
+      ("♥": Option[Suit.Value]) shouldEqual Some(Hearts)
+      ("D": Option[Suit.Value]) shouldEqual Some(Diamonds)
+      ("♦": Option[Suit.Value]) shouldEqual Some(Diamonds)
+      ("C": Option[Suit.Value]) shouldEqual Some(Clubs)
+      ("♣": Option[Suit.Value]) shouldEqual Some(Clubs)
+    }
+
+    "converts wrong string values into None implicitly" in {
+      ("": Option[Suit.Value]) shouldEqual None
+      (" ": Option[Suit.Value]) shouldEqual None
+      ("1": Option[Suit.Value]) shouldEqual None
+      ("2": Option[Suit.Value]) shouldEqual None
+      ("11": Option[Suit.Value]) shouldEqual None
+      (" 1 1    1": Option[Suit.Value]) shouldEqual None
+      ("SS": Option[Suit.Value]) shouldEqual None
+      ("SH": Option[Suit.Value]) shouldEqual None
+      ("HH": Option[Suit.Value]) shouldEqual None
+      ("DD": Option[Suit.Value]) shouldEqual None
+      ("CC": Option[Suit.Value]) shouldEqual None
+    }
   }
 }
