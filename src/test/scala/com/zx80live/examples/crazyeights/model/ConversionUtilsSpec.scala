@@ -155,7 +155,11 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       deck54Strings foreach (c => assert(string2Card(c) != None))
     }
 
-    "converts string values into Some(Card)" in {
+    "converts correct deck54Strings into Some(Card) implicitly" in {
+      deck54Strings foreach (c => assert((c: Option[Card]) != None))
+    }
+
+    "converts correct string values into Some(Card)" in {
       string2Card("★") shouldEqual Some(Card(BlackJoker))
       string2Card("☆") shouldEqual Some(Card(WhiteJoker))
       string2Card("2♠") shouldEqual Some(Card(Two, Spades))
@@ -210,6 +214,63 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       string2Card("A♥") shouldEqual Some(Card(Ace, Hearts))
       string2Card("A♦") shouldEqual Some(Card(Ace, Diamonds))
       string2Card("A♣") shouldEqual Some(Card(Ace, Clubs))
+    }
+
+    "converts correct string values into Some(Card) implicitly" in {
+      ("★": Option[Card]) shouldEqual Some(Card(BlackJoker))
+      ("☆": Option[Card]) shouldEqual Some(Card(WhiteJoker))
+      ("2♠": Option[Card]) shouldEqual Some(Card(Two, Spades))
+      ("2♥": Option[Card]) shouldEqual Some(Card(Two, Hearts))
+      ("2♦": Option[Card]) shouldEqual Some(Card(Two, Diamonds))
+      ("2♣": Option[Card]) shouldEqual Some(Card(Two, Clubs))
+      ("3♠": Option[Card]) shouldEqual Some(Card(Three, Spades))
+      ("3♥": Option[Card]) shouldEqual Some(Card(Three, Hearts))
+      ("3♦": Option[Card]) shouldEqual Some(Card(Three, Diamonds))
+      ("3♣": Option[Card]) shouldEqual Some(Card(Three, Clubs))
+      ("4♠": Option[Card]) shouldEqual Some(Card(Four, Spades))
+      ("4♥": Option[Card]) shouldEqual Some(Card(Four, Hearts))
+      ("4♦": Option[Card]) shouldEqual Some(Card(Four, Diamonds))
+      ("4♣": Option[Card]) shouldEqual Some(Card(Four, Clubs))
+      ("5♠": Option[Card]) shouldEqual Some(Card(Five, Spades))
+      ("5♥": Option[Card]) shouldEqual Some(Card(Five, Hearts))
+      ("5♦": Option[Card]) shouldEqual Some(Card(Five, Diamonds))
+      ("5♣": Option[Card]) shouldEqual Some(Card(Five, Clubs))
+      ("6♠": Option[Card]) shouldEqual Some(Card(Six, Spades))
+      ("6♥": Option[Card]) shouldEqual Some(Card(Six, Hearts))
+      ("6♦": Option[Card]) shouldEqual Some(Card(Six, Diamonds))
+      ("6♣": Option[Card]) shouldEqual Some(Card(Six, Clubs))
+      ("7♠": Option[Card]) shouldEqual Some(Card(Seven, Spades))
+      ("7♥": Option[Card]) shouldEqual Some(Card(Seven, Hearts))
+      ("7♦": Option[Card]) shouldEqual Some(Card(Seven, Diamonds))
+      ("7♣": Option[Card]) shouldEqual Some(Card(Seven, Clubs))
+      ("8♠": Option[Card]) shouldEqual Some(Card(Eight, Spades))
+      ("8♥": Option[Card]) shouldEqual Some(Card(Eight, Hearts))
+      ("8♦": Option[Card]) shouldEqual Some(Card(Eight, Diamonds))
+      ("8♣": Option[Card]) shouldEqual Some(Card(Eight, Clubs))
+      ("9♠": Option[Card]) shouldEqual Some(Card(Nine, Spades))
+      ("9♥": Option[Card]) shouldEqual Some(Card(Nine, Hearts))
+      ("9♦": Option[Card]) shouldEqual Some(Card(Nine, Diamonds))
+      ("9♣": Option[Card]) shouldEqual Some(Card(Nine, Clubs))
+      ("10♠": Option[Card]) shouldEqual Some(Card(Ten, Spades))
+      ("10♥": Option[Card]) shouldEqual Some(Card(Ten, Hearts))
+      ("10♦": Option[Card]) shouldEqual Some(Card(Ten, Diamonds))
+      ("10♣": Option[Card]) shouldEqual Some(Card(Ten, Clubs))
+      ("J♠": Option[Card]) shouldEqual Some(Card(Jack, Spades))
+      ("J♥": Option[Card]) shouldEqual Some(Card(Jack, Hearts))
+      ("J♦": Option[Card]) shouldEqual Some(Card(Jack, Diamonds))
+      ("J♣": Option[Card]) shouldEqual Some(Card(Jack, Clubs))
+      ("Q♠": Option[Card]) shouldEqual Some(Card(Queen, Spades))
+      ("Q♥": Option[Card]) shouldEqual Some(Card(Queen, Hearts))
+      ("Q♦": Option[Card]) shouldEqual Some(Card(Queen, Diamonds))
+      ("Q♣": Option[Card]) shouldEqual Some(Card(Queen, Clubs))
+      ("K♠": Option[Card]) shouldEqual Some(Card(King, Spades))
+      ("K♥": Option[Card]) shouldEqual Some(Card(King, Hearts))
+      ("K♦": Option[Card]) shouldEqual Some(Card(King, Diamonds))
+      ("K♣": Option[Card]) shouldEqual Some(Card(King, Clubs))
+      ("A♠": Option[Card]) shouldEqual Some(Card(Ace, Spades))
+      ("A♥": Option[Card]) shouldEqual Some(Card(Ace, Hearts))
+      ("A♦": Option[Card]) shouldEqual Some(Card(Ace, Diamonds))
+      ("A♣": Option[Card]) shouldEqual Some(Card(Ace, Clubs))
     }
   }
 }
