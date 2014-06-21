@@ -21,6 +21,10 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       rankStrings foreach (r => assert(string2Rank(r) != None))
     }
 
+    "converts correct rankStrings into Some(_) implicitly" in {
+      rankStrings foreach (r => assert((r: Option[Rank.Value]) != None))
+    }
+
     "converts correct string values into Some(Rank.Value)" in {
       string2Rank("2") shouldEqual Some(Two)
       string2Rank("3") shouldEqual Some(Three)
@@ -90,6 +94,10 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       suitStrings foreach (r => assert(string2Suit(r) != None))
     }
 
+    "converts correct suitStrings into Some(_) implicitly" in {
+      suitStrings foreach (r => assert((r: Option[Suit.Value]) != None))
+    }
+
     "converts correct string values into Some(Suit.Value)" in {
       string2Suit("S") shouldEqual Some(Spades)
       string2Suit("♠") shouldEqual Some(Spades)
@@ -143,7 +151,7 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
 
 
   "string2Card" when {
-    "converts string values from deck54Strings into Some(Card)" in {
+    "converts correct deck54Strings into Some(Card)" in {
       deck54Strings foreach (c => assert(string2Card(c) != None))
     }
 
