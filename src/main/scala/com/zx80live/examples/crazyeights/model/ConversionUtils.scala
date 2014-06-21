@@ -7,7 +7,7 @@ import scala.language.implicitConversions
 import scala.util.matching.Regex
 
 /**
- * Utils for conversion string to game model
+ * Utils for conversion string to game model implicitly
  *
  * @author Andrew Proshkin
  */
