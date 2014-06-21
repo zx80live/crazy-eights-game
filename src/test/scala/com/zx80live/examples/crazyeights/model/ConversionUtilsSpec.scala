@@ -1,5 +1,8 @@
 package com.zx80live.examples.crazyeights.model
 
+import com.zx80live.examples.crazyeights.model.ConversionUtils._
+import com.zx80live.examples.crazyeights.model.Rank._
+import com.zx80live.examples.crazyeights.model.Suit._
 import org.scalatest._
 
 /**
@@ -7,9 +10,6 @@ import org.scalatest._
  * @author Andrew Proshkin
  */
 class ConversionUtilsSpec extends FlatSpec with Matchers {
-
-  import com.zx80live.examples.crazyeights.model.ConversionUtils._
-  import com.zx80live.examples.crazyeights.model.Rank._
 
   "string2Rank" should "converts correct string values into Some(Rank.Value)" in {
     string2Rank("2") shouldEqual Some(Two)
@@ -39,5 +39,63 @@ class ConversionUtilsSpec extends FlatSpec with Matchers {
     string2Rank("ABC") shouldEqual None
     string2Rank("A B C ") shouldEqual None
     string2Rank(" 1 2 3 4  5") shouldEqual None
+  }
+
+  "string2Suit" should "converts correct string values into Some(Suit.Value)" in {
+    string2Suit("S") shouldEqual Some(Spades)
+    string2Suit("♠") shouldEqual Some(Spades)
+    string2Suit("H") shouldEqual Some(Hearts)
+    string2Suit("♥") shouldEqual Some(Hearts)
+    string2Suit("D") shouldEqual Some(Diamonds)
+    string2Suit("♦") shouldEqual Some(Diamonds)
+    string2Suit("C") shouldEqual Some(Clubs)
+    string2Suit("♣") shouldEqual Some(Clubs)
+  }
+
+  "string2Suit" should "converts wrong string values into None" in {
+    string2Suit("") shouldEqual None
+    string2Suit(" ") shouldEqual None
+    string2Suit("1") shouldEqual None
+    string2Suit("2") shouldEqual None
+    string2Suit("11") shouldEqual None
+    string2Suit(" 1 1    1") shouldEqual None
+    string2Suit("SS") shouldEqual None
+    string2Suit("SH") shouldEqual None
+    string2Suit("HH") shouldEqual None
+    string2Suit("DD") shouldEqual None
+    string2Suit("CC") shouldEqual None
+  }
+
+  "implicit string2Rank" should "convert correct string values into Some(Rank.Value) implicitly" in {
+    ("2": Option[Rank.Value]) shouldEqual Some(Two)
+    ("3": Option[Rank.Value]) shouldEqual Some(Three)
+    ("4": Option[Rank.Value]) shouldEqual Some(Four)
+    ("5": Option[Rank.Value]) shouldEqual Some(Five)
+    ("6": Option[Rank.Value]) shouldEqual Some(Six)
+    ("7": Option[Rank.Value]) shouldEqual Some(Seven)
+    ("8": Option[Rank.Value]) shouldEqual Some(Eight)
+    ("9": Option[Rank.Value]) shouldEqual Some(Nine)
+    ("10": Option[Rank.Value]) shouldEqual Some(Ten)
+    ("J": Option[Rank.Value]) shouldEqual Some(Jack)
+    ("Q": Option[Rank.Value]) shouldEqual Some(Queen)
+    ("K": Option[Rank.Value]) shouldEqual Some(King)
+    ("A": Option[Rank.Value]) shouldEqual Some(Ace)
+    ("BJ": Option[Rank.Value]) shouldEqual Some(BlackJoker)
+    ("★": Option[Rank.Value]) shouldEqual Some(BlackJoker)
+    ("WJ": Option[Rank.Value]) shouldEqual Some(WhiteJoker)
+    ("☆": Option[Rank.Value]) shouldEqual Some(WhiteJoker)
+  }
+
+  "implicit string2Rank" should "convert wrong string values into None implicitly" in {
+    ("": Option[Rank.Value]) shouldEqual None
+    (" ": Option[Rank.Value]) shouldEqual None
+    ("1": Option[Rank.Value]) shouldEqual None
+    ("11": Option[Rank.Value]) shouldEqual None
+    ("22": Option[Rank.Value]) shouldEqual None
+    ("AA": Option[Rank.Value]) shouldEqual None
+    ("A A": Option[Rank.Value]) shouldEqual None
+    ("ABC": Option[Rank.Value]) shouldEqual None
+    ("A B C": Option[Rank.Value]) shouldEqual None
+    (" 1 2 3 4  5": Option[Rank.Value]) shouldEqual None
   }
 }
