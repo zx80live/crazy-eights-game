@@ -12,7 +12,15 @@ import org.scalatest._
  */
 class ConversionUtilsSpec extends WordSpec with Matchers {
 
+  val rankStrings: List[String] = "2" :: "3" :: "4" :: "5" :: "6" :: "7" :: "8" :: "9" :: "10" :: "J" :: "Q" :: "K" :: "A" :: "★" :: "☆" :: Nil
+  val suitStrings: List[String] = "♠" :: "♥" :: "♦" :: "♣" :: Nil
+  val deck54Strings: List[String] = "★" :: "☆" :: (for (r <- rankStrings.filter(r => r != "★" && r != "☆"); s <- suitStrings) yield s"$r$s")
+
   "string2Rank" when {
+    "converts correct rankStrings into Some(_)" in {
+      rankStrings foreach (r => assert(string2Rank(r) != None))
+    }
+
     "converts correct string values into Some(Rank.Value)" in {
       string2Rank("2") shouldEqual Some(Two)
       string2Rank("3") shouldEqual Some(Three)
@@ -78,6 +86,10 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
   }
 
   "string2Suit" when {
+    "converts correct suitStrings into Some(_)" in {
+      suitStrings foreach (r => assert(string2Suit(r) != None))
+    }
+
     "converts correct string values into Some(Suit.Value)" in {
       string2Suit("S") shouldEqual Some(Spades)
       string2Suit("♠") shouldEqual Some(Spades)
@@ -126,6 +138,70 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       ("HH": Option[Suit.Value]) shouldEqual None
       ("DD": Option[Suit.Value]) shouldEqual None
       ("CC": Option[Suit.Value]) shouldEqual None
+    }
+  }
+
+
+  "string2Card" when {
+    "converts string values from deck54Strings into Some(Card)" in {
+      deck54Strings foreach (c => assert(string2Card(c) != None))
+    }
+
+    "converts string values into Some(Card)" in {
+      string2Card("★") shouldEqual Some(Card(BlackJoker))
+      string2Card("☆") shouldEqual Some(Card(WhiteJoker))
+      string2Card("2♠") shouldEqual Some(Card(Two, Spades))
+      string2Card("2♥") shouldEqual Some(Card(Two, Hearts))
+      string2Card("2♦") shouldEqual Some(Card(Two, Diamonds))
+      string2Card("2♣") shouldEqual Some(Card(Two, Clubs))
+      string2Card("3♠") shouldEqual Some(Card(Three, Spades))
+      string2Card("3♥") shouldEqual Some(Card(Three, Hearts))
+      string2Card("3♦") shouldEqual Some(Card(Three, Diamonds))
+      string2Card("3♣") shouldEqual Some(Card(Three, Clubs))
+      string2Card("4♠") shouldEqual Some(Card(Four, Spades))
+      string2Card("4♥") shouldEqual Some(Card(Four, Hearts))
+      string2Card("4♦") shouldEqual Some(Card(Four, Diamonds))
+      string2Card("4♣") shouldEqual Some(Card(Four, Clubs))
+      string2Card("5♠") shouldEqual Some(Card(Five, Spades))
+      string2Card("5♥") shouldEqual Some(Card(Five, Hearts))
+      string2Card("5♦") shouldEqual Some(Card(Five, Diamonds))
+      string2Card("5♣") shouldEqual Some(Card(Five, Clubs))
+      string2Card("6♠") shouldEqual Some(Card(Six, Spades))
+      string2Card("6♥") shouldEqual Some(Card(Six, Hearts))
+      string2Card("6♦") shouldEqual Some(Card(Six, Diamonds))
+      string2Card("6♣") shouldEqual Some(Card(Six, Clubs))
+      string2Card("7♠") shouldEqual Some(Card(Seven, Spades))
+      string2Card("7♥") shouldEqual Some(Card(Seven, Hearts))
+      string2Card("7♦") shouldEqual Some(Card(Seven, Diamonds))
+      string2Card("7♣") shouldEqual Some(Card(Seven, Clubs))
+      string2Card("8♠") shouldEqual Some(Card(Eight, Spades))
+      string2Card("8♥") shouldEqual Some(Card(Eight, Hearts))
+      string2Card("8♦") shouldEqual Some(Card(Eight, Diamonds))
+      string2Card("8♣") shouldEqual Some(Card(Eight, Clubs))
+      string2Card("9♠") shouldEqual Some(Card(Nine, Spades))
+      string2Card("9♥") shouldEqual Some(Card(Nine, Hearts))
+      string2Card("9♦") shouldEqual Some(Card(Nine, Diamonds))
+      string2Card("9♣") shouldEqual Some(Card(Nine, Clubs))
+      string2Card("10♠") shouldEqual Some(Card(Ten, Spades))
+      string2Card("10♥") shouldEqual Some(Card(Ten, Hearts))
+      string2Card("10♦") shouldEqual Some(Card(Ten, Diamonds))
+      string2Card("10♣") shouldEqual Some(Card(Ten, Clubs))
+      string2Card("J♠") shouldEqual Some(Card(Jack, Spades))
+      string2Card("J♥") shouldEqual Some(Card(Jack, Hearts))
+      string2Card("J♦") shouldEqual Some(Card(Jack, Diamonds))
+      string2Card("J♣") shouldEqual Some(Card(Jack, Clubs))
+      string2Card("Q♠") shouldEqual Some(Card(Queen, Spades))
+      string2Card("Q♥") shouldEqual Some(Card(Queen, Hearts))
+      string2Card("Q♦") shouldEqual Some(Card(Queen, Diamonds))
+      string2Card("Q♣") shouldEqual Some(Card(Queen, Clubs))
+      string2Card("K♠") shouldEqual Some(Card(King, Spades))
+      string2Card("K♥") shouldEqual Some(Card(King, Hearts))
+      string2Card("K♦") shouldEqual Some(Card(King, Diamonds))
+      string2Card("K♣") shouldEqual Some(Card(King, Clubs))
+      string2Card("A♠") shouldEqual Some(Card(Ace, Spades))
+      string2Card("A♥") shouldEqual Some(Card(Ace, Hearts))
+      string2Card("A♦") shouldEqual Some(Card(Ace, Diamonds))
+      string2Card("A♣") shouldEqual Some(Card(Ace, Clubs))
     }
   }
 }

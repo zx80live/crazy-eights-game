@@ -36,6 +36,6 @@ trait UnicodeView {
       case BlackJoker => " \u2605 "
       case WhiteJoker => " \u2606 "
     }
-    s"[$r$s]"
+    s"$r$s"
   }
 }
