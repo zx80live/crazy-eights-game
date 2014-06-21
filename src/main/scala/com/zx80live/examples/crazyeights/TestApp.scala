@@ -23,16 +23,16 @@ import scala.language.implicitConversions
 
 
   val r: Option[Rank.Value] = "WJ"
-  println(r)
+  //println(r)
 
   val c: Option[Card] = "2D"
   val d: Option[Card] = "BJ"
-  println(c)
-  println(d)
+  //println(c)
+  //println(d)
 
   //println(List[Option[Card]]("2D", "3S", "BJ", "UNKNOWN", "WJ").flatten)
-  println("2D , 3 ♣, 3S, BJ, UNKNOWN, 2♦  , WJ": Option[List[Card]])
-  println("ABCD,A": Option[List[Card]])
+//  println("2D , 3 ♣, 3S, BJ, UNKNOWN, 2♦  , WJ": Option[List[Card]])
+//  println("ABCD,A": Option[List[Card]])
 
   //println("2D,3D,4S": Option[List[Card]])
 
@@ -51,4 +51,7 @@ import scala.language.implicitConversions
   //GameLogic.findEight(cards)
 
   //cards.filter(_.rank == Two) foreach println
+
+  //private val either: Either[IllegalArgumentException, Card] = card"A♣"
+  //println(either)
 }

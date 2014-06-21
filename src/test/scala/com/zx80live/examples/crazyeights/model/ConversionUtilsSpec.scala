@@ -273,6 +273,75 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       ("A♣": Option[Card]) shouldEqual Some(Card(Ace, Clubs))
     }
 
+    "card string interpolation into Some(Card)" in {
+      card"★" shouldEqual Some(Card(BlackJoker))
+      card"☆" shouldEqual Some(Card(WhiteJoker))
+      card"2♠" shouldEqual Some(Card(Two, Spades))
+      card"2♥" shouldEqual Some(Card(Two, Hearts))
+      card"2♦" shouldEqual Some(Card(Two, Diamonds))
+      card"2♣" shouldEqual Some(Card(Two, Clubs))
+      card"3♠" shouldEqual Some(Card(Three, Spades))
+      card"3♥" shouldEqual Some(Card(Three, Hearts))
+      card"3♦" shouldEqual Some(Card(Three, Diamonds))
+      card"3♣" shouldEqual Some(Card(Three, Clubs))
+      card"4♠" shouldEqual Some(Card(Four, Spades))
+      card"4♥" shouldEqual Some(Card(Four, Hearts))
+      card"4♦" shouldEqual Some(Card(Four, Diamonds))
+      card"4♣" shouldEqual Some(Card(Four, Clubs))
+      card"5♠" shouldEqual Some(Card(Five, Spades))
+      card"5♥" shouldEqual Some(Card(Five, Hearts))
+      card"5♦" shouldEqual Some(Card(Five, Diamonds))
+      card"5♣" shouldEqual Some(Card(Five, Clubs))
+      card"6♠" shouldEqual Some(Card(Six, Spades))
+      card"6♥" shouldEqual Some(Card(Six, Hearts))
+      card"6♦" shouldEqual Some(Card(Six, Diamonds))
+      card"6♣" shouldEqual Some(Card(Six, Clubs))
+      card"7♠" shouldEqual Some(Card(Seven, Spades))
+      card"7♥" shouldEqual Some(Card(Seven, Hearts))
+      card"7♦" shouldEqual Some(Card(Seven, Diamonds))
+      card"7♣" shouldEqual Some(Card(Seven, Clubs))
+      card"8♠" shouldEqual Some(Card(Eight, Spades))
+      card"8♥" shouldEqual Some(Card(Eight, Hearts))
+      card"8♦" shouldEqual Some(Card(Eight, Diamonds))
+      card"8♣" shouldEqual Some(Card(Eight, Clubs))
+      card"9♠" shouldEqual Some(Card(Nine, Spades))
+      card"9♥" shouldEqual Some(Card(Nine, Hearts))
+      card"9♦" shouldEqual Some(Card(Nine, Diamonds))
+      card"9♣" shouldEqual Some(Card(Nine, Clubs))
+      card"10♠" shouldEqual Some(Card(Ten, Spades))
+      card"10♥" shouldEqual Some(Card(Ten, Hearts))
+      card"10♦" shouldEqual Some(Card(Ten, Diamonds))
+      card"10♣" shouldEqual Some(Card(Ten, Clubs))
+      card"J♠" shouldEqual Some(Card(Jack, Spades))
+      card"J♥" shouldEqual Some(Card(Jack, Hearts))
+      card"J♦" shouldEqual Some(Card(Jack, Diamonds))
+      card"J♣" shouldEqual Some(Card(Jack, Clubs))
+      card"Q♠" shouldEqual Some(Card(Queen, Spades))
+      card"Q♥" shouldEqual Some(Card(Queen, Hearts))
+      card"Q♦" shouldEqual Some(Card(Queen, Diamonds))
+      card"Q♣" shouldEqual Some(Card(Queen, Clubs))
+      card"K♠" shouldEqual Some(Card(King, Spades))
+      card"K♥" shouldEqual Some(Card(King, Hearts))
+      card"K♦" shouldEqual Some(Card(King, Diamonds))
+      card"K♣" shouldEqual Some(Card(King, Clubs))
+      card"A♠" shouldEqual Some(Card(Ace, Spades))
+      card"A♥" shouldEqual Some(Card(Ace, Hearts))
+      card"A♦" shouldEqual Some(Card(Ace, Diamonds))
+      card"A♣" shouldEqual Some(Card(Ace, Clubs))
+    }
+
+    "card wrong string interpolation into None" in {
+      card"" shouldEqual None
+      card" " shouldEqual None
+      card"123" shouldEqual None
+      card"1 2 3" shouldEqual None
+      card"♥" shouldEqual None
+      card"2" shouldEqual None
+      card"22" shouldEqual None
+      card"♥♥" shouldEqual None
+      card"♥ ♥" shouldEqual None
+    }
+
     "converts wrong card strings into None" in {
       string2Card("") shouldEqual None
       string2Card(" ") shouldEqual None
@@ -306,6 +375,14 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       string2CardsList("11♠, B♥, 0♣, ☆♦") should equal(None)
     }
 
+    "cards string interpolation into Some(List[Card])" in {
+      cards"2♠, 3♥, K♣, Q♥, ☆" should equal(Some(List(Card(Two, Spades), Card(Three, Hearts), Card(King, Clubs), Card(Queen, Hearts), Card(WhiteJoker))))
+      cards"2♠, U5, C, Q♥, ☆" should equal(Some(List(Card(Two, Spades), Card(Queen, Hearts), Card(WhiteJoker))))
+      cards"11♠, B♥, 0♣, A♦" should equal(Some(List(Card(Ace, Diamonds))))
+      cards"11♠, B♥, 0♣, ☆♦" should equal(None)
+      cards"UNWKNOWN" should equal(None)
+    }
+
     "converts correct cards into Some(List[Card]) with filtered wrong cards elements implicitly" in {
       ("2♠, 3♥, K♣, Q♥, ☆": Option[List[Card]]) should equal(Some(List(Card(Two, Spades), Card(Three, Hearts), Card(King, Clubs), Card(Queen, Hearts), Card(WhiteJoker))))
       ("2♠, U5, C, Q♥, ☆": Option[List[Card]]) should equal(Some(List(Card(Two, Spades), Card(Queen, Hearts), Card(WhiteJoker))))
@@ -313,4 +390,6 @@ class ConversionUtilsSpec extends WordSpec with Matchers {
       ("11♠, B♥, 0♣, ☆♦": Option[List[Card]]) should equal(None)
     }
   }
+
+
 }

@@ -14,12 +14,16 @@ import scala.util.matching.Regex
 object ConversionUtils {
 
   /**
-   * Allow to use string interpolation into regex
+   * Allow to use string interpolation into: regex, card, cards list
    *
    * @param sc - string context
    */
-  implicit class RegexContext(sc: StringContext) {
+  implicit class CardsHelper(sc: StringContext) {
     def r = new Regex(sc.parts.mkString, sc.parts.tail.map(_ => "x"): _*)
+
+    def card(args: Any*): Option[Card] = sc.raw()
+
+    def cards(args: Any*): Option[List[Card]] = sc.raw()
   }
 
   /**
