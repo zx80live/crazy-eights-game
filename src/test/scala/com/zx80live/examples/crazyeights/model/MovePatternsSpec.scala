@@ -24,14 +24,39 @@ class MovePatternsSpec extends WordSpec with Matchers with MovePatterns {
     }
   }
 
-  "findPreferredByRank" in {
-    findPreferredByRank(card"A♠".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(Some(cards"A♦, A♣".get))
-    findPreferredByRank(card"2♥".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(Some(cards"2♦, 2♣, 2♠".get))
-    findPreferredByRank(card"2♣".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(Some(cards"2♦, 2♣, 2♠".get))
+  "findPreferredByRank without eights and jokers and sorted by priority" in {
+    findPreferredByRank(card"A♠".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(cards"A♦, A♣")
+    findPreferredByRank(card"2♥".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(cards"2♦, 2♣, 2♠")
+    findPreferredByRank(card"2♣".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(cards"2♦, 2♣, 2♠")
     findPreferredByRank(card"7♣".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(None)
   }
 
-  "findPreferredBySuit" in {
+  "findPreferredBySuit without eights and jokers and sorted by priority" in {
+    findPreferredBySuit(card"4♣".get, cards"2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆".get) should equal(List(cards"2♣, 2♦, 2♠".get, cards"A♣, A♦".get, cards"3♣".get))
+    findPreferredBySuit(card"4♦".get, cards"2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆".get) should equal(List(cards"2♦, 2♣, 2♠".get, cards"A♦, A♣".get))
+    findPreferredBySuit(card"7♠".get, cards"2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆".get) should equal(List(cards"2♠, 2♦, 2♣".get))
+  }
 
+  "findPreferred" when {
+    "not moves" in {
+      findPreferred(card"4♥".get, cards"2♦, 3♣, 2♣, A♦, 2♠, A♣".get) should equal(Nil)
+    }
+
+    "best move - eight" in {
+      findPreferred(card"4♥".get, cards"2♦, 3♣, 2♣, A♦, 8♦, 2♠, A♣".get) should equal(cards"8♦".get)
+      findPreferred(card"4♥".get, cards"2♦, 3♣, 8♣, A♦, 8♦, 2♠, A♣".get) should equal(cards"8♣".get)
+    }
+
+    "best move - joker" in {
+      findPreferred(card"4♥".get, cards"2♦, 3♣, 2♣, A♦, 2♠, ☆, 2♠, A♣".get) should equal(cards"☆".get)
+    }
+
+//    "best move - by current rank" in {
+//      findPreferred(card"A♠".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(cards"A♦, A♣")
+//    }
+//
+//    "best move - biggest cards list by current suit" in {
+//
+//    }
   }
 }

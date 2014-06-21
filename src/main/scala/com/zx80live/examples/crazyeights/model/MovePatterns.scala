@@ -108,8 +108,10 @@ trait MovePatterns {
     val f4 = findJoker _
 
     val result = f1(curr, cards).headOption orElse f2(curr, cards) orElse f3(cards) orElse f4(cards)
+
     result match {
       //TODO warning
+      case Some(x: Card) => List(x)
       case Some(xs: List[Card]) => xs
       case _ => List()
     }
