@@ -107,7 +107,13 @@ trait MovePatterns {
     val f3 = findEight _
     val f4 = findJoker _
 
-    val result = f1(curr, cards).headOption orElse f2(curr, cards) orElse f3(cards) orElse f4(cards)
+    val preferredBySuit: Option[List[Card]] = findPreferredBySuit(curr, cards).headOption
+    val preferredByRank: Option[List[Card]] = findPreferredByRank(curr, cards)
+
+
+
+
+    val result = preferredBySuit orElse preferredByRank orElse findEight(cards) orElse findJoker(cards)
 
     result match {
       //TODO warning
