@@ -51,12 +51,12 @@ class MovePatternsSpec extends WordSpec with Matchers with MovePatterns {
       findPreferred(card"4♥".get, cards"2♦, 3♣, 2♣, A♦, 2♠, ☆, 2♠, A♣".get) should equal(cards"☆".get)
     }
 
-//    "best move - by current rank" in {
-//      findPreferred(card"A♠".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(cards"A♦, A♣")
-//    }
-//
-//    "best move - biggest cards list by current suit" in {
-//
-//    }
+    "best move - by current suit" in {
+      findPreferred(card"A♠".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(cards"2♠, 2♦, 2♣".get)
+    }
+
+    "best move - by current rank" in {
+      findPreferred(card"2♥".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(cards"2♦, 2♣, 2♠".get)
+    }
   }
 }
