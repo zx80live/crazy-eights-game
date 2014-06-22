@@ -65,6 +65,7 @@ class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8W
             eventListener.onEvent(new RecreateStockpileEvent)
             drawCard(eventListener)
 
+
           case Left(e) => None
         }
     }
