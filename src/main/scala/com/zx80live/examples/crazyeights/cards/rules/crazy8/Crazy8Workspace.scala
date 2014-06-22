@@ -56,7 +56,7 @@ class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8W
         _stockPile = tail
         Some(head)
       case Nil =>
-        createWorkspace(deck54) match {
+        createWorkspace(_discardPile) match {
           case Right((s, d)) =>
             //TODO analyze recursion and add guardian
             _stockPile = s
@@ -86,7 +86,6 @@ class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8W
       Right(true)
     }
   }
-
 
 
 }

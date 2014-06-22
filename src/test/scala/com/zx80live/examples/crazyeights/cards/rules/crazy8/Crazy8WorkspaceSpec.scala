@@ -101,24 +101,24 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
 
 
 
-//      implicit val listener = new WorkspaceEventListener {
-//        override def onEvent[T](evt: WorkspaceEvent[T]): Unit = println(s"onEvent($evt)")
-//      }
-//
-//      println(ws.drawCard)
-//      println(ws.drawCard)
-//      println(ws.drawCard) // event
-//      println(ws.drawCard)
-//      println(ws.drawCard)
-//      println(ws.drawCard)
-//      println(ws.drawCard)
-//      println(ws.drawCard)
-//      println(ws.drawCard)
-//      println(ws.drawCard)
-//      println(ws.drawCard)
-//      println(ws.drawCard)
-//      println(ws.drawCard)
-//      println(ws.drawCard)
+      implicit val listener = new WorkspaceEventListener {
+        override def onEvent[T](evt: WorkspaceEvent[T]): Unit = println(s"onEvent($evt)")
+      }
+
+      println(ws.drawCard)
+      println(ws.drawCard)
+      println(ws.drawCard) // event
+      println(ws.drawCard)
+      println(ws.drawCard)
+      println(ws.drawCard)
+      println(ws.drawCard)
+      println(ws.drawCard)
+      println(ws.drawCard)
+      println(ws.drawCard)
+      println(ws.drawCard)
+      println(ws.drawCard)
+      println(ws.drawCard)
+      println(ws.drawCard)
 
     }
   }
