@@ -15,7 +15,7 @@ object CollectionUtils {
    * @return
    */
   def maxSeq[T](opt1: Option[List[T]], opt2: Option[List[T]]): Option[List[T]] = {
-    //TODO refactoring
+    //TODO refactoring: apply some functional pattern
     Seq(opt1, opt2).flatten match {
       case Seq(Nil, Nil) => None
       case Seq(Nil, b) => Some(b)
