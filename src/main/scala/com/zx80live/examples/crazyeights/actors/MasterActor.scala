@@ -1,27 +1,26 @@
 package com.zx80live.examples.crazyeights.actors
 
-import akka.actor.{Actor, ActorSystem, Props}
+import akka.actor.{Actor, ActorLogging}
+import com.zx80live.examples.crazyeights.actors.Messages.{Card, Discard}
 import com.zx80live.examples.crazyeights.cards.CardsHelper
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8MovePatterns
 
 /**
  *
  * @author Andrew Proshkin
  */
-class MasterActor extends Actor with CardsHelper {
+class MasterActor extends Actor with CardsHelper with Crazy8MovePatterns with ActorLogging {
 
-  var system: Option[ActorSystem] = None
 
-  def run(): Unit = {
-    val system = ActorSystem("MySystem")
-    val player1 = system.actorOf(Props[AIPlayerActor], name = "player1")
-    val player2 = system.actorOf(Props[AIPlayerActor], name = "player2")
-    //    player1 ! NewGame()
-    //    player1 ! Say("Hello, all")
-    //    player1 ! Say("how are you?")
-    //    player1 ! Card(Rank.Ace, Suit.Clubs)
+
+  override def receive: Receive = {
+    case text: String => st(s"accept $text")
+    case Discard(cards) =>
+      st(s"accept Discard($cards)")
+
   }
 
-  run()
-
-  override def receive: Receive = ???
+  def st(msg: Any) {
+    log.info(msg.toString)
+  }
 }

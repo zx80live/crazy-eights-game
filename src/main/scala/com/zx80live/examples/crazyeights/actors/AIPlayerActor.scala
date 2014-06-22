@@ -9,11 +9,11 @@ import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8MovePatterns
  *
  * @author Andrew Proshkin
  */
-class AIPlayerActor extends Actor with Crazy8MovePatterns with ActorLogging {
+class AIPlayerActor extends Actor with Player with Crazy8MovePatterns with ActorLogging {
   var cards: List[Card] = Nil
 
   override def receive = {
-    case Message(text) =>
+    case text: String =>
       st(s"accept Message($text)")
 
     case NewGame(newCards) =>
@@ -29,7 +29,6 @@ class AIPlayerActor extends Actor with Crazy8MovePatterns with ActorLogging {
   }
 
   def st(msg: Any) = {
-    println(s"$this: $msg")
     log.info(msg.toString)
   }
 }

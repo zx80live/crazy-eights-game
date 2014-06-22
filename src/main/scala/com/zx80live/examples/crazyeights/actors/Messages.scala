@@ -7,15 +7,6 @@ package com.zx80live.examples.crazyeights.actors
  */
 object Messages {
 
-  /**
-   * Some status message
-   *
-   * send from: Any
-   * to: Any
-   *
-   * @param msg - message text
-   */
-  case class Message(msg: String)
 
   /**
    * Some broadcast message
