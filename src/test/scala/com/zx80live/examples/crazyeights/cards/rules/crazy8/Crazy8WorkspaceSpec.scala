@@ -75,9 +75,12 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
   }
 
   "discardCards - illegal variants" when {
-    "empty cards" in {
-      val result: Either[DiscardException, Boolean] = new Crazy8Workspace().discardCards(List())
-      result shouldBe a[Left[DiscardException, Boolean]]
+    //TODO add test cases
+    "illegal 1" in {
+      new Crazy8Workspace().discardCards(List()) shouldBe a[Left[DiscardException, Boolean]]
+      new Crazy8Workspace().discardCards(cards"A♦, ★".get) shouldBe a[Left[DiscardException, Boolean]]
+      new Crazy8Workspace().discardCards(cards"A♦, ☆".get) shouldBe a[Left[DiscardException, Boolean]]
+      new Crazy8Workspace().discardCards(cards"5♦,8♠,5♣,5♠".get) shouldBe a[Left[DiscardException, Boolean]]
     }
   }
 }
