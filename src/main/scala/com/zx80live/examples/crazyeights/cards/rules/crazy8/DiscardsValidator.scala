@@ -10,14 +10,28 @@ import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 trait DiscardsValidator {
   def validateDiscardByJoker(cards: List[Card]): Boolean = {
     cards.groupBy(_.suit) match {
+      // cards consist of jokers
       case m if m.size == 1 && m.keys.head == Suit.Special => true
       case _ => false
     }
   }
 
   def validateDiscardByEight(cards: List[Card]): Boolean = {
+    validateDiscardByRank(Card(Rank.Eight, Suit.Diamonds), cards)
+  }
+
+  def validateDiscardByRank(current: Card, cards: List[Card]): Boolean = {
     cards.groupBy(_.rank) match {
-      case m if m.size == 1 && m.keys.head == Rank.Eight => true
+      // cards consist of equal ranks and these ranks equals current.rank
+      case m if m.size == 1 && m.keys.head == current.rank => true
+      case _ => false
+    }
+  }
+
+  def validateDiscardBySuit(current: Card, cards: List[Card]): Boolean = {
+    cards.groupBy(_.rank) match {
+      // cards consist of equal ranks and contains suit such as current.suit
+      case m if m.size == 1 && cards.exists(_.suit == current.suit) => true
       case _ => false
     }
   }

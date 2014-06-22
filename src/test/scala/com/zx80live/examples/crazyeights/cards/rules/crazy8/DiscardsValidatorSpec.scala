@@ -42,4 +42,29 @@ class DiscardsValidatorSpec extends WordSpec with Matchers with DiscardsValidato
       validateDiscardByEight(cards"8♠,8♥,A♦,8♦,8♣".get) shouldEqual false
     }
   }
+
+  "validateDiscardByRank" when {
+    "correct variants" in {
+      validateDiscardByRank(card"5♦".get, cards"5♦".get) shouldEqual true
+      validateDiscardByRank(card"5♦".get, cards"5♦,5♣".get) shouldEqual true
+      validateDiscardByRank(card"5♦".get, cards"5♦,5♣,5♠".get) shouldEqual true
+      validateDiscardByRank(card"5♦".get, cards"5♦,5♣,5♠,5♥".get) shouldEqual true
+    }
+
+    "illegal variants" in {
+      validateDiscardByRank(card"5♦".get, cards"5♦,A♠".get) shouldEqual false
+      validateDiscardByRank(card"5♦".get, cards"7♦,8♣".get) shouldEqual false
+      validateDiscardByRank(card"5♦".get, cards"5♦,8♠,5♣,5♠".get) shouldEqual false
+      validateDiscardByRank(card"5♦".get, Nil) shouldEqual false
+    }
+  }
+
+  "validateDiscardBySuit" when {
+    "correct variants" in {
+    }
+
+    "illegal variants" in {
+    }
+  }
+
 }
