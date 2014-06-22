@@ -5,6 +5,7 @@ import com.zx80live.examples.crazyeights.cards.Rank
 import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
+import com.zx80live.examples.crazyeights.cards.rules.WorkspaceEventListener
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
 import org.scalatest.{Matchers, WordSpec}
 
@@ -81,6 +82,44 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
       new Crazy8Workspace().discardCards(cards"A♦, ★".get) shouldBe a[Left[DiscardException, Boolean]]
       new Crazy8Workspace().discardCards(cards"A♦, ☆".get) shouldBe a[Left[DiscardException, Boolean]]
       new Crazy8Workspace().discardCards(cards"5♦,8♠,5♣,5♠".get) shouldBe a[Left[DiscardException, Boolean]]
+    }
+  }
+
+  "drawCard" when {
+    "recreate stockpile from discard pile" in {
+      val ws = new Crazy8Workspace(cards"2♦,3♠,4♣".get)
+      println(ws)
+
+      ws.discardCards(cards"${ws.currentCard.rank}♣".get)
+      ws.discardCards(cards"9♣".get)
+      ws.discardCards(cards"10♣".get)
+      ws.discardCards(cards"J♣".get)
+      ws.discardCards(cards"Q♣".get)
+      ws.discardCards(cards"K♣".get)
+      ws.discardCards(cards"A♣".get)
+      println(ws)
+
+
+
+//      implicit val listener = new WorkspaceEventListener {
+//        override def onEvent[T](evt: WorkspaceEvent[T]): Unit = println(s"onEvent($evt)")
+//      }
+//
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+//      println(ws.drawCard) // event
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+//      println(ws.drawCard)
+
     }
   }
 }

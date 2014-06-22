@@ -2,8 +2,8 @@ package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.CardsHelper._
-import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
+import com.zx80live.examples.crazyeights.cards.rules.{Workspace, WorkspaceEventListener}
 
 
 /**
@@ -72,7 +72,7 @@ class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8W
   }
 
   /** TODO test
-    * TODO event (Joker, Eight, Etc)
+    * TODO event (Joker, Eight, Success)
     * Discard player's cards.
     *
     * @param cards - player's cards
@@ -86,5 +86,7 @@ class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8W
       Right(true)
     }
   }
+
+
 
 }

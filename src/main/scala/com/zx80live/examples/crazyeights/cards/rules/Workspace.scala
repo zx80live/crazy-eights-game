@@ -9,9 +9,9 @@ import com.zx80live.examples.crazyeights.cards.rules.crazy8.WorkspaceEvent
  * @author Andrew Proshkin
  */
 trait Workspace {
-  type WorkspaceEventListener = {def onEvent[T](evt: WorkspaceEvent[T]): Unit}
 
-  implicit val defaultListener: WorkspaceEventListener = new {
+
+  implicit val defaultListener: WorkspaceEventListener = new WorkspaceEventListener {
     def onEvent[T](evt: WorkspaceEvent[T]): Unit = {}
   }
 
@@ -24,4 +24,17 @@ trait Workspace {
   def drawCard(implicit eventListener: WorkspaceEventListener): Option[Card]
 
   def discardCards(cards: List[Card]): Either[DiscardException, Boolean]
+
+  override def toString: String = {
+    s"""Workspace {
+      |  stockpile:   $stockPile
+      |  discardPile: $discardPile
+      |  currentCard: $currentCard
+      |}
+    """.stripMargin
+  }
+}
+
+trait WorkspaceEventListener {
+  def onEvent[T](evt: WorkspaceEvent[T]): Unit
 }
