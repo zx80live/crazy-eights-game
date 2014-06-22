@@ -18,7 +18,7 @@ class MovePatternsSpec extends WordSpec with Matchers with MovePatterns {
   }
 
   "findJoker" when {
-    "find first Some(Rank.XXXJoker) or None" in {
+    "find first Some(Rank.BlackJoker)|Some(Rank.WhiteJoker) or None" in {
       findJoker(cards" 2♦,  ★, 3♣, 2♣, A♦, 8♦, 8♠, A♣, ☆ ".get) shouldEqual card"★"
       findJoker(cards" 2♦, 5♣, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣".get) shouldEqual None
     }

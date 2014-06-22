@@ -1,6 +1,6 @@
 package com.zx80live.examples.crazyeights.actors
 
-import akka.actor.{ActorLogging, Actor}
+import akka.actor.{Actor, ActorLogging}
 import com.zx80live.examples.crazyeights.actors.messages.{NewGame, Say}
 import com.zx80live.examples.crazyeights.model.Card
 
@@ -14,10 +14,10 @@ class PlayerActor extends Actor with ActorLogging {
   override def receive = {
     case m: NewGame =>
       cards.clear()
-      println("new game")
+
     case c: Card =>
       cards += c
-      println(s"add card $c")
+
     case Say(msg) => println(msg)
     case _ => println("I don't know")
   }
