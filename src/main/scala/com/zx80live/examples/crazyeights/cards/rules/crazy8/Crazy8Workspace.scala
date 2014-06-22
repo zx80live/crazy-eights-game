@@ -78,12 +78,18 @@ class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8W
     * @param cards - player's cards
     * @return
     */
-  override def discardCards(cards: List[Card]): Either[DiscardException, Boolean] = {
+  override def discardCards(cards: List[Card]): Either[DiscardException, DiscardEvent] = {
     if (!validateDiscard(currentCard, cards)) {
       Left(new DiscardException(s"$cards is not valid for current $currentCard"))
     } else {
       _discardPile = cards ::: _discardPile
-      Right(true)
+
+      if (validateDiscardByEight(cards))
+        Right(EightDiscardEvent)
+      else if (validateDiscardByJoker(cards))
+        Right(JokerDiscardEvent)
+      else
+        Right(SuccessDiscardEvent)
     }
   }
 

@@ -1,7 +1,5 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.Suit
-
 /**
  * @author Andrew Proshkin
  *
@@ -14,8 +12,8 @@ sealed class RecreateStockpileEvent[String] extends WorkspaceEvent("stockpile is
 
 class DiscardEvent
 
-sealed class JokerDiscardEvent extends DiscardEvent
+object JokerDiscardEvent extends DiscardEvent
 
-sealed class EightDiscardEvent(suit: Suit.Value) extends DiscardEvent
+object EightDiscardEvent extends DiscardEvent
 
-sealed class SuccessDiscardEvent extends DiscardEvent
+object SuccessDiscardEvent extends DiscardEvent

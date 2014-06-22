@@ -2,7 +2,7 @@ package com.zx80live.examples.crazyeights.cards.rules
 
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.WorkspaceEvent
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.{DiscardEvent, WorkspaceEvent}
 
 /**
  *
@@ -23,7 +23,7 @@ trait Workspace {
 
   def drawCard(implicit eventListener: WorkspaceEventListener): Option[Card]
 
-  def discardCards(cards: List[Card]): Either[DiscardException, Boolean]
+  def discardCards(cards: List[Card]): Either[DiscardException, DiscardEvent]
 
   override def toString: String = {
     s"""Workspace {

@@ -30,58 +30,58 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
 
   "discardCards - correct variants" when {
     "jokers" in {
-      new Crazy8Workspace().discardCards(cards"★, ☆, ☆, ★".get) shouldEqual Right(true)
-      new Crazy8Workspace().discardCards(cards"★".get) shouldEqual Right(true)
-      new Crazy8Workspace().discardCards(cards"☆".get) shouldEqual Right(true)
+      new Crazy8Workspace().discardCards(cards"★, ☆, ☆, ★".get) shouldEqual Right(JokerDiscardEvent)
+      new Crazy8Workspace().discardCards(cards"★".get) shouldEqual Right(JokerDiscardEvent)
+      new Crazy8Workspace().discardCards(cards"☆".get) shouldEqual Right(JokerDiscardEvent)
     }
 
     "eights" in {
-      new Crazy8Workspace().discardCards(cards"8♠".get) shouldEqual Right(true)
-      new Crazy8Workspace().discardCards(cards"8♥".get) shouldEqual Right(true)
-      new Crazy8Workspace().discardCards(cards"8♦".get) shouldEqual Right(true)
-      new Crazy8Workspace().discardCards(cards"8♣".get) shouldEqual Right(true)
-      new Crazy8Workspace().discardCards(cards"8♠,8♥,8♦,8♣".get) shouldEqual Right(true)
+      new Crazy8Workspace().discardCards(cards"8♠".get) shouldEqual Right(EightDiscardEvent)
+      new Crazy8Workspace().discardCards(cards"8♥".get) shouldEqual Right(EightDiscardEvent)
+      new Crazy8Workspace().discardCards(cards"8♦".get) shouldEqual Right(EightDiscardEvent)
+      new Crazy8Workspace().discardCards(cards"8♣".get) shouldEqual Right(EightDiscardEvent)
+      new Crazy8Workspace().discardCards(cards"8♠,8♥,8♦,8♣".get) shouldEqual Right(EightDiscardEvent)
     }
 
     "rank 1" in {
       val ws = new Crazy8Workspace
       val current: Rank.Value = ws.currentCard.rank
-      ws.discardCards(cards"$current♦".get) shouldEqual Right(true)
+      ws.discardCards(cards"$current♦".get) shouldEqual Right(SuccessDiscardEvent)
     }
 
     "rank 2" in {
       val ws = new Crazy8Workspace
       val r = ws.currentCard.rank
-      ws.discardCards(cards"$r♦, $r♣".get) shouldEqual Right(true)
+      ws.discardCards(cards"$r♦, $r♣".get) shouldEqual Right(SuccessDiscardEvent)
     }
 
     "rank 3" in {
       val ws = new Crazy8Workspace
       val r = ws.currentCard.rank
-      ws.discardCards(cards"$r♦, $r♣, $r♠".get) shouldEqual Right(true)
+      ws.discardCards(cards"$r♦, $r♣, $r♠".get) shouldEqual Right(SuccessDiscardEvent)
     }
 
     //TODO (for suit-xxx) create test data with filtering current
     "suit 1" in {
       val ws = new Crazy8Workspace
       val s = ws.currentCard.suit
-      ws.discardCards(cards"4$s".get) shouldEqual Right(true)
+      ws.discardCards(cards"4$s".get) shouldEqual Right(SuccessDiscardEvent)
     }
 
     "suit 2" in {
       val ws = new Crazy8Workspace
       val s = ws.currentCard.suit
-      ws.discardCards(cards"4$s, 4♣, 4♦, 4♠".get) shouldEqual Right(true)
+      ws.discardCards(cards"4$s, 4♣, 4♦, 4♠".get) shouldEqual Right(SuccessDiscardEvent)
     }
   }
 
   "discardCards - illegal variants" when {
     //TODO add test cases
     "illegal 1" in {
-      new Crazy8Workspace().discardCards(List()) shouldBe a[Left[DiscardException, Boolean]]
-      new Crazy8Workspace().discardCards(cards"A♦, ★".get) shouldBe a[Left[DiscardException, Boolean]]
-      new Crazy8Workspace().discardCards(cards"A♦, ☆".get) shouldBe a[Left[DiscardException, Boolean]]
-      new Crazy8Workspace().discardCards(cards"5♦,8♠,5♣,5♠".get) shouldBe a[Left[DiscardException, Boolean]]
+      new Crazy8Workspace().discardCards(List()) shouldBe a[Left[DiscardException, DiscardEvent]]
+      new Crazy8Workspace().discardCards(cards"A♦, ★".get) shouldBe a[Left[DiscardException, DiscardEvent]]
+      new Crazy8Workspace().discardCards(cards"A♦, ☆".get) shouldBe a[Left[DiscardException, DiscardEvent]]
+      new Crazy8Workspace().discardCards(cards"5♦,8♠,5♣,5♠".get) shouldBe a[Left[DiscardException, DiscardEvent]]
     }
   }
 
