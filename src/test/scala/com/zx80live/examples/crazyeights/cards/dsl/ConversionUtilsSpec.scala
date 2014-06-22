@@ -1,9 +1,9 @@
-package com.zx80live.examples.crazyeights.model.cards.dsl
+package com.zx80live.examples.crazyeights.cards.dsl
 
 import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
-import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
+import com.zx80live.examples.crazyeights.cards.{CardsHelper, Card, Rank, Suit}
 import org.scalatest._
 
 /**
@@ -11,11 +11,7 @@ import org.scalatest._
  *
  * @author Andrew Proshkin
  */
-class ConversionUtilsSpec extends WordSpec with Matchers {
-
-  val rankStrings: List[String] = "2" :: "3" :: "4" :: "5" :: "6" :: "7" :: "8" :: "9" :: "10" :: "J" :: "Q" :: "K" :: "A" :: "★" :: "☆" :: Nil
-  val suitStrings: List[String] = "♠" :: "♥" :: "♦" :: "♣" :: Nil
-  val deck54Strings: List[String] = "★" :: "☆" :: (for (r <- rankStrings.filter(r => r != "★" && r != "☆"); s <- suitStrings) yield s"$r$s")
+class ConversionUtilsSpec extends WordSpec with Matchers with CardsHelper {
 
   "string2Rank" when {
     "converts correct rankStrings into Some(_)" in {

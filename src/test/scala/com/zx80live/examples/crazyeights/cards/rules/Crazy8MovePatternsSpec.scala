@@ -1,7 +1,6 @@
-package com.zx80live.examples.crazyeights.model.cards.rules
+package com.zx80live.examples.crazyeights.cards.rules
 
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
-import com.zx80live.examples.crazyeights.cards.rules.Crazy8MovePatterns
 import org.scalatest._
 
 /**
