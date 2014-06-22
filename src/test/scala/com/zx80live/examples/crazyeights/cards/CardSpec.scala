@@ -8,13 +8,7 @@ import org.scalatest.{Matchers, WordSpec}
  */
 class CardSpec extends WordSpec with Matchers with CardsHelper {
 
-  "get lazy 52-cards deck" in {
-    deck52.length shouldEqual 52
-  }
 
-  "get lazy 54-cards deck" in {
-    deck54.length shouldEqual 54
-  }
 
   "create 54-cards deck" in {
     deck54Pairs map (p => Card(p._1, p._2))

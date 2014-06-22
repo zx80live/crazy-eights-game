@@ -1,6 +1,8 @@
 package com.zx80live.examples.crazyeights.cards
 
 
+import com.zx80live.examples.crazyeights.cards.rules.{DefaultCondition, ShuffleCondition}
+
 import scala.util.Random
 
 /**
@@ -27,5 +29,20 @@ trait CardsHelper {
   lazy val deck52Pairs: List[(Rank.Value, Suit.Value)] = for (r <- ranks.filter(r => r != BlackJoker && r != WhiteJoker); s <- suits.filter(_ != Special)) yield (r, s)
   lazy val deck54Pairs: List[(Rank.Value, Suit.Value)] = (BlackJoker, Special) ::(WhiteJoker, Special) :: deck52Pairs
 
-  def shuffle(deck: List[Card]): List[Card] = Random.shuffle(deck)
+  /**
+   * Shuffle cards deck with condition
+   *
+   * @param deck - cards
+   * @param condition - some condition
+   * @return
+   */
+  def shuffle(deck: List[Card], condition: ShuffleCondition = DefaultCondition): List[Card] = {
+    //TODO create recursion guardian
+    //TODO @tailrec
+    val shuffled = Random.shuffle(deck)
+    if (condition.acceptShuffle(shuffled))
+      shuffled
+    else
+      shuffle(shuffled, condition)
+  }
 }
