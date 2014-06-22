@@ -98,22 +98,31 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
 
       ws.currentCard shouldEqual card"A♦".get
 
+      var event: Option[WorkspaceEvent] = None
       implicit val listener = new WorkspaceEventListener {
-        override def onEvent[T](evt: WorkspaceEvent[T]): Unit = {
-          println(s"onEvent($evt)")
-          println(ws)
+        override def onEvent(evt: WorkspaceEvent): Unit = {
+          event = Some(evt)
         }
       }
 
       ws.drawCard shouldEqual card"3♠"
+      /**/ event shouldEqual None
       ws.drawCard shouldEqual card"4♣"
-      ws.currentCard shouldEqual card"A♦".get // WorkspaceEvent
-      ws.drawCard shouldEqual card"K♦"
+      /**/ event shouldEqual None
+      ws.currentCard shouldEqual card"A♦".get
+      /**/ event shouldEqual None
+      ws.drawCard shouldEqual card"K♦" // WorkspaceEvent
+      /**/ event should not equal None
       ws.drawCard shouldEqual card"Q♦"
+      /**/ event should not equal None
       ws.drawCard shouldEqual card"J♦"
+      /**/ event should not equal None
       ws.drawCard shouldEqual card"10♦"
+      /**/ event should not equal None
       ws.drawCard shouldEqual card"2♦"
+      /**/ event should not equal None
       ws.drawCard shouldEqual None
+      /**/ event should not equal None
       ws.drawCard shouldEqual None
     }
 

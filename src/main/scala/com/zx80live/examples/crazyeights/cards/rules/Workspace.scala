@@ -12,7 +12,7 @@ trait Workspace {
 
 
   implicit val defaultListener: WorkspaceEventListener = new WorkspaceEventListener {
-    def onEvent[T](evt: WorkspaceEvent[T]): Unit = {}
+    def onEvent(evt: WorkspaceEvent): Unit = {}
   }
 
   def stockPile: List[Card]
@@ -37,5 +37,5 @@ trait Workspace {
 }
 
 trait WorkspaceEventListener {
-  def onEvent[T](evt: WorkspaceEvent[T]): Unit
+  def onEvent(evt: WorkspaceEvent): Unit
 }
