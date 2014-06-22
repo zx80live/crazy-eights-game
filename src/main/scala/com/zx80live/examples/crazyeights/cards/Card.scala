@@ -24,7 +24,11 @@ case class Card(rank: Rank.Value, suit: Suit.Value = Suit.Special) extends Unico
  */
 object Suit extends Enumeration {
   type Suit = Value
-  val Spades, Hearts, Diamonds, Clubs, Special = Value
+  val Spades = Value("S")
+  val Hearts = Value("H")
+  val Diamonds = Value("D")
+  val Clubs = Value("C")
+  val Special = Value("")
 }
 
 /**
@@ -32,7 +36,21 @@ object Suit extends Enumeration {
  */
 object Rank extends Enumeration {
   type Rank = Value
-  val Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace, BlackJoker, WhiteJoker = Value
+  val Two = Value("2")
+  val Three = Value("3")
+  val Four = Value("4")
+  val Five = Value("5")
+  val Six = Value("6")
+  val Seven = Value("7")
+  val Eight = Value("8")
+  val Nine = Value("9")
+  val Ten = Value("10")
+  val Jack = Value("J")
+  val Queen = Value("Q")
+  val King = Value("K")
+  val Ace = Value("A")
+  val BlackJoker = Value("BJ")
+  val WhiteJoker = Value("WJ")
 }
 
 

@@ -7,6 +7,8 @@ import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardEx
 
 
 /**
+ * TODO ERROR! currentCard may be Nine!
+ *
  * TODO use Set[Card] instead List[Card] in all occurrences
  *
  * @author Andrew Proshkin
