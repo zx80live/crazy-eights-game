@@ -41,7 +41,14 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
       new Crazy8Workspace().discardCards(cards"8♠,8♥,8♦,8♣".get) shouldEqual Right(true)
     }
 
-    "rank group" in {}
+    "rank group" in {
+      println(card"${2}♥")
+      //val ws = new Crazy8Workspace
+      //ws.discardCards(cards"${ws.currentCard.rank}♦".get) shouldEqual true
+//      validateDiscardByRank(card"5♦".get, cards"5♦,5♣".get) shouldEqual true
+//      validateDiscardByRank(card"5♦".get, cards"5♦,5♣,5♠".get) shouldEqual true
+//      validateDiscardByRank(card"5♦".get, cards"5♦,5♣,5♠,5♥".get) shouldEqual true
+    }
 
     "suit group" in {}
   }

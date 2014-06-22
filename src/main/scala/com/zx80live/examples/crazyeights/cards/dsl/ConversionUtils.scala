@@ -16,6 +16,8 @@ import scala.util.matching.Regex
 object ConversionUtils {
 
   /**
+   * TODO refactoring duplicate code
+   *
    * Allow to use string interpolation into: regex, card, cards list
    *
    * @param sc - string context
@@ -24,14 +26,46 @@ object ConversionUtils {
     def r = new Regex(sc.parts.mkString, sc.parts.tail.map(_ => "x"): _*)
 
     //TODO test
-    def rank(args: Any*): Option[Rank.Value] = sc.raw()
+    def rank(args: Any*): Option[Rank.Value] = {
+      val strings = sc.parts.iterator
+      val buff = new StringBuilder(strings.next())
+      while (strings.hasNext) {
+        buff append args.iterator.next
+        buff append strings.next
+      }
+      buff.toString(): Option[Rank.Value]
+    }
 
     //TODO test
-    def suit(args: Any*): Option[Suit.Value] = sc.raw()
+    def suit(args: Any*): Option[Suit.Value] = {
+      val strings = sc.parts.iterator
+      val buff = new StringBuilder(strings.next())
+      while (strings.hasNext) {
+        buff append args.iterator.next
+        buff append strings.next
+      }
+      buff.toString(): Option[Suit.Value]
+    }
 
-    def card(args: Any*): Option[Card] = sc.raw()
+    def card(args: Any*): Option[Card] = {
+      val strings = sc.parts.iterator
+      val buff = new StringBuilder(strings.next())
+      while (strings.hasNext) {
+        buff append args.iterator.next
+        buff append strings.next
+      }
+      buff.toString(): Option[Card]
+    }
 
-    def cards(args: Any*): Option[List[Card]] = sc.raw()
+    def cards(args: Any*): Option[List[Card]] = {
+      val strings = sc.parts.iterator
+      val buff = new StringBuilder(strings.next())
+      while (strings.hasNext) {
+        buff append args.iterator.next
+        buff append strings.next
+      }
+      buff.toString(): Option[List[Card]]
+    }
   }
 
   /**
