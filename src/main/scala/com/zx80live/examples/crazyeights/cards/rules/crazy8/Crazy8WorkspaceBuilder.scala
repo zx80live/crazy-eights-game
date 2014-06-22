@@ -15,9 +15,10 @@ trait Crazy8WorkspaceBuilder {
    * Create shuffled stockpile and discard pile from cards list
    *
    * @param cards - some cards list
+   * @param shuffle - if true then cards will be shuffled
    * @return tuple of stockpile and discard pile
    */
-  def createWorkspace(cards: List[Card]): Either[Throwable, (List[Card], List[Card])] = {
+  def createWorkspace(cards: List[Card], shuffle: Boolean = true): Either[Throwable, (List[Card], List[Card])] = {
 
     //TODO add condition for shorts lists of Eights and Special cards
     cards match {

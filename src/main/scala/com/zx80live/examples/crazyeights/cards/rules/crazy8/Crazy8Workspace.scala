@@ -13,7 +13,7 @@ import com.zx80live.examples.crazyeights.cards.rules.{Workspace, WorkspaceEventL
  *
  * @author Andrew Proshkin
  */
-class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8WorkspaceBuilder with Crazy8MovePatterns with Crazy8DiscardsValidator {
+class Crazy8Workspace(cards: List[Card] = deck54, shuffle: Boolean = true) extends Workspace with Crazy8WorkspaceBuilder with Crazy8MovePatterns with Crazy8DiscardsValidator {
 
   /**
    * used for structural types
@@ -26,7 +26,7 @@ class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8W
 
   private var _discardPile: List[Card] = Nil
 
-  createWorkspace(cards) match {
+  createWorkspace(cards, shuffle) match {
     case Right((s, d)) =>
       _stockPile = s
       _discardPile = d
@@ -56,7 +56,7 @@ class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8W
         _stockPile = tail
         Some(head)
       case Nil =>
-        createWorkspace(_discardPile) match {
+        createWorkspace(_discardPile, shuffle) match {
           case Right((s, d)) =>
             //TODO analyze recursion and add guardian
             _stockPile = s

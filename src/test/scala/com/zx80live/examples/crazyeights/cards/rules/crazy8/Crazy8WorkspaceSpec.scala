@@ -122,5 +122,9 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
       println(ws.drawCard)
 
     }
+
+    "stack overflow" in {
+
+    }
   }
 }
