@@ -10,6 +10,4 @@ object Exceptions {
 
   sealed class DiscardException(msg: String = "") extends RuntimeException(msg)
 
-  sealed class EmptyCardsDiscardException extends DiscardException("can't discard empty cards list")
-
 }

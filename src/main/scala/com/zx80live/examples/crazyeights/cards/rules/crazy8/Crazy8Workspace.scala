@@ -1,8 +1,8 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DiscardException, EmptyCardsDiscardException}
-import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper, Suit}
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
+import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper}
 
 
 /**
@@ -10,7 +10,7 @@ import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper, Suit}
  *
  * @author Andrew Proshkin
  */
-class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBuilder with Crazy8MovePatterns {
+class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBuilder with Crazy8MovePatterns with Crazy8DiscardsValidator {
 
   import scala.language.reflectiveCalls
 
@@ -26,10 +26,13 @@ class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBui
   }
 
 
+  // TODO test
   override def stockPile: List[Card] = _stockPile
 
+  // TODO test
   override def discardPile: List[Card] = _discardPile
 
+  // TODO test
   override def currentCard: Card = _discardPile.head
 
   /**
@@ -59,36 +62,19 @@ class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBui
     }
   }
 
-  /**
-   * Discard player's cards.
-   *
-   * @param cards - player's cards
-   * @return
-   */
+  /** TODO test
+    * Discard player's cards.
+    *
+    * @param cards - player's cards
+    * @return
+    */
   override def discardCards(cards: List[Card]): Either[DiscardException, Boolean] = {
-    cards match {
-      case Nil => Left(new EmptyCardsDiscardException)
-      case _ =>
-        // check can move by rank
-        // check can move by suit
-        // check can move by eight
-        // check can move by joker
-
-        _discardPile = cards ::: _discardPile
-        Right(true)
+    if (!validateDiscard(currentCard, cards)) {
+      Left(new DiscardException(s"$cards is not valid for current $currentCard"))
+    } else {
+      _discardPile = cards ::: _discardPile
+      Right(true)
     }
   }
 
-  //def validateDiscardByRank(cards: List[Card], current: Card): Either[DiscardException, Boolean] = {
-  //    cards.groupBy(_.rank) match {
-  //      case m if m.size > 1 &&  =>
-  //    }
-  //}
-  //  def validateDiscardBySuit(cards: List[Card], current: Card): Either[DiscardException, Boolean] = ???
-  //
-  //  def validateDiscardByEight(cards: List[Card], current: Card): Either[DiscardException, Boolean] = ???
-  //
-
-
-  override def validateDiscard(cards: List[Card]): Either[DiscardException, Boolean] = ???
 }

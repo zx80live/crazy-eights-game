@@ -3,7 +3,7 @@ package com.zx80live.examples.crazyeights.cards.rules.crazy8
 import com.zx80live.examples.crazyeights.cards.CardsHelper
 import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DiscardException, EmptyCardsDiscardException}
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
 import org.scalatest.{Matchers, WordSpec}
 
 /**
@@ -30,10 +30,6 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with CardsHelper with C
       val ws = new Crazy8Workspace
       val result: Either[DiscardException, Boolean] = ws.discardCards(List())
       result shouldBe a[Left[DiscardException, Boolean]]
-      result match {
-        case Left(t: EmptyCardsDiscardException) => true shouldEqual true //TODO refactoring
-        case _ => true shouldEqual false //TODO refactoring
-      }
     }
   }
 
