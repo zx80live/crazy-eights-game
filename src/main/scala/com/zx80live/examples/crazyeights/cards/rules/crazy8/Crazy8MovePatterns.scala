@@ -4,7 +4,7 @@ import com.zx80live.examples.crazyeights.cards.Card
 
 
 /**
- * Search move patterns
+ * Search move patterns for crazy eights game
  *
  * @author Andrew Proshkin
  */
