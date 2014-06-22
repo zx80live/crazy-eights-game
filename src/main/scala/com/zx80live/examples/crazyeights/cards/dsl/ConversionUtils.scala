@@ -20,7 +20,7 @@ object ConversionUtils {
    *
    * @param sc - string context
    */
-  implicit class CardsHelper(sc: StringContext) {
+  implicit class CardsConversionHelper(sc: StringContext) {
     def r = new Regex(sc.parts.mkString, sc.parts.tail.map(_ => "x"): _*)
 
     //TODO test
