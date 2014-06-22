@@ -61,6 +61,11 @@ class DiscardsValidatorSpec extends WordSpec with Matchers with DiscardsValidato
 
   "validateDiscardBySuit" when {
     "correct variants" in {
+      validateDiscardBySuit(card"4♣".get, cards"4♣".get) shouldEqual true
+      validateDiscardBySuit(card"4♣".get, cards"A♣".get) shouldEqual true
+      validateDiscardBySuit(card"2♣".get, cards"2♣, 2♦, 2♠".get) shouldEqual true
+      validateDiscardBySuit(card"4♣".get, cards"2♦, 2♠, 2♣".get) shouldEqual true
+      validateDiscardBySuit(card"4♣".get, cards"A♦, A♣, A♠".get) shouldEqual true
     }
 
     "illegal variants" in {
