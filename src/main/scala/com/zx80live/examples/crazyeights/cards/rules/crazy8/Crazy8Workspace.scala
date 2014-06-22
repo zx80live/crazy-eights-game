@@ -37,7 +37,7 @@ class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBui
    * If stockpile is empty then stockpile := shuffle(discardPile)
    *
    * @param eventListener - listener for handling inner events from drawCards method
-   * @return
+   * @return Some[Card] or None if stockpile and discard pile are empty
    */
   override def drawCard(implicit eventListener: WorkspaceEventListener): Option[Card] = {
     _stockPile match {
@@ -51,10 +51,9 @@ class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBui
             _stockPile = s
             _discardPile = d
 
-            eventListener.onEvent("stockpile is empty, recreate it from discard pile")
+            eventListener.onEvent("stockpile is empty, recreate them from discard pile")
             drawCard(eventListener)
 
-          // stockpile and discard pile are empty
           case Left(e) => None
         }
     }
