@@ -1,5 +1,6 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
+import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper}
 
 
@@ -8,7 +9,7 @@ import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper}
  *
  * @author Andrew Proshkin
  */
-class Crazy8Workspace extends CardsHelper with Crazy8WorkspaceBuilder {
+class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBuilder {
   private var _stockPile: List[Card] = Nil
 
   private var _discardPile: List[Card] = Nil
@@ -33,16 +34,24 @@ class Crazy8Workspace extends CardsHelper with Crazy8WorkspaceBuilder {
    *
    * @return
    */
-  //  def drawCard: Card = {
-  //    _stockPile match {
-  //      case head :: tail =>
-  //        _stockPile = tail
-  //        head
-  //      case Nil =>
-  //        _stockPile = _discardPile.shuffle
-  //        _discardPile = createDiscardPile
-  //    }
-  //  }
+  def drawCard(): Option[Card] = {
+    _stockPile match {
+      case head :: tail =>
+        _stockPile = tail
+        Some(head)
+      case Nil =>
+        createWorkspace(deck54) match {
+          case Right((s, d)) =>
+            //TODO analyze recursion and add guardian
+            _stockPile = s
+            _discardPile = d
+            drawCard()
 
+          // stockpile and discard pile are empty
+          case Left(e) => None
+        }
+    }
+  }
 
+  override def discardCards(cards: List[Card]): Unit = ???
 }
