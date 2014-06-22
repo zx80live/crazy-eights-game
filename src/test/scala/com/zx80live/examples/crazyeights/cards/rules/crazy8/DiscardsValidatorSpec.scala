@@ -66,10 +66,10 @@ class DiscardsValidatorSpec extends WordSpec with Matchers with DiscardsValidato
       validateDiscardBySuit(card"2♣".get, cards"2♣, 2♦, 2♠".get) shouldEqual true
       validateDiscardBySuit(card"4♣".get, cards"2♦, 2♠, 2♣".get) shouldEqual true
       validateDiscardBySuit(card"4♣".get, cards"A♦, A♣, A♠".get) shouldEqual true
+      validateDiscardBySuit(card"2♥".get, cards"2♣, 2♦, 2♠".get) shouldEqual true
     }
 
     "illegal variants" in {
-      validateDiscardBySuit(card"2♥".get, cards"2♣, 2♦, 2♠".get) shouldEqual false
       validateDiscardBySuit(card"2♥".get, cards"4♣, 4♦, 4♠".get) shouldEqual false
       validateDiscardBySuit(card"2♥".get, cards"2♥, 3♥, 4♥".get) shouldEqual false
       validateDiscardBySuit(card"2♥".get, cards"2♥, 3♣, 4♦".get) shouldEqual false
@@ -78,11 +78,11 @@ class DiscardsValidatorSpec extends WordSpec with Matchers with DiscardsValidato
 
   "validateDiscard" when {
     "correct variants" in {
-      // joker group
+      // by joker group
       validateDiscard(card"5♦".get, cards"★, ☆, ☆, ★".get) shouldEqual true
       validateDiscard(card"5♦".get, cards"★".get) shouldEqual true
       validateDiscard(card"5♦".get, cards"☆".get) shouldEqual true
-      // eight group
+      // by eight group
       validateDiscard(card"5♦".get, cards"8♠".get) shouldEqual true
       validateDiscard(card"5♦".get, cards"8♥".get) shouldEqual true
       validateDiscard(card"5♦".get, cards"8♦".get) shouldEqual true
@@ -99,9 +99,29 @@ class DiscardsValidatorSpec extends WordSpec with Matchers with DiscardsValidato
       validateDiscard(card"2♣".get, cards"2♣, 2♦, 2♠".get) shouldEqual true
       validateDiscard(card"4♣".get, cards"2♦, 2♠, 2♣".get) shouldEqual true
       validateDiscard(card"4♣".get, cards"A♦, A♣, A♠".get) shouldEqual true
+      validateDiscard(card"2♥".get, cards"2♣, 2♦, 2♠".get) shouldEqual true
     }
 
     "illegal variants" in {
+      // by joker group
+      validateDiscard(card"5♦".get, Nil) shouldEqual false
+      validateDiscard(card"5♦".get, cards"2♠".get) shouldEqual false
+      validateDiscard(card"5♦".get, cards"A♦,★".get) shouldEqual false
+      validateDiscard(card"5♦".get, cards"A♦,☆".get) shouldEqual false
+      // by eight group
+      validateDiscard(card"5♦".get, Nil) shouldEqual false
+      validateDiscard(card"5♦".get, cards"2♠".get) shouldEqual false
+      validateDiscard(card"5♦".get, cards"2♠,8♠".get) shouldEqual false
+      validateDiscard(card"5♦".get, cards"8♠,8♥,A♦,8♦,8♣".get) shouldEqual false
+      // by rank group
+      validateDiscard(card"5♦".get, cards"5♦,A♠".get) shouldEqual false
+      validateDiscard(card"5♦".get, cards"7♦,8♣".get) shouldEqual false
+      validateDiscard(card"5♦".get, cards"5♦,8♠,5♣,5♠".get) shouldEqual false
+      validateDiscard(card"5♦".get, Nil) shouldEqual false
+      // by suit group
+      validateDiscard(card"2♥".get, cards"4♣, 4♦, 4♠".get) shouldEqual false
+      validateDiscard(card"2♥".get, cards"2♥, 3♥, 4♥".get) shouldEqual false
+      validateDiscard(card"2♥".get, cards"2♥, 3♣, 4♦".get) shouldEqual false
     }
   }
 

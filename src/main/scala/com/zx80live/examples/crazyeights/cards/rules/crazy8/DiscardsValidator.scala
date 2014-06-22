@@ -36,7 +36,7 @@ trait DiscardsValidator {
   def validateDiscardBySuit(current: Card, cards: List[Card]): Boolean = {
     cards.groupBy(_.rank) match {
       // cards consist of equal ranks and contains suit such as current.suit
-      case m if m.size == 1 && cards.exists(_.suit == current.suit) => true
+      case m if m.size == 1 && (cards.exists(_.suit == current.suit) || validateDiscardByRank(current, cards)) => true
       case _ => false
     }
   }
