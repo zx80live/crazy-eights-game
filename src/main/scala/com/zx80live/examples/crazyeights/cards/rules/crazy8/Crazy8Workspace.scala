@@ -1,8 +1,9 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
+import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
-import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper}
 
 
 /**
@@ -10,7 +11,7 @@ import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper}
  *
  * @author Andrew Proshkin
  */
-class Crazy8Workspace(cards: List[Card] = Nil) extends Workspace with CardsHelper with Crazy8WorkspaceBuilder with Crazy8MovePatterns with Crazy8DiscardsValidator {
+class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8WorkspaceBuilder with Crazy8MovePatterns with Crazy8DiscardsValidator {
 
   /**
    * used for structural types
@@ -23,7 +24,7 @@ class Crazy8Workspace(cards: List[Card] = Nil) extends Workspace with CardsHelpe
 
   private var _discardPile: List[Card] = Nil
 
-  createWorkspace(deck54) match {
+  createWorkspace(cards) match {
     case Right((s, d)) =>
       _stockPile = s
       _discardPile = d

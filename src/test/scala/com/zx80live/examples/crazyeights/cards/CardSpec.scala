@@ -1,5 +1,6 @@
 package com.zx80live.examples.crazyeights.cards
 
+import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.IllegalCardFormatException
 import org.scalatest.{Matchers, WordSpec}
 
@@ -7,7 +8,7 @@ import org.scalatest.{Matchers, WordSpec}
  *
  * @author Andrew Proshkin
  */
-class CardSpec extends WordSpec with Matchers with CardsHelper {
+class CardSpec extends WordSpec with Matchers {
 
 
 

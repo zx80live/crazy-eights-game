@@ -1,13 +1,13 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.CardsHelper
+import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import org.scalatest.{Matchers, WordSpec}
 
 /**
  *
  * @author Andrew Proshkin
  */
-class Crazy8ShuffleConditionSpec extends WordSpec with Matchers with CardsHelper {
+class Crazy8ShuffleConditionSpec extends WordSpec with Matchers {
 
   import com.zx80live.examples.crazyeights.cards.Rank._
   import com.zx80live.examples.crazyeights.cards.Suit._

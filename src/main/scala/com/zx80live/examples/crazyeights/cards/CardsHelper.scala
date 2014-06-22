@@ -10,7 +10,7 @@ import scala.util.Random
  *
  * @author Andrew Proshkin
  */
-trait CardsHelper {
+object CardsHelper {
 
   import com.zx80live.examples.crazyeights.cards.Rank._
   import com.zx80live.examples.crazyeights.cards.Suit._

@@ -2,12 +2,13 @@ package com.zx80live.examples.crazyeights.cards
 
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8ShuffleCondition
 import org.scalatest.{Matchers, WordSpec}
+import com.zx80live.examples.crazyeights.cards.CardsHelper._
 
 /**
  *
  * @author Andrew Proshkin
  */
-class CardsHelperSpec extends WordSpec with Matchers with CardsHelper {
+class CardsHelperSpec extends WordSpec with Matchers {
   "get lazy 52-cards deck" in {
     deck52.length shouldEqual 52
   }

@@ -1,12 +1,13 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper}
+import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.cards.CardsHelper._
 
 /**
  *
  * @author Andrew Proshkin
  */
-trait Crazy8WorkspaceBuilder extends CardsHelper {
+trait Crazy8WorkspaceBuilder {
 
   implicit val shuffleCondition = Crazy8ShuffleCondition
 

@@ -1,9 +1,10 @@
 package com.zx80live.examples.crazyeights.cards.dsl
 
+import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
-import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper, Rank, Suit}
+import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 import org.scalatest._
 
 /**
@@ -11,7 +12,7 @@ import org.scalatest._
  *
  * @author Andrew Proshkin
  */
-class ConversionUtilsSpec extends WordSpec with Matchers with CardsHelper {
+class ConversionUtilsSpec extends WordSpec with Matchers {
 
   "string2Rank" when {
     "converts correct rankStrings into Some(_)" in {

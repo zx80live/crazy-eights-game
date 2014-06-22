@@ -1,16 +1,17 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
+import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
-import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper}
 import org.scalatest.{Matchers, WordSpec}
 
 /**
  *
  * @author Andrew Proshkin
  */
-class Crazy8WorkspaceBuilderSpec extends WordSpec with Matchers with CardsHelper with Crazy8WorkspaceBuilder {
+class Crazy8WorkspaceBuilderSpec extends WordSpec with Matchers with Crazy8WorkspaceBuilder {
   "createWorkspace" when {
     "from standard 54-cards deck" in {
       val cards: List[Card] = deck54

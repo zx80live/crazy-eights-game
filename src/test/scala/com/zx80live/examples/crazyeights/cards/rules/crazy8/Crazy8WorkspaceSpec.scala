@@ -1,6 +1,6 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.CardsHelper
+import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
@@ -10,7 +10,7 @@ import org.scalatest.{Matchers, WordSpec}
  *
  * @author Andrew Proshkin
  */
-class Crazy8WorkspaceSpec extends WordSpec with Matchers with CardsHelper with Crazy8WorkspaceBuilder {
+class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBuilder {
 
 
   "workspace" when {
@@ -29,11 +29,6 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with CardsHelper with C
     "discard empty cards" in {
       val result: Either[DiscardException, Boolean] = new Crazy8Workspace().discardCards(List())
       result shouldBe a[Left[DiscardException, Boolean]]
-    }
-  }
-
-  "discard validation" when {
-    "validateDiscardByJoker" in {
     }
   }
 }
