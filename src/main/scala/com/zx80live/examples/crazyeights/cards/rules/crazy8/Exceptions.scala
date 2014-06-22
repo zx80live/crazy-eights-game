@@ -6,10 +6,10 @@ package com.zx80live.examples.crazyeights.cards.rules.crazy8
  */
 object Exceptions {
 
-  class IllegalCardFormatException(msg: String = "") extends RuntimeException
+  sealed class IllegalCardFormatException(msg: String = "") extends RuntimeException(msg)
 
-  class DiscardException(msg: String = "") extends RuntimeException
+  sealed class DiscardException(msg: String = "") extends RuntimeException(msg)
 
-  class EmptyCardsDiscardException extends DiscardException("can't discard empty cards list")
+  sealed class EmptyCardsDiscardException extends DiscardException("can't discard empty cards list")
 
 }

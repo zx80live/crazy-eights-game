@@ -2,7 +2,7 @@ package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DiscardException, EmptyCardsDiscardException}
-import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper}
+import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper, Suit}
 
 
 /**
@@ -79,8 +79,16 @@ class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBui
     }
   }
 
-  private def checkCanMoveByRank(cards: List[Card]) = ???
-  private def checkCanMoveBySuit(cards: List[Card]) = ???
-  private def checkCanMoveByEight(cards: List[Card]) = ???
-  private def checkCanMoveByJoker(cards: List[Card]) = ???
+  //def validateDiscardByRank(cards: List[Card], current: Card): Either[DiscardException, Boolean] = {
+  //    cards.groupBy(_.rank) match {
+  //      case m if m.size > 1 &&  =>
+  //    }
+  //}
+  //  def validateDiscardBySuit(cards: List[Card], current: Card): Either[DiscardException, Boolean] = ???
+  //
+  //  def validateDiscardByEight(cards: List[Card], current: Card): Either[DiscardException, Boolean] = ???
+  //
+
+
+  override def validateDiscard(cards: List[Card]): Either[DiscardException, Boolean] = ???
 }

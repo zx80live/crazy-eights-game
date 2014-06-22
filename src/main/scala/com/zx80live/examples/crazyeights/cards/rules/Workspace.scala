@@ -24,4 +24,6 @@ trait Workspace {
   def drawCard(implicit eventListener: WorkspaceEventListener): Option[Card]
 
   def discardCards(cards: List[Card]): Either[DiscardException, Boolean]
+
+  def validateDiscard(cards: List[Card]): Either[DiscardException, Boolean]
 }

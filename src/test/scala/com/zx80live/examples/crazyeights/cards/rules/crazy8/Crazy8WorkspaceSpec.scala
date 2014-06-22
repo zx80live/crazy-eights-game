@@ -35,17 +35,10 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with CardsHelper with C
         case _ => true shouldEqual false //TODO refactoring
       }
     }
-
-    "discard one card" in {
-      val ws = new Crazy8Workspace
-      //val currentCard: Card =
-    }
   }
 
-  "drawCard" when {
-    "handle workspace events" in {
+  "discard validation" when {
+    "validateDiscardByJoker" in {
     }
   }
-
-
 }
