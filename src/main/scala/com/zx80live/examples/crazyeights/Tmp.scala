@@ -1,6 +1,6 @@
 package com.zx80live.examples.crazyeights
 
-import com.zx80live.examples.crazyeights.cards.rules.Crazy8MovePatterns
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8MovePatterns
 import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 
 /**

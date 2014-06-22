@@ -1,5 +1,6 @@
-package com.zx80live.examples.crazyeights.cards.rules
+package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
+import com.zx80live.examples.crazyeights.cards.rules.ShuffleCondition
 import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 
 /**

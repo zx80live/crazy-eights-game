@@ -1,6 +1,6 @@
 package com.zx80live.examples.crazyeights.cards
 
-import com.zx80live.examples.crazyeights.cards.rules.Crazy8ShuffleCondition
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8ShuffleCondition
 import org.scalatest.{Matchers, WordSpec}
 
 /**

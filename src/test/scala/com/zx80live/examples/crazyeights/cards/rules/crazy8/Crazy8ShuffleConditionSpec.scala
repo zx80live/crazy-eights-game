@@ -1,4 +1,4 @@
-package com.zx80live.examples.crazyeights.cards.rules
+package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
 import com.zx80live.examples.crazyeights.cards.CardsHelper
 import org.scalatest.{Matchers, WordSpec}
@@ -12,7 +12,7 @@ class Crazy8ShuffleConditionSpec extends WordSpec with Matchers with CardsHelper
   import com.zx80live.examples.crazyeights.cards.Rank._
   import com.zx80live.examples.crazyeights.cards.Suit._
   import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
-  import com.zx80live.examples.crazyeights.cards.rules.Crazy8ShuffleCondition._
+  import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8ShuffleCondition._
 
   "acceptShuffle" when {
     "true condition for cards except Eights and Jokers at first position in deck" in {

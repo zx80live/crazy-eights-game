@@ -1,4 +1,4 @@
-package com.zx80live.examples.crazyeights.cards.rules
+package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import org.scalatest._
