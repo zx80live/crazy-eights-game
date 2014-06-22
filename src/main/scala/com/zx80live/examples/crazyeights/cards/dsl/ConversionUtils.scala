@@ -76,6 +76,8 @@ object ConversionUtils {
   /**
    * Converts string to card
    *
+   * TODO some IDE (for example Idea) doesn't support syntax for regex interpolated string but compile it
+   *
    * @param str - card string representation
    * @return
    */
