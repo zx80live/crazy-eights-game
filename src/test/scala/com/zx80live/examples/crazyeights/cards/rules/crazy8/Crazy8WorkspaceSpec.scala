@@ -1,12 +1,12 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
 import com.zx80live.examples.crazyeights.cards.CardsHelper._
-import com.zx80live.examples.crazyeights.cards.Rank
 import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import com.zx80live.examples.crazyeights.cards.rules.WorkspaceEventListener
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{WorkspaceException, DiscardException}
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DealException, DiscardException}
+import com.zx80live.examples.crazyeights.cards.{Card, Rank}
 import org.scalatest.{Matchers, WordSpec}
 
 /**
@@ -24,6 +24,34 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
       ws.stockPile.contains(ws.currentCard) shouldEqual false
       ws.currentCard.rank should not be Eight
       ws.currentCard.suit should not be Special
+    }
+  }
+
+  "workspace deal" when {
+    "deal for incorrect players count" in {
+      new Crazy8Workspace().deal(-100) shouldBe a[Left[DealException, List[List[Card]]]]
+      new Crazy8Workspace().deal(0) shouldBe a[Left[DealException, List[List[Card]]]]
+      new Crazy8Workspace().deal(100) shouldBe a[Left[DealException, List[List[Card]]]]
+    }
+
+    "deal for correct players count = 1" in {
+      val playersCount = 1
+      val ws = new Crazy8Workspace(shuffle = false)
+
+      val topCards = ws.stockPile.take(ws.dealCardsCount)
+
+      val deal: Either[DealException, List[List[Card]]] = ws.deal(playersCount)
+      deal shouldBe a[Right[DealException, List[List[Card]]]]
+
+      deal match {
+        case Right(list: List[List[Card]]) =>
+          list.length shouldEqual playersCount
+          list.head.length shouldEqual ws.dealCardsCount
+
+          list.head.reverse shouldEqual topCards
+        case _ =>
+          true shouldEqual false
+      }
     }
   }
 

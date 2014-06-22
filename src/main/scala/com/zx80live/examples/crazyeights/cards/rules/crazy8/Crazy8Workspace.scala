@@ -102,9 +102,9 @@ class Crazy8Workspace(cards: List[Card] = deck54, shuffle: Boolean = true) exten
 
     } else {
       var cards: List[List[Card]] = Nil
-      for (i <- 0 to playersCount) {
+      for (i <- 1 to playersCount) {
         var playerCards: List[Card] = Nil
-        for (ci <- 0 to dealCardsCount)
+        for (ci <- 1 to dealCardsCount)
           playerCards = drawCard.get :: playerCards
 
         cards = playerCards :: cards
