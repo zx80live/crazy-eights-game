@@ -1,6 +1,5 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
 import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 
 /**
@@ -9,17 +8,17 @@ import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
  * @author Andrew Proshkin
  */
 trait DiscardsValidator {
-  def validateDiscardByJoker(cards: List[Card]): Either[DiscardException, Boolean] = {
+  def validateDiscardByJoker(cards: List[Card]): Boolean = {
     cards.groupBy(_.suit) match {
-      case m if m.size == 1 && m.keys.head == Suit.Special => Right(true)
-      case _ => Left(new DiscardException(s"$cards is not contains jokers"))
+      case m if m.size == 1 && m.keys.head == Suit.Special => true
+      case _ => false
     }
   }
 
-  def validateDiscardByEight(cards: List[Card]): Either[DiscardException, Boolean] = {
+  def validateDiscardByEight(cards: List[Card]): Boolean = {
     cards.groupBy(_.rank) match {
-      case m if m.size == 1 && m.keys.head == Rank.Eight => Right(true)
-      case _ => Left(new DiscardException(s"$cards is not contains eights"))
+      case m if m.size == 1 && m.keys.head == Rank.Eight => true
+      case _ => false
     }
   }
 }
