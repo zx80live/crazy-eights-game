@@ -69,6 +69,7 @@ class Crazy8Workspace(cards: List[Card] = deck54) extends Workspace with Crazy8W
   }
 
   /** TODO test
+    * TODO event (Joker, Eight, Etc)
     * Discard player's cards.
     *
     * @param cards - player's cards

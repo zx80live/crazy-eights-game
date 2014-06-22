@@ -3,6 +3,7 @@ package com.zx80live.examples.crazyeights.cards.rules.crazy8
 import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
+import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
 import org.scalatest.{Matchers, WordSpec}
 
@@ -25,8 +26,28 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
     }
   }
 
-  "discardCards" when {
-    "discard empty cards" in {
+  "discardCards - correct variants" when {
+    "joker group" in {
+      new Crazy8Workspace().discardCards(cards"★, ☆, ☆, ★".get) shouldEqual Right(true)
+      new Crazy8Workspace().discardCards(cards"★".get) shouldEqual Right(true)
+      new Crazy8Workspace().discardCards(cards"☆".get) shouldEqual Right(true)
+    }
+
+    "eight group" in {
+      new Crazy8Workspace().discardCards(cards"8♠".get) shouldEqual Right(true)
+      new Crazy8Workspace().discardCards(cards"8♥".get) shouldEqual Right(true)
+      new Crazy8Workspace().discardCards(cards"8♦".get) shouldEqual Right(true)
+      new Crazy8Workspace().discardCards(cards"8♣".get) shouldEqual Right(true)
+      new Crazy8Workspace().discardCards(cards"8♠,8♥,8♦,8♣".get) shouldEqual Right(true)
+    }
+
+    "rank group" in {}
+
+    "suit group" in {}
+  }
+
+  "discardCards - illegal variants" when {
+    "empty cards" in {
       val result: Either[DiscardException, Boolean] = new Crazy8Workspace().discardCards(List())
       result shouldBe a[Left[DiscardException, Boolean]]
     }
