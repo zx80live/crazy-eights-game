@@ -4,7 +4,7 @@ package com.zx80live.examples.crazyeights.cards
  *
  * @author Andrew Proshkin
  */
-trait UnicodeView {
+trait AsciiView {
   this: Card =>
 
   override def toString = {
@@ -12,10 +12,10 @@ trait UnicodeView {
     import com.zx80live.examples.crazyeights.cards.Suit._
 
     val s: String = suit match {
-      case Spades => "♠"
-      case Hearts => "♥"
-      case Diamonds => "♦"
-      case Clubs => "♣"
+      case Spades => "S"
+      case Hearts => "H"
+      case Diamonds => "D"
+      case Clubs => "C"
       case Special => ""
     }
 
@@ -33,8 +33,8 @@ trait UnicodeView {
       case Queen => " Q"
       case King => " K"
       case Ace => " A"
-      case BlackJoker => " ★ "
-      case WhiteJoker => " ☆ "
+      case BlackJoker => "BJ"
+      case WhiteJoker => "WJ"
     }
     s"$r$s"
   }
