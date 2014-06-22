@@ -53,6 +53,8 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
           true shouldEqual false
       }
     }
+
+    //TODO deal for correct players count = 2,3,...n
   }
 
   "discardCards - correct variants" when {
