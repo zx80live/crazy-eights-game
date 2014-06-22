@@ -1,5 +1,7 @@
 package com.zx80live.examples.crazyeights.cards
 
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.IllegalCardFormatException
+
 /**
  * Card model
  *
@@ -12,7 +14,7 @@ package com.zx80live.examples.crazyeights.cards
  */
 case class Card(rank: Rank.Value, suit: Suit.Value = Suit.Special) extends UnicodeView {
   if ((rank == Rank.WhiteJoker || rank == Rank.BlackJoker) && suit != Suit.Special)
-    throw new IllegalArgumentException(s"Joker must not have suit: $this")
+    throw new IllegalCardFormatException(s"Joker must not have suit: $this")
 }
 
 /**

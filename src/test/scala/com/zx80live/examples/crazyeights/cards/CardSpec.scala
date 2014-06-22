@@ -1,5 +1,6 @@
 package com.zx80live.examples.crazyeights.cards
 
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.IllegalCardFormatException
 import org.scalatest.{Matchers, WordSpec}
 
 /**
@@ -15,10 +16,10 @@ class CardSpec extends WordSpec with Matchers with CardsHelper {
   }
 
   "create wrong cards" in {
-    intercept[IllegalArgumentException] {
+    intercept[IllegalCardFormatException] {
       Card(Rank.BlackJoker, Suit.Diamonds)
     }
-    intercept[IllegalArgumentException] {
+    intercept[IllegalCardFormatException] {
       Card(Rank.WhiteJoker, Suit.Diamonds)
     }
   }
