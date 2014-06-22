@@ -1,13 +1,15 @@
-package com.zx80live.examples.crazyeights.model
+package com.zx80live.examples.crazyeights.cards.dsl
 
-import com.zx80live.examples.crazyeights.model.Rank._
-import com.zx80live.examples.crazyeights.model.Suit._
+import com.zx80live.examples.crazyeights.cards.Rank._
+import com.zx80live.examples.crazyeights.cards.Suit._
+import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 
 import scala.language.implicitConversions
 import scala.util.matching.Regex
 
 /**
- * Utils for conversion string to game model implicitly
+ * Simple DSL for 54-cards deck.
+ * Utils for conversion string to game model implicitly.
  *
  * @author Andrew Proshkin
  */

@@ -1,4 +1,4 @@
-package com.zx80live.examples.crazyeights.model
+package com.zx80live.examples.crazyeights.cards
 
 /**
  *
@@ -8,8 +8,8 @@ trait UnicodeView {
   this: Card =>
 
   override def toString = {
-    import com.zx80live.examples.crazyeights.model.Rank._
-    import com.zx80live.examples.crazyeights.model.Suit._
+    import com.zx80live.examples.crazyeights.cards.Rank._
+    import com.zx80live.examples.crazyeights.cards.Suit._
 
     val s: String = suit match {
       case Spades => "\u2660"

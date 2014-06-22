@@ -1,6 +1,6 @@
-package com.zx80live.examples.crazyeights.model
+package com.zx80live.examples.crazyeights.model.util
 
-import com.zx80live.examples.crazyeights.CollectionUtils._
+import com.zx80live.examples.crazyeights.util.CollectionUtils._
 import org.scalatest.{Matchers, WordSpec}
 
 /**

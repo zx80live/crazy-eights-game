@@ -1,9 +1,8 @@
 package com.zx80live.examples.crazyeights.actors
 
-import akka.actor.{Props, ActorSystem}
-import com.typesafe.config.ConfigFactory
-import com.zx80live.examples.crazyeights.actors.messages.{Say, NewGame}
-import com.zx80live.examples.crazyeights.model.{Suit, Rank, Card}
+import akka.actor.{ActorSystem, Props}
+import com.zx80live.examples.crazyeights.actors.messages.{NewGame, Say}
+import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 
 /**
  *

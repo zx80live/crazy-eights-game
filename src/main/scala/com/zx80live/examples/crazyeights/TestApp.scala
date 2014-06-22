@@ -1,6 +1,7 @@
 package com.zx80live.examples.crazyeights
 
-import com.zx80live.examples.crazyeights.model.{Card, Rank, Suit}
+import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils
+import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 
 
 /**
@@ -17,9 +18,9 @@ object TestApp extends App {
     Card(Rank.BlackJoker, Suit.Special) :: Card(Rank.WhiteJoker, Suit.Special) :: deck52
   }
 
-  import com.zx80live.examples.crazyeights.model.ConversionUtils._
+  import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 
-import scala.language.implicitConversions
+  import scala.language.implicitConversions
 
 
   val r: Option[Rank.Value] = "WJ"
@@ -31,8 +32,8 @@ import scala.language.implicitConversions
   //println(d)
 
   //println(List[Option[Card]]("2D", "3S", "BJ", "UNKNOWN", "WJ").flatten)
-//  println("2D , 3 ♣, 3S, BJ, UNKNOWN, 2♦  , WJ": Option[List[Card]])
-//  println("ABCD,A": Option[List[Card]])
+  //  println("2D , 3 ♣, 3S, BJ, UNKNOWN, 2♦  , WJ": Option[List[Card]])
+  //  println("ABCD,A": Option[List[Card]])
 
   //println("2D,3D,4S": Option[List[Card]])
 

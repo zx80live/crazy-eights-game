@@ -1,4 +1,4 @@
-package com.zx80live.examples.crazyeights
+package com.zx80live.examples.crazyeights.util
 
 /**
  *

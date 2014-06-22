@@ -1,4 +1,4 @@
-package com.zx80live.examples.crazyeights.model
+package com.zx80live.examples.crazyeights.cards
 
 /**
  *

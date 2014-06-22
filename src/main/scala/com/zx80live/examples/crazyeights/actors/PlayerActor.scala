@@ -2,7 +2,7 @@ package com.zx80live.examples.crazyeights.actors
 
 import akka.actor.{Actor, ActorLogging}
 import com.zx80live.examples.crazyeights.actors.messages.{NewGame, Say}
-import com.zx80live.examples.crazyeights.model.Card
+import com.zx80live.examples.crazyeights.cards.Card
 
 /**
  *

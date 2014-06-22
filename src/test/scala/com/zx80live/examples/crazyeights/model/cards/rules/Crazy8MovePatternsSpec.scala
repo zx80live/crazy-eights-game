@@ -1,6 +1,7 @@
-package com.zx80live.examples.crazyeights.model
+package com.zx80live.examples.crazyeights.model.cards.rules
 
-import com.zx80live.examples.crazyeights.model.ConversionUtils._
+import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
+import com.zx80live.examples.crazyeights.cards.rules.Crazy8MovePatterns
 import org.scalatest._
 
 /**
@@ -8,7 +9,7 @@ import org.scalatest._
  *
  * @author Andrew Proshkin
  */
-class MovePatternsSpec extends WordSpec with Matchers with MovePatterns {
+class Crazy8MovePatternsSpec extends WordSpec with Matchers with Crazy8MovePatterns {
 
   "findEight" when {
     "find first Some(Rank.Eight) or None" in {

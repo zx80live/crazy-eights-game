@@ -1,4 +1,7 @@
-package com.zx80live.examples.crazyeights.model
+package com.zx80live.examples.crazyeights.cards.rules
+
+import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.util.CollectionUtils
 
 
 /**
@@ -6,11 +9,11 @@ package com.zx80live.examples.crazyeights.model
  *
  * @author Andrew Proshkin
  */
-trait MovePatterns {
+trait Crazy8MovePatterns {
 
-  import com.zx80live.examples.crazyeights.model.Rank.Eight
-  import com.zx80live.examples.crazyeights.model.Suit.Special
-  import com.zx80live.examples.crazyeights.CollectionUtils._
+  import com.zx80live.examples.crazyeights.cards.Rank.Eight
+  import com.zx80live.examples.crazyeights.cards.Suit.Special
+  import com.zx80live.examples.crazyeights.util.CollectionUtils._
 
   /**
    * Find preferred move patterns by current suit.
