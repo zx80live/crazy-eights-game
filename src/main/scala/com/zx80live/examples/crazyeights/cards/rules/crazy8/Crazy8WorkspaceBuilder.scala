@@ -28,7 +28,7 @@ trait Crazy8WorkspaceBuilder {
         Left(new IllegalArgumentException("can't create workspace from empty cards list"))
 
       case head :: tail =>
-        val shuffled = cards.shuffle
+        val shuffled = if (shuffle) cards.shuffle else cards
         val stockPile: List[Card] = shuffled.tail
         val discardPile: List[Card] = shuffled.head :: Nil
         Right(stockPile, discardPile)

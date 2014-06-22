@@ -86,41 +86,35 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
   }
 
   "drawCard" when {
-    "recreate stockpile from discard pile" in {
-      //TODO test case
-      val ws = new Crazy8Workspace(cards"2♦,3♠,4♣".get)
-      println(ws)
+    "recreate stockpile event from discard pile" in {
+      val ws = new Crazy8Workspace(cards"2♦,3♠,4♣".get, shuffle = false)
+      ws.currentCard shouldEqual card"2♦".get
 
-      ws.discardCards(cards"${ws.currentCard.rank}♣".get)
-      ws.discardCards(cards"9♣".get)
-      ws.discardCards(cards"10♣".get)
-      ws.discardCards(cards"J♣".get)
-      ws.discardCards(cards"Q♣".get)
-      ws.discardCards(cards"K♣".get)
-      ws.discardCards(cards"A♣".get)
-      println(ws)
+      ws.discardCards(cards"10♦".get)
+      ws.discardCards(cards"J♦".get)
+      ws.discardCards(cards"Q♦".get)
+      ws.discardCards(cards"K♦".get)
+      ws.discardCards(cards"A♦".get)
 
-
+      ws.currentCard shouldEqual card"A♦".get
 
       implicit val listener = new WorkspaceEventListener {
-        override def onEvent[T](evt: WorkspaceEvent[T]): Unit = println(s"onEvent($evt)")
+        override def onEvent[T](evt: WorkspaceEvent[T]): Unit = {
+          println(s"onEvent($evt)")
+          println(ws)
+        }
       }
 
-      println(ws.drawCard)
-      println(ws.drawCard)
-      println(ws.drawCard) // event
-      println(ws.drawCard)
-      println(ws.drawCard)
-      println(ws.drawCard)
-      println(ws.drawCard)
-      println(ws.drawCard)
-      println(ws.drawCard)
-      println(ws.drawCard)
-      println(ws.drawCard)
-      println(ws.drawCard)
-      println(ws.drawCard)
-      println(ws.drawCard)
-
+      ws.drawCard shouldEqual card"3♠"
+      ws.drawCard shouldEqual card"4♣"
+      ws.currentCard shouldEqual card"A♦".get // WorkspaceEvent
+      ws.drawCard shouldEqual card"K♦"
+      ws.drawCard shouldEqual card"Q♦"
+      ws.drawCard shouldEqual card"J♦"
+      ws.drawCard shouldEqual card"10♦"
+      ws.drawCard shouldEqual card"2♦"
+      ws.drawCard shouldEqual None
+      ws.drawCard shouldEqual None
     }
 
     "stack overflow" in {

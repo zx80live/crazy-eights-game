@@ -25,11 +25,12 @@ trait Workspace {
 
   def discardCards(cards: List[Card]): Either[DiscardException, DiscardEvent]
 
+  def isShuffle:Boolean
+
   override def toString: String = {
-    s"""Workspace {
+    s"""Workspace(currentCard: $currentCard, shuffle: $isShuffle) {
       |  stockpile:   $stockPile
       |  discardPile: $discardPile
-      |  currentCard: $currentCard
       |}
     """.stripMargin
   }

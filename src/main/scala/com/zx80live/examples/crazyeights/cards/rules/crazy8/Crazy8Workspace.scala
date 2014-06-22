@@ -34,6 +34,8 @@ class Crazy8Workspace(cards: List[Card] = deck54, shuffle: Boolean = true) exten
   }
 
 
+  override def isShuffle: Boolean = shuffle
+
   // TODO test
   override def stockPile: List[Card] = _stockPile
 
