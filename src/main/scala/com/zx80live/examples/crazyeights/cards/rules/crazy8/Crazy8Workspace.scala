@@ -10,7 +10,7 @@ import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper}
  *
  * @author Andrew Proshkin
  */
-class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBuilder {
+class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBuilder with Crazy8MovePatterns {
 
   import scala.language.reflectiveCalls
 
@@ -51,7 +51,7 @@ class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBui
             _stockPile = s
             _discardPile = d
 
-            eventListener.onEvent("stockpile is empty, recreate them from discard pile")
+            eventListener.onEvent(new RecreateStockpileEvent)
             drawCard(eventListener)
 
           case Left(e) => None
@@ -59,12 +59,28 @@ class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBui
     }
   }
 
+  /**
+   * Discard player's cards.
+   *
+   * @param cards - player's cards
+   * @return
+   */
   override def discardCards(cards: List[Card]): Either[DiscardException, Boolean] = {
     cards match {
       case Nil => Left(new EmptyCardsDiscardException)
       case _ =>
+        // check can move by rank
+        // check can move by suit
+        // check can move by eight
+        // check can move by joker
+
         _discardPile = cards ::: _discardPile
         Right(true)
     }
   }
+
+  private def checkCanMoveByRank(cards: List[Card]) = ???
+  private def checkCanMoveBySuit(cards: List[Card]) = ???
+  private def checkCanMoveByEight(cards: List[Card]) = ???
+  private def checkCanMoveByJoker(cards: List[Card]) = ???
 }
