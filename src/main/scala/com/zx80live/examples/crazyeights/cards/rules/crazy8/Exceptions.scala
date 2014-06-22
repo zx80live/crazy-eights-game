@@ -10,4 +10,8 @@ object Exceptions {
 
   sealed class DiscardException(msg: String = "") extends RuntimeException(msg)
 
+  sealed class DealException(msg: String = "") extends RuntimeException(msg)
+
+  sealed class WorkspaceException(msg: String = "") extends RuntimeException(msg)
+
 }

@@ -2,7 +2,7 @@ package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.CardsHelper._
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DealException, DiscardException, WorkspaceException}
 import com.zx80live.examples.crazyeights.cards.rules.{Workspace, WorkspaceEventListener}
 
 
@@ -96,4 +96,24 @@ class Crazy8Workspace(cards: List[Card] = deck54, shuffle: Boolean = true) exten
   }
 
 
+  override def deal(playersCount: Int): Either[DealException, List[List[Card]]] = {
+    if (playersCount > maxPlayersCount || playersCount <= 0) {
+      Left(new DealException(s"players count must be between(1, $maxPlayersCount), current playersCount = $playersCount"))
+
+    } else {
+      var cards: List[List[Card]] = Nil
+      for (i <- 0 to playersCount) {
+        var playerCards: List[Card] = Nil
+        for (ci <- 0 to dealCardsCount)
+          playerCards = drawCard.get :: playerCards
+
+        cards = playerCards :: cards
+      }
+      Right(cards)
+    }
+  }
+
+  override def maxPlayersCount: Int = 4
+
+  override def dealCardsCount: Int = 8
 }

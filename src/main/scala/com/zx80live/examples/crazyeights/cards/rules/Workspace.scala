@@ -1,7 +1,7 @@
 package com.zx80live.examples.crazyeights.cards.rules
 
 import com.zx80live.examples.crazyeights.cards.Card
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DealException, DiscardException}
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{DiscardEvent, WorkspaceEvent}
 
 /**
@@ -15,9 +15,15 @@ trait Workspace {
     def onEvent(evt: WorkspaceEvent): Unit = {}
   }
 
+  def maxPlayersCount: Int
+
   def stockPile: List[Card]
 
   def discardPile: List[Card]
+
+  def deal(playersCount: Int): Either[DealException, List[List[Card]]]
+
+  def dealCardsCount: Int
 
   def currentCard: Card
 
@@ -25,7 +31,7 @@ trait Workspace {
 
   def discardCards(cards: List[Card]): Either[DiscardException, DiscardEvent]
 
-  def isShuffle:Boolean
+  def isShuffle: Boolean
 
   override def toString: String = {
     s"""Workspace(currentCard: $currentCard, shuffle: $isShuffle) {

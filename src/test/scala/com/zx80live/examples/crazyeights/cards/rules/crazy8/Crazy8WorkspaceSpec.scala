@@ -6,7 +6,7 @@ import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import com.zx80live.examples.crazyeights.cards.rules.WorkspaceEventListener
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.DiscardException
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{WorkspaceException, DiscardException}
 import org.scalatest.{Matchers, WordSpec}
 
 /**
@@ -14,7 +14,6 @@ import org.scalatest.{Matchers, WordSpec}
  * @author Andrew Proshkin
  */
 class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBuilder {
-
 
   "workspace" when {
     "init workspace" in {

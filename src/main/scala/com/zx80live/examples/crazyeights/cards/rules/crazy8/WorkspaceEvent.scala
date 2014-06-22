@@ -5,9 +5,11 @@ package com.zx80live.examples.crazyeights.cards.rules.crazy8
  *
  * @param param - event message
  */
-case class WorkspaceEvent(param: String)
+case class WorkspaceEvent(param: String = "")
 
 sealed class RecreateStockpileEvent extends WorkspaceEvent("stockpile is empty, recreate them from discard pile")
+
+class DealEvent extends WorkspaceEvent
 
 class DiscardEvent
 
@@ -16,3 +18,5 @@ object JokerDiscardEvent extends DiscardEvent
 object EightDiscardEvent extends DiscardEvent
 
 object SuccessDiscardEvent extends DiscardEvent
+
+object SuccessDealEvent extends DealEvent
