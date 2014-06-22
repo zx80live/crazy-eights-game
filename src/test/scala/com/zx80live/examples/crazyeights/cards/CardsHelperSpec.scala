@@ -16,15 +16,29 @@ class CardsHelperSpec extends WordSpec with Matchers with CardsHelper {
     deck54.length shouldEqual 54
   }
 
-  "shuffle" when {
+  "shuffleDeck" when {
     "without conditions" in {
-      val shuffled = shuffle(deck54)
+      val shuffled = shuffleDeck(deck54)
       shuffled.length shouldEqual deck54.length
       shuffled foreach (deck54.contains(_))
     }
 
     "with crazy8 conditions" in {
-      val shuffled = shuffle(deck54, Crazy8ShuffleCondition)
+      val shuffled = shuffleDeck(deck54, Crazy8ShuffleCondition)
+      shuffled.length shouldEqual deck54.length
+      shuffled foreach (deck54.contains(_))
+    }
+  }
+
+  "List[Card] shuffle implicitly" when {
+    "without conditions implicitly" in {
+      val shuffled = deck54.shuffle
+      shuffled.length shouldEqual deck54.length
+      shuffled foreach (deck54.contains(_))
+    }
+
+    "with crazy8 conditions implicitly" in {
+      val shuffled = deck54.shuffle(Crazy8ShuffleCondition)
       shuffled.length shouldEqual deck54.length
       shuffled foreach (deck54.contains(_))
     }

@@ -29,6 +29,10 @@ trait CardsHelper {
   lazy val deck52Pairs: List[(Rank.Value, Suit.Value)] = for (r <- ranks.filter(r => r != BlackJoker && r != WhiteJoker); s <- suits.filter(_ != Special)) yield (r, s)
   lazy val deck54Pairs: List[(Rank.Value, Suit.Value)] = (BlackJoker, Special) ::(WhiteJoker, Special) :: deck52Pairs
 
+  implicit class CardsDeckHelper(deck: List[Card]) {
+    def shuffle(implicit condition: ShuffleCondition = DefaultCondition): List[Card] = shuffleDeck(deck, condition)
+  }
+
   /**
    * Shuffle cards deck with condition
    *
@@ -36,13 +40,13 @@ trait CardsHelper {
    * @param condition - some condition
    * @return
    */
-  def shuffle(deck: List[Card], condition: ShuffleCondition = DefaultCondition): List[Card] = {
+  def shuffleDeck(deck: List[Card], condition: ShuffleCondition = DefaultCondition): List[Card] = {
     //TODO create recursion guardian
     //TODO @tailrec
     val shuffled = Random.shuffle(deck)
     if (condition.acceptShuffle(shuffled))
       shuffled
     else
-      shuffle(shuffled, condition)
+      shuffleDeck(shuffled, condition)
   }
 }
