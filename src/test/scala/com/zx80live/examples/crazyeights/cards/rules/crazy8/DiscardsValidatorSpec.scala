@@ -26,4 +26,14 @@ class DiscardsValidatorSpec extends WordSpec with Matchers with DiscardsValidato
       validateDiscardByJoker(cards"A♦,☆".get) shouldBe a[Left[DiscardException, Boolean]]
     }
   }
+
+  "validateDiscardByEight" when {
+    "correct variants" in {
+      validateDiscardByEight(cards"8♠".get) shouldEqual Right(true)
+      validateDiscardByEight(cards"8♥".get) shouldEqual Right(true)
+      validateDiscardByEight(cards"8♦".get) shouldEqual Right(true)
+      validateDiscardByEight(cards"8♣".get) shouldEqual Right(true)
+      validateDiscardByEight(cards"8♠,8♥,8♦,8♣".get) shouldEqual Right(true)
+    }
+  }
 }
