@@ -23,6 +23,12 @@ object ConversionUtils {
   implicit class CardsHelper(sc: StringContext) {
     def r = new Regex(sc.parts.mkString, sc.parts.tail.map(_ => "x"): _*)
 
+    //TODO test
+    def rank(args: Any*): Option[Rank.Value] = sc.raw()
+
+    //TODO test
+    def suit(args: Any*): Option[Suit.Value] = sc.raw()
+
     def card(args: Any*): Option[Card] = sc.raw()
 
     def cards(args: Any*): Option[List[Card]] = sc.raw()
