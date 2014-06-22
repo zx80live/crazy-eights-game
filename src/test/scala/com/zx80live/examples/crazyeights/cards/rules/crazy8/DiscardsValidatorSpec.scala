@@ -76,4 +76,33 @@ class DiscardsValidatorSpec extends WordSpec with Matchers with DiscardsValidato
     }
   }
 
+  "validateDiscard" when {
+    "correct variants" in {
+      // joker group
+      validateDiscard(card"5♦".get, cards"★, ☆, ☆, ★".get) shouldEqual true
+      validateDiscard(card"5♦".get, cards"★".get) shouldEqual true
+      validateDiscard(card"5♦".get, cards"☆".get) shouldEqual true
+      // eight group
+      validateDiscard(card"5♦".get, cards"8♠".get) shouldEqual true
+      validateDiscard(card"5♦".get, cards"8♥".get) shouldEqual true
+      validateDiscard(card"5♦".get, cards"8♦".get) shouldEqual true
+      validateDiscard(card"5♦".get, cards"8♣".get) shouldEqual true
+      validateDiscard(card"5♦".get, cards"8♠,8♥,8♦,8♣".get) shouldEqual true
+      // by rank group
+      validateDiscard(card"5♦".get, cards"5♦".get) shouldEqual true
+      validateDiscard(card"5♦".get, cards"5♦,5♣".get) shouldEqual true
+      validateDiscard(card"5♦".get, cards"5♦,5♣,5♠".get) shouldEqual true
+      validateDiscard(card"5♦".get, cards"5♦,5♣,5♠,5♥".get) shouldEqual true
+      // by suit group
+      validateDiscard(card"4♣".get, cards"4♣".get) shouldEqual true
+      validateDiscard(card"4♣".get, cards"A♣".get) shouldEqual true
+      validateDiscard(card"2♣".get, cards"2♣, 2♦, 2♠".get) shouldEqual true
+      validateDiscard(card"4♣".get, cards"2♦, 2♠, 2♣".get) shouldEqual true
+      validateDiscard(card"4♣".get, cards"A♦, A♣, A♠".get) shouldEqual true
+    }
+
+    "illegal variants" in {
+    }
+  }
+
 }
