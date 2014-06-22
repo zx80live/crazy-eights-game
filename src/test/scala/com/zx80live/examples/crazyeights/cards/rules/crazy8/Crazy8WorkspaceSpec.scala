@@ -27,8 +27,7 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with CardsHelper with C
 
   "discardCards" when {
     "discard empty cards" in {
-      val ws = new Crazy8Workspace
-      val result: Either[DiscardException, Boolean] = ws.discardCards(List())
+      val result: Either[DiscardException, Boolean] = new Crazy8Workspace().discardCards(List())
       result shouldBe a[Left[DiscardException, Boolean]]
     }
   }

@@ -10,7 +10,12 @@ import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper}
  *
  * @author Andrew Proshkin
  */
-class Crazy8Workspace extends Workspace with CardsHelper with Crazy8WorkspaceBuilder with Crazy8MovePatterns with Crazy8DiscardsValidator {
+class Crazy8Workspace(cards: List[Card] = Nil) extends Workspace with CardsHelper with Crazy8WorkspaceBuilder with Crazy8MovePatterns with Crazy8DiscardsValidator {
+
+  /**
+   * used for structural types
+   * @see Workspace#WorkspaceEventListener
+   */
 
   import scala.language.reflectiveCalls
 

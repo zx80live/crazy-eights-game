@@ -1,7 +1,7 @@
 package com.zx80live.examples.crazyeights.actors
 
 import akka.actor.{Actor, ActorLogging}
-import com.zx80live.examples.crazyeights.actors.Messages.{Card, Discard}
+import com.zx80live.examples.crazyeights.actors.Messages.Discard
 import com.zx80live.examples.crazyeights.cards.CardsHelper
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8MovePatterns
 

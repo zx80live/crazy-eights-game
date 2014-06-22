@@ -3,7 +3,7 @@ package com.zx80live.examples.crazyeights.cards.dsl
 import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
-import com.zx80live.examples.crazyeights.cards.{CardsHelper, Card, Rank, Suit}
+import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper, Rank, Suit}
 import org.scalatest._
 
 /**

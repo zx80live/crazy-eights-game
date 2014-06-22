@@ -1,6 +1,5 @@
 package com.zx80live.examples.crazyeights
 
-import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils
 import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 
 
@@ -20,7 +19,7 @@ object TestApp extends App {
 
   import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 
-  import scala.language.implicitConversions
+import scala.language.implicitConversions
 
 
   val r: Option[Rank.Value] = "WJ"
