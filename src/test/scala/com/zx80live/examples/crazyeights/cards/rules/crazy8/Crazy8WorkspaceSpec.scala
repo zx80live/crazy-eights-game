@@ -87,6 +87,7 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
 
   "drawCard" when {
     "recreate stockpile from discard pile" in {
+      //TODO test case
       val ws = new Crazy8Workspace(cards"2♦,3♠,4♣".get)
       println(ws)
 
