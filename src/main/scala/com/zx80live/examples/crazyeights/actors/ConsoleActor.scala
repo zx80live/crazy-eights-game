@@ -1,6 +1,7 @@
 package com.zx80live.examples.crazyeights.actors
 
 import akka.actor.{Actor, ActorLogging}
+import com.zx80live.examples.crazyeights.actors.ConsoleActorSystem._
 import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
@@ -116,17 +117,12 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
       scala.io.StdIn.readLine() match {
 
 
+        case "help" | "h" | "?" =>
+          printHelp()
         case "about" =>
           printAbout()
-          enterCommand()
-
-        case "rules" =>
+        case "rules" | "r" =>
           printRules()
-          enterCommand()
-
-        case "terms" =>
-          printTerms()
-          enterCommand()
 
         case "draw" | "d" =>
           log.info("request draw card")

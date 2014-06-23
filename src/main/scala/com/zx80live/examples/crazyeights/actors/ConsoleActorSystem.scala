@@ -29,11 +29,8 @@ object ConsoleActorSystem extends App with GameHelp {
         printHelp()
       case "about" =>
         printAbout()
-
       case "rules" | "r" =>
         printRules()
-      case "terms" | "t" =>
-        printTerms()
       case "exit" | "quit" | "q" | "e" =>
         println("Bye!")
         system.shutdown()

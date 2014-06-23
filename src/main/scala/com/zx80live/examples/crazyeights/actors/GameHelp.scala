@@ -7,56 +7,50 @@ package com.zx80live.examples.crazyeights.actors
 trait GameHelp {
 
   def printAbout(): Unit = {
-    println("Andrew Proshkin, zx80live@gmail.com".stripMargin)
-  }
-
-  def printTerms():Unit = {
     println(
       """
-        |Game terms:
+        |
+        |                 C r a z y      E i g h t s
+        |----------------------------------------------------------------
+        |About:
+        |----------------------------------------------------------------
+        | Version:   1.0
+        |
+        | Developer: Andrew Proshkin,
+        | Email:     zx80live@gmail.com
+        | Skype:     zx80live
+        |
         |----------------------------------------------------------------
         |
-        | deck         - standard 54-cards deck
-        | stockpile    - TODO describe
-        | discardpile  - TODO describe
-        | current card - top card of discardpile
-        | special card - any eights or joker cards
-        | workspace    - game workspace consists of deck, stockpile,
-        |                discardpile and implements game rules
-        | draw         - player's request for getting card from stockpile
-        | discard      - player's move, if move cards are correct, them
-        |                will be put into discardpile
-        | pass         - TODO describe
-        |
-      """.stripMargin)
+        | """.stripMargin)
   }
+
+
 
   def printHelp(): Unit = {
     println(
       """
+        |
+        |                 C r a z y      E i g h t s
+        |----------------------------------------------------------------
         |system commands:
         |----------------------------------------------------------------
         | help|h|?          - print help
-        |
-        | terms|t           - print game terms
-        |
+        | about             - about version, author
         | rules|r           - print game rules
-        |
-        | about             - print about
-        |
+        | new [count]       - new game with players, example "new 2"
         | exit|e|quit|q|end - end of game and exit
         |
+        |----------------------------------------------------------------
         | game commands:
         |----------------------------------------------------------------
-        | new [count]       - new game with players, example "new 2"
-        |
+        | pass|p            - pass current move
         | status|stat|st    - print game status
-        |
-        | cards             - print your cards
-        |
-        | discard [cards]   - discard cards to game workspace (your move)
-        |
-        | draw              - request for getting cards from stockpile
+        | suggest|sg        - suggest preferred move (if exists)
+        | A♠,5♦,K♥,4♥,☆     - comma-separated cards for discard (user's move)
+        | draw|d            - request for getting cards from stockpile
+        | exit|quit|e|q     - exit from game
+        |----------------------------------------------------------------
         |
       """.stripMargin)
   }
@@ -64,8 +58,11 @@ trait GameHelp {
   def printRules(): Unit = {
     println(
       """
-        |Rules of the Crazy Eights
-        |---------------------------
+        |
+        |                 C r a z y      E i g h t s
+        |---------------------------------------------------------------
+        |Rules:
+        |----------------------------------------------------------------
         |
         |In preparation, each player is dealt 8 cards from a 52-card deck. The remaining cards constitute
         |the stockpile from which players will draw when required. The top card on the stockpile is put face
