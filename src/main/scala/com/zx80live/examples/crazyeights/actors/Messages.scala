@@ -1,8 +1,8 @@
 package com.zx80live.examples.crazyeights.actors
 
-import com.zx80live.examples.crazyeights.cards.{Suit, Card}
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.DiscardEvent
 import com.zx80live.examples.crazyeights.cards.rules.{ReadonlyWorkspace, Workspace}
+import com.zx80live.examples.crazyeights.cards.{Card, Suit}
 
 /**
  * Messages for actors
@@ -116,7 +116,7 @@ object Messages {
    */
   case class CurrentCard(card: Card)
 
-  case class Deal(cards: List[Card])
+  case class Deal(cards: List[Card], ws: Workspace)
 
   /**
    * Response for GetCard message

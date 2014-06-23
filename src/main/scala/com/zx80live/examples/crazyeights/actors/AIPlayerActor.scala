@@ -3,29 +3,63 @@ package com.zx80live.examples.crazyeights.actors
 import akka.actor.{Actor, ActorLogging}
 import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.Card
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8MovePatterns
+import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, JokerDiscardEvent, SuccessDiscardEvent}
 
 /**
  * AI player actor
  *
+ * TODO show AIPlayer's cards for debug mode = enabled
+ *
  * @author Andrew Proshkin
  */
 class AIPlayerActor extends Actor with Player with Crazy8MovePatterns with ActorLogging {
+  var workspace: Option[ReadonlyWorkspace] = None
   var cards: List[Card] = Nil
 
   override def receive = {
-    case Deal(list) =>
-      log.info(s"accept deal cards: $list")
+    case Deal(list, ws) =>
       cards = list
+      workspace = Some(ws)
+      log.info(s"accept deal cards: $list")
+
+    case SuccessDiscard(correctDiscardCards, ws, event) =>
+      cards = cards diff correctDiscardCards
+      workspace = Some(ws)
+      log.info(s"discard event: $event")
+      event match {
+        case _: JokerDiscardEvent => None
+          log.info("pass move because there was joker")
+          sender ! Pass(Some("WithJoker"))
+
+        case _: SuccessDiscardEvent =>
+          movePreferred()
+        case _ => sender ! Pass()
+      }
+
+    case WrongDiscard(wrongMoveCards, ws, msg) =>
+      workspace = Some(ws)
+      log.error(s"wrong move $wrongMoveCards because $msg")
+      sender ! Pass(Some("AI has moved illegal"))
+
+    case DrawedCard(card, ws) =>
+      cards = card :: cards
+      workspace = Some(ws)
+      movePreferred()
 
     case NextMove(ws) =>
-      log.info(s"accept next move")
-      sender ! Pass()
-
-    case text: String =>
-      log.info(s"accept string: $text")
+      workspace = Some(ws)
+      movePreferred()
 
     case m@_ => log.info(s"accept unsupported message $m")
+  }
+
+  private def movePreferred() = {
+    findPreferred(workspace.get.currentCard, cards) match {
+      case xs if xs.length > 0 =>
+        sender ! Discard(xs)
+      case _ => sender ! Draw()
+    }
   }
 
 }

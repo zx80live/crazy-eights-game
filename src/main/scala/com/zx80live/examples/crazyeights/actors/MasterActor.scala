@@ -104,7 +104,7 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
               val player = context.actorOf(Props[AIPlayerActor], s"player-${players.length}")
               players = player :: players
 
-              player ! Deal(playersCards)
+              player ! Deal(playersCards, workspace)
             }
 
 
