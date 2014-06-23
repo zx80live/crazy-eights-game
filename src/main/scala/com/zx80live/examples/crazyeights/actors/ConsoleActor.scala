@@ -1,7 +1,6 @@
 package com.zx80live.examples.crazyeights.actors
 
 import akka.actor.{Actor, ActorLogging}
-import com.zx80live.examples.crazyeights.actors.ConsoleActorSystem._
 import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
@@ -150,8 +149,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
             case Some(list) =>
               sender ! Discard(list)
             case _ =>
-              log.error("wrong cards or command, try again")
-              enterCommand()
+              enterCommand("*** ERROR: wrong cards or command, try again *** ")
           }
       }
     }
