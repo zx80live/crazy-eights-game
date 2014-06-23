@@ -34,32 +34,28 @@ class ConsoleActor extends Actor with ActorLogging {
 
       enterMoveCards() match {
         case Left(cmd) =>
-          Future({
-            cmd
-          }) pipeTo sender
+          sender ! cmd
 
         case Right(moveCards) =>
-          Future({
-            Discard(moveCards)
-          }) pipeTo sender
+          sender ! Discard(moveCards)
 
         case _ => Future({
           Pass()
         }) pipeTo sender
-
       }
 
     case NextMove(ws) =>
-      scala.io.StdIn.readLine("human-command:>") match {
-        case cmd@_ =>
-          val f = Future({
-            Some(cmd)
-          }) recover {
-            case t =>
-              log.error(s"can't get command $t")
-              None
-          }
-          f pipeTo sender
+      workspace = Some(ws)
+      enterMoveCards() match {
+        case Left(cmd) =>
+          sender ! cmd
+
+        case Right(moveCards) =>
+          sender ! Discard(moveCards)
+
+        case _ => Future({
+          Pass()
+        }) pipeTo sender
       }
 
     case m@_ => log.error(s"unsupported message $m")
