@@ -1,6 +1,7 @@
 package com.zx80live.examples.crazyeights.actors.infrastructure
 
 import akka.actor.{Actor, ActorLogging}
+import akka.remote.transport.ThrottlerTransportAdapter.Direction.Receive
 import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
@@ -14,6 +15,17 @@ class ConsoleActor extends Actor with ActorLogging {
   var cards: List[Card] = Nil
   var workspace: Option[ReadonlyWorkspace] = None
 
+
+  private def enterCommand() = parseConsoleCommand() match {
+    case Left(cmd) =>
+      sender ! cmd
+
+    case Right(moveCards) =>
+      sender ! Discard(moveCards)
+
+    case _ => sender ! Pass()
+  }
+
   override def receive: Receive = {
 
     case SuccessDiscard(correctDiscardCards, ws, event) =>
@@ -21,73 +33,33 @@ class ConsoleActor extends Actor with ActorLogging {
       workspace = Some(ws)
       logStatus()
       log.info(s"discard event: $event")
-      enterMoveCards() match {
-        case Left(cmd) =>
-          sender ! cmd
-
-        case Right(moveCards) =>
-          sender ! Discard(moveCards)
-
-        case _ => sender ! Pass()
-      }
+      enterCommand()
 
     case WrongDiscard(wrongMoveCards, ws, msg) =>
       workspace = Some(ws)
       log.error(s"wrong move $wrongMoveCards because $msg")
       logStatus()
-      enterMoveCards() match {
-        case Left(cmd) =>
-          sender ! cmd
-
-        case Right(moveCards) =>
-          sender ! Discard(moveCards)
-
-        case _ => sender ! Pass()
-      }
+      enterCommand()
 
     case DrawedCard(card, ws) =>
       cards = card :: cards
       workspace = Some(ws)
       logStatus()
 
-      enterMoveCards() match {
-        case Left(cmd) =>
-          sender ! cmd
-
-        case Right(moveCards) =>
-          sender ! Discard(moveCards)
-
-        case _ => sender ! Pass()
-      }
+      enterCommand()
 
     case DealAndNextMove(list, ws) =>
       cards = list
       workspace = Some(ws)
       logStatus()
 
-      enterMoveCards() match {
-        case Left(cmd) =>
-          sender ! cmd
-
-        case Right(moveCards) =>
-          sender ! Discard(moveCards)
-
-        case _ => sender ! Pass()
-      }
+      enterCommand()
 
     case NextMove(ws) =>
       workspace = Some(ws)
       logStatus()
 
-      enterMoveCards() match {
-        case Left(cmd) =>
-          sender ! cmd
-
-        case Right(moveCards) =>
-          sender ! Discard(moveCards)
-
-        case _ => sender ! Pass()
-      }
+      enterCommand()
 
     case m@_ => log.error(s"unsupported message $m")
   }
@@ -97,7 +69,7 @@ class ConsoleActor extends Actor with ActorLogging {
     log.info(s"\nyour cards: $cards")
   }
 
-  private def enterMoveCards(): Either[Any, List[Card]] = {
+  private def parseConsoleCommand(): Either[Any, List[Card]] = {
     log.info("\nenter pass|p|draw|d|exit|e or comma-separated cards:>")
     scala.io.StdIn.readLine() match {
       case "exit" | "e" =>
@@ -113,7 +85,7 @@ class ConsoleActor extends Actor with ActorLogging {
             Right(list)
           case _ =>
             log.error("wrong cards or command, try again")
-            enterMoveCards()
+            parseConsoleCommand()
         }
     }
   }
