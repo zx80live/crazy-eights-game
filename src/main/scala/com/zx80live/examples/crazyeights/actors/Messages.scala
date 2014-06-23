@@ -1,5 +1,7 @@
 package com.zx80live.examples.crazyeights.actors
 
+import com.zx80live.examples.crazyeights.cards.Card
+
 /**
  * Messages for actors
  *
@@ -95,12 +97,14 @@ object Messages {
    */
   case class CurrentCard(card: Card)
 
+  case class Deal(cards: List[Card])
+
   /**
    * Response for GetCard message
    *
    * send from: Master
    * to: Player
    */
-  type Card = com.zx80live.examples.crazyeights.cards.Card
+  //type Card = com.zx80live.examples.crazyeights.cards.Card
 
 }
