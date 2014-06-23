@@ -80,10 +80,33 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
     case m@_ => log.error(s"unsupported message $m")
   }
 
+  private def printStatus(): Unit = {
+
+    workspace match {
+      case Some(ws) =>
+        log.info(
+          s"""
+            |
+            |  Workspace(shuffle: ${ws.isShuffle}) {
+            |    stockpile:   ${prettyList(ws.stockPile)}
+            |    discardPile: ${prettyList(ws.discardPile)}
+            |    currentCard: ${ws.currentCard.toString.trim}
+            |  }
+            |  your cards:    ${prettyList(cards)}
+          """.stripMargin)
+
+      case None =>
+        log.info(s"Workspace: None")
+    }
+    log.info(s"your cards: $cards")
+  }
+
+  private def prettyList(list: List[_]): String = {
+    list.map(_.toString.trim).mkString(",")
+  }
 
   private def enterCommand(): Unit = {
-    log.info(s"\n${workspace.toString}")
-    log.info(s"\nyour cards: $cards")
+    printStatus()
 
     if (checkWin()) {
       //TODO synchronized check Win with MasterActor state
