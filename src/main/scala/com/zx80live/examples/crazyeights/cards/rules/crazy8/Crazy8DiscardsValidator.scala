@@ -10,6 +10,14 @@ import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
  */
 trait Crazy8DiscardsValidator extends DiscardValidator {
 
+  def validateFirstJoker(current: Card, cards: List[Card]): Boolean = {
+    current match {
+      case Card(_, Suit.Special) =>
+        validateDiscardByRank(cards.head, cards)
+      case _ => false
+    }
+  }
+
   def validateDiscard(current: Card, cards: List[Card]): Boolean = {
     validateDiscardByJoker(cards) || validateDiscardByEight(cards) || validateDiscardByRank(current, cards) || validateDiscardBySuit(current, cards)
   }

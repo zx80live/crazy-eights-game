@@ -47,9 +47,16 @@ class AIPlayerActor extends Actor with Player with Crazy8MovePatterns with Actor
       workspace = Some(ws)
       movePreferred()
 
-    case NextMove(ws) =>
+    case NextMove(ws, true) =>
+      log.info("player can move any card because there is joker")
       workspace = Some(ws)
       movePreferred()
+
+    case NextMove(ws, false) =>
+      workspace = Some(ws)
+      movePreferred()
+
+
 
     case m@_ => log.info(s"accept unsupported message $m")
   }

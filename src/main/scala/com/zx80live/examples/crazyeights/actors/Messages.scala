@@ -86,7 +86,7 @@ object Messages {
    * send from: Master
    * to: Player
    */
-  case class NextMove(workspace: Workspace)
+  case class NextMove(workspace: Workspace, canAnyCardMove:Boolean = false)
 
   /**
    * Broadcast message with some user move

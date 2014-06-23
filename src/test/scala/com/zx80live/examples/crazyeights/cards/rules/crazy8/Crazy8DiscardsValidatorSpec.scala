@@ -101,6 +101,10 @@ class Crazy8DiscardsValidatorSpec extends WordSpec with Matchers with Crazy8Disc
       validateDiscard(card"4♣".get, cards"2♦, 2♠, 2♣".get) shouldEqual true
       validateDiscard(card"4♣".get, cards"A♦, A♣, A♠".get) shouldEqual true
       validateDiscard(card"2♥".get, cards"2♣, 2♦, 2♠".get) shouldEqual true
+      // current joker
+      validateDiscard(card"☆".get, cards"4♣, 4♦, 4♠".get) shouldEqual true
+      validateDiscard(card"☆".get, cards"9♠".get) shouldEqual true
+
     }
 
     "illegal variants" in {
@@ -124,7 +128,14 @@ class Crazy8DiscardsValidatorSpec extends WordSpec with Matchers with Crazy8Disc
       validateDiscard(card"2♥".get, cards"4♣, 4♦, 4♠".get) shouldEqual false
       validateDiscard(card"2♥".get, cards"2♥, 3♥, 4♥".get) shouldEqual false
       validateDiscard(card"2♥".get, cards"2♥, 3♣, 4♦".get) shouldEqual false
+      // current joker
+      validateDiscard(card"☆".get, cards"2♥, 3♥, 4♥".get) shouldEqual false
     }
+  }
+
+  "validateFirstJoker" in {
+    validateFirstJoker(card"☆".get, cards"4♣, 4♦, 4♠".get) shouldEqual true
+    validateFirstJoker(card"☆".get, cards"2♥, 3♥, 4♥".get) shouldEqual false
   }
 
 }

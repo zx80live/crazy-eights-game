@@ -67,9 +67,15 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
       workspace = Some(ws)
       enterCommand()
 
-    case NextMove(ws) =>
+    case NextMove(ws, true) =>
+      log.info("you can move any card because there is joker")
       workspace = Some(ws)
       enterCommand()
+
+    case NextMove(ws, false) =>
+      workspace = Some(ws)
+      enterCommand()
+
 
     case m@_ => log.error(s"unsupported message $m")
   }

@@ -59,4 +59,9 @@ class Crazy8MovePatternsSpec extends WordSpec with Matchers with Crazy8MovePatte
       findPreferred(card"2♥".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(cards"2♦, 2♣, 2♠".get)
     }
   }
+
+  "findAnyNonSpecial" in {
+    findAnyNonSpecial(cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) shouldEqual cards"2♦"
+
+  }
 }

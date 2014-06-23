@@ -3,7 +3,6 @@ package com.zx80live.examples.crazyeights.actors
 import java.util.concurrent.TimeUnit
 
 import akka.actor._
-import com.zx80live.examples.crazyeights.actors.ConsoleActor
 import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.Rank.Eight
@@ -68,6 +67,19 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
           playersIterator = players.iterator
           val nextPlayer = playersIterator.next()
           nextPlayer ! NextMove(workspace)
+          log.info(s"move to first $nextPlayer")
+        }
+
+      case Pass(Some("WithJoker")) =>
+        log.info(s"accept pass user${sender.path}")
+        if (playersIterator.hasNext) {
+          val nextPlayer = playersIterator.next()
+          nextPlayer ! NextMove(workspace, canAnyCardMove = true)
+          log.info(s"move to next $nextPlayer")
+        } else {
+          playersIterator = players.iterator
+          val nextPlayer = playersIterator.next()
+          nextPlayer ! NextMove(workspace, canAnyCardMove = true)
           log.info(s"move to first $nextPlayer")
         }
 
