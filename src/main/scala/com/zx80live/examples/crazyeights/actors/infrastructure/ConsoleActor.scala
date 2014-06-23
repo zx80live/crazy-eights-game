@@ -25,21 +25,15 @@ class ConsoleActor extends Actor with ActorLogging {
       log.info(ws.toString)
       log.info(s"your cards: ${cards.toString()}")
 
-      fetchMoveCards() match {
+      enterMoveCards() match {
         case Some(moveCards) =>
           Future({
-            Some(Discard(moveCards))
-          }) recover {
-            case t =>
-              None
-          } pipeTo sender
+            Discard(moveCards)
+          }) pipeTo sender
 
         case _ => Future({
-          Some(Pass())
-        }) recover {
-          case t =>
-            None
-        } pipeTo sender
+          Pass()
+        }) pipeTo sender
 
       }
 
@@ -59,7 +53,7 @@ class ConsoleActor extends Actor with ActorLogging {
     case m@_ => log.error(s"unsupported message $m")
   }
 
-  private def fetchMoveCards(): Option[List[Card]] = {
+  private def enterMoveCards(): Option[List[Card]] = {
     scala.io.StdIn.readLine("your-move[enter comma-separated cards or 'pass']:>") match {
       case "pass" => None
       case cmd =>
@@ -69,7 +63,7 @@ class ConsoleActor extends Actor with ActorLogging {
             Some(list)
           case _ =>
             log.info("wrong cards, try again")
-            fetchMoveCards()
+            enterMoveCards()
         }
     }
   }
