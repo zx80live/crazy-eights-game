@@ -11,7 +11,7 @@ import com.zx80live.examples.crazyeights.cards.{Card, Suit}
  *
  * @author Andrew Proshkin
  */
-class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with Crazy8DiscardsValidator {
+class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with Crazy8DiscardsValidator with GameHelp {
   var cards: List[Card] = Nil
   var workspace: Option[ReadonlyWorkspace] = None
 
@@ -86,8 +86,24 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
     }
     else {
 
-      log.info("\nenter pass|p|draw|d|exit|e|suggest|sg or comma-separated cards:>")
+      log.info("\nenter help|pass|p|draw|d|exit|e|suggest|sg or comma-separated cards:>")
       scala.io.StdIn.readLine() match {
+
+        case "help" | "h" | "?" =>
+          printHelp()
+          enterCommand()
+
+        case "about" =>
+          printAbout()
+          enterCommand()
+
+        case "rules" =>
+          printRules()
+          enterCommand()
+
+        case "terms" =>
+          printTerms()
+          enterCommand()
 
         case "draw" | "d" =>
           log.info("request draw card")
@@ -96,9 +112,9 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
         case "suggest" | "sg" =>
           findPreferred(workspace.get.currentCard, cards) match {
             case preferred if preferred.length > 0 =>
-              log.info(s"the preferred move is: $preferred")
+              log.info(s"\nthe preferred move is: $preferred")
             case _ =>
-              log.info("can't find preferred move, use commands draw|pass")
+              log.info("\ncan't find preferred move, use commands draw|pass")
           }
           enterCommand()
 
@@ -107,9 +123,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
           sender ! Pass()
 
         case "exit" | "e" =>
-          //TODO refactoring (find safe shutdown feature)
           sender ! Exit()
-          System.exit(1)
 
         case xs@_ =>
           val parsedCards: Option[List[Card]] = cards"$xs"

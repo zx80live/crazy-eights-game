@@ -43,6 +43,8 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
       case Exit() =>
         log.info(s"Bye!")
         getContext().system.deadLetters
+        //TODO refactoring (find safe shutdown feature)
+        System.exit(0)
 
       case Discard(list) =>
         log.info(s"accept discard $list")
