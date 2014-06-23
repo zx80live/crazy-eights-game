@@ -52,15 +52,6 @@ object ConsoleActorSystem extends App with GameHelp {
         }
 
 
-
-      //val future: Future[Any] = master ? ""
-      //        private val future: Future[Any] = master ? CreateHuman()
-      //        val result = Await.result(future, Duration.create(2, TimeUnit.SECONDS)).asInstanceOf[Some[String]]
-      //        println(s"result = $result")
-
-
-
-
       case "status" | "stat" | "st" =>
         master ! WorkspaceStatus()
 
