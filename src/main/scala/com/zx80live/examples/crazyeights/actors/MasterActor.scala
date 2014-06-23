@@ -23,6 +23,11 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
 
 
   override def receive: Receive = {
+    case Discard(list) =>
+      log.info(s"accept discard $list")
+    case Pass(None) =>
+      log.info(s"accept pass")
+
     case WorkspaceStatus() =>
       log.info(workspace.toString)
 
