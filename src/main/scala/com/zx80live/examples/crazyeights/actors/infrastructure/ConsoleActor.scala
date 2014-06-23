@@ -25,6 +25,17 @@ class ConsoleActor extends Actor with ActorLogging {
       log.info(s"accept drawed card response $card")
       log.info(s"your cards $cards")
 
+      enterMoveCards() match {
+        case Left(cmd) =>
+          sender ! cmd
+
+        case Right(moveCards) =>
+          sender ! Discard(moveCards)
+
+        case _ => Future({
+          Pass()
+        }) pipeTo sender
+      }
 
     case DealAndNextMove(list, ws) =>
       cards = list
@@ -63,8 +74,8 @@ class ConsoleActor extends Actor with ActorLogging {
 
   private def enterMoveCards(): Either[Any, List[Card]] = {
     scala.io.StdIn.readLine("your-move[enter pass|draw or comma-separated cards]:>") match {
-      case "draw" => Left(Draw())
-      case "pass" => Left(Pass())
+      case "draw" | "d" => Left(Draw())
+      case "pass" | "p" => Left(Pass())
       case cmd =>
         val parsedCards: Option[List[Card]] = cards"${cmd}"
         parsedCards match {
