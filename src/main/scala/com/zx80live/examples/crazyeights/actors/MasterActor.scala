@@ -58,7 +58,7 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
         }
 
       case Pass(None) =>
-        log.info(s"accept pass")
+        log.info(s"accept pass user${sender.path}")
 
       case Draw() =>
         log.info(s"accept draw")

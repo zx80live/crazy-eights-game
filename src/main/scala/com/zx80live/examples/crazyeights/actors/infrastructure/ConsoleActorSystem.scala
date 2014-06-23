@@ -16,7 +16,8 @@ object ConsoleActorSystem extends App with GameHelp {
   val master = system.actorOf(Props[MasterActor], name = "master")
 
   //master ! NewGame(2)
-  while (true) {
+  var ok = true
+  while (ok) {
     println("\nenter command or help|h or new [playersCount]:>")
     scala.io.StdIn.readLine() match {
       //TODO some IDE (for example Idea) doesn't support syntax for regex interpolated string but compile it
@@ -24,6 +25,7 @@ object ConsoleActorSystem extends App with GameHelp {
         println(s"create new game with [$c] players")
         val playersCount: Option[Int] = s"$c"
         master ! NewGame(playersCount.get)
+        ok = false
       case "help" | "h" | "?" =>
         printHelp()
       case "about" =>
