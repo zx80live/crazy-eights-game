@@ -10,8 +10,6 @@ import org.scalatest.{Matchers, WordSpec}
  */
 class CardSpec extends WordSpec with Matchers {
 
-
-
   "create 54-cards deck" in {
     deck54Pairs map (p => Card(p._1, p._2))
   }
