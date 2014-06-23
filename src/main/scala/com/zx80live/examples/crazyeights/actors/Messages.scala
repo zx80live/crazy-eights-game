@@ -57,6 +57,8 @@ object Messages {
    */
   case class Pass(msg: Option[String] = None)
 
+  case class Draw()
+
   /**
    * Request for new card
    *

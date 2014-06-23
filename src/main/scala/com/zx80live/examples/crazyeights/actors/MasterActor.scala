@@ -35,6 +35,9 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
     case Pass(None) =>
       log.info(s"accept pass")
 
+    case Draw() =>
+      log.info(s"accept draw")
+
     case WorkspaceStatus() =>
       log.info(workspace.toString)
 

@@ -2,7 +2,7 @@ package com.zx80live.examples.crazyeights.actors.infrastructure
 
 import akka.actor.{Actor, ActorLogging}
 import akka.pattern.pipe
-import com.zx80live.examples.crazyeights.actors.Messages.{DealAndNextMove, Discard, NextMove, Pass}
+import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
@@ -26,7 +26,12 @@ class ConsoleActor extends Actor with ActorLogging {
       log.info(s"your cards: ${cards.toString()}")
 
       enterMoveCards() match {
-        case Some(moveCards) =>
+        case Left(cmd) =>
+          Future({
+            cmd
+          }) pipeTo sender
+
+        case Right(moveCards) =>
           Future({
             Discard(moveCards)
           }) pipeTo sender
@@ -53,16 +58,17 @@ class ConsoleActor extends Actor with ActorLogging {
     case m@_ => log.error(s"unsupported message $m")
   }
 
-  private def enterMoveCards(): Option[List[Card]] = {
-    scala.io.StdIn.readLine("your-move[enter comma-separated cards or 'pass']:>") match {
-      case "pass" => None
+  private def enterMoveCards(): Either[Any, List[Card]] = {
+    scala.io.StdIn.readLine("your-move[enter pass|draw or comma-separated cards]:>") match {
+      case "draw" => Left(Draw())
+      case "pass" => Left(Pass())
       case cmd =>
         val parsedCards: Option[List[Card]] = cards"${cmd}"
         parsedCards match {
           case Some(list) =>
-            Some(list)
+            Right(list)
           case _ =>
-            log.info("wrong cards, try again")
+            log.info("wrong cards or command, try again")
             enterMoveCards()
         }
     }
