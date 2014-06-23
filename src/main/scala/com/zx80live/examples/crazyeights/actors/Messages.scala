@@ -8,6 +8,8 @@ package com.zx80live.examples.crazyeights.actors
 object Messages {
 
 
+  case class WorkspaceStatus()
+
   /**
    * Some broadcast message
    *
