@@ -38,11 +38,14 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
 
     case Draw() =>
       log.info(s"accept draw")
+
       workspace.drawCard() match {
         case Some(card) =>
           log.info(s"draw from ws $card")
+          sender ! DrawedCard(card, workspace)
         case _ =>
           log.error(s"stockpile is empty, ws = $workspace")
+          sender ! "can't draw card, stockpile is empty, ws = $workspace"
       }
 
     case WorkspaceStatus() =>

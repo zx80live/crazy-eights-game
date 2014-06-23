@@ -19,6 +19,13 @@ class ConsoleActor extends Actor with ActorLogging {
   var workspace: Option[ReadonlyWorkspace] = None
 
   override def receive: Receive = {
+    case DrawedCard(card, ws) =>
+      cards = card :: cards
+      workspace = Some(ws)
+      log.info(s"accept drawed card response $card")
+      log.info(s"your cards $cards")
+
+
     case DealAndNextMove(list, ws) =>
       cards = list
       workspace = Some(ws)

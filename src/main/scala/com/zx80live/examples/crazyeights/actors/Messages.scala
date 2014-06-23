@@ -59,6 +59,8 @@ object Messages {
 
   case class Draw()
 
+  case class DrawedCard(card: Card, ws: Workspace)
+
   /**
    * Request for new card
    *
