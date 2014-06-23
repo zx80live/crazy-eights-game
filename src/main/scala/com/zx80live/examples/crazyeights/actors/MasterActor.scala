@@ -28,7 +28,8 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
     case SetSuit(suit) =>
       workspace.currentCard match {
         case Card(Eight, _) =>
-          log.info(s"DO CHANGE SUIT TO $suit")
+          log.info(s"do change suit to $suit")
+          workspace.setCurrentSuit(suit) //TODO match result
         case _ =>
           log.error(s"can't change $suit because current card is not eight")
       }
