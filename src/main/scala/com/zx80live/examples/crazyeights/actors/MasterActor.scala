@@ -41,7 +41,8 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
         }
         sender ! NextMove(workspace)
       case Exit() =>
-        log.info(s"//TODO exit")
+        log.info(s"Bye!")
+        getContext().system.deadLetters
 
       case Discard(list) =>
         log.info(s"accept discard $list")

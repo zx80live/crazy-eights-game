@@ -107,8 +107,8 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
           sender ! Pass()
 
         case "exit" | "e" =>
-          log.warning("TODO exit")
-          enterCommand()
+          sender ! Exit()
+          System.exit(1)
 
         case xs@_ =>
           val parsedCards: Option[List[Card]] = cards"$xs"
