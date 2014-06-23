@@ -22,9 +22,8 @@ class ConsoleActor extends Actor with ActorLogging {
     case DrawedCard(card, ws) =>
       cards = card :: cards
       workspace = Some(ws)
-      //log.info(s"accept drawed card response $card")
-      log.info(ws.toString)
-      log.info(s"your cards: $cards")
+      log.info(s"\n${ws.toString}")
+      log.info(s"\nyour cards: $cards")
 
       enterMoveCards() match {
         case Left(cmd) =>
@@ -41,8 +40,8 @@ class ConsoleActor extends Actor with ActorLogging {
     case DealAndNextMove(list, ws) =>
       cards = list
       workspace = Some(ws)
-      log.info(ws.toString)
-      log.info(s"your cards: ${cards.toString()}")
+      log.info(s"\n${ws.toString}")
+      log.info(s"\nyour cards: $cards")
 
       enterMoveCards() match {
         case Left(cmd) =>
