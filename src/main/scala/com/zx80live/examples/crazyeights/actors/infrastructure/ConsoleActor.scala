@@ -22,8 +22,9 @@ class ConsoleActor extends Actor with ActorLogging {
     case DrawedCard(card, ws) =>
       cards = card :: cards
       workspace = Some(ws)
-      log.info(s"accept drawed card response $card")
-      log.info(s"your cards $cards")
+      //log.info(s"accept drawed card response $card")
+      log.info(ws.toString)
+      log.info(s"your cards: $cards")
 
       enterMoveCards() match {
         case Left(cmd) =>
@@ -73,16 +74,19 @@ class ConsoleActor extends Actor with ActorLogging {
   }
 
   private def enterMoveCards(): Either[Any, List[Card]] = {
-    scala.io.StdIn.readLine("your-move[enter pass|draw or comma-separated cards]:>") match {
-      case "draw" | "d" => Left(Draw())
-      case "pass" | "p" => Left(Pass())
+    log.info("\nyour-move[enter pass|draw or comma-separated cards]:>")
+    scala.io.StdIn.readLine() match {
+      case "draw" | "d" =>
+        Left(Draw())
+      case "pass" | "p" =>
+        Left(Pass())
       case cmd =>
         val parsedCards: Option[List[Card]] = cards"${cmd}"
         parsedCards match {
           case Some(list) =>
             Right(list)
           case _ =>
-            log.info("wrong cards or command, try again")
+            log.error("wrong cards or command, try again")
             enterMoveCards()
         }
     }
