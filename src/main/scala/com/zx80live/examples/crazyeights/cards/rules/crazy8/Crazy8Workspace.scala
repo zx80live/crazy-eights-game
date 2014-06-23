@@ -1,6 +1,6 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.cards.{Suit, Card}
 import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DealException, DiscardException, WorkspaceException}
 import com.zx80live.examples.crazyeights.cards.rules.{Workspace, WorkspaceEventListener}
@@ -116,4 +116,10 @@ class Crazy8Workspace(cards: List[Card] = deck54, shuffle: Boolean = true) exten
   override def maxPlayersCount: Int = 4
 
   override def dealCardsCount: Int = 8
+
+  //TODO refactoring
+  //TODO test
+  override def setCurrentSuit(suit: Suit.Value): Either[WorkspaceException, Boolean] = {
+    Right(true)
+  }
 }

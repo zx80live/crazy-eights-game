@@ -1,8 +1,8 @@
 package com.zx80live.examples.crazyeights.cards.rules
 
-import com.zx80live.examples.crazyeights.cards.Card
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DealException, DiscardException}
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DealException, DiscardException, WorkspaceException}
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{DiscardEvent, WorkspaceEvent}
+import com.zx80live.examples.crazyeights.cards.{Card, Suit}
 
 /**
  *
@@ -22,6 +22,10 @@ trait Workspace extends ReadonlyWorkspace {
   def drawCard(implicit eventListener: WorkspaceEventListener = defaultListener): Option[Card]
 
   def discardCards(cards: List[Card]): Either[DiscardException, DiscardEvent]
+
+  //TODO refactoring
+  //TODO test
+  def setCurrentSuit(suit: Suit.Value): Either[WorkspaceException, Boolean]
 
 
   override def toString: String = {
