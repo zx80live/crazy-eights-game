@@ -118,7 +118,6 @@ class Crazy8Workspace(cards: List[Card] = deck54, shuffle: Boolean = true) exten
   override def dealCardsCount: Int = 8
 
   //TODO refactoring
-  //TODO test
   override def setCurrentSuit(suit: Suit.Value): Either[WorkspaceException, Boolean] = {
     currentCard match {
       case Card(Rank.Eight, _) =>

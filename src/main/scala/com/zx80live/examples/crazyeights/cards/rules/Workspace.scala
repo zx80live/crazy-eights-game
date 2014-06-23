@@ -24,7 +24,6 @@ trait Workspace extends ReadonlyWorkspace {
   def discardCards(cards: List[Card]): Either[DiscardException, DiscardEvent]
 
   //TODO refactoring
-  //TODO test
   def setCurrentSuit(suit: Suit.Value): Either[WorkspaceException, Boolean]
 
 
