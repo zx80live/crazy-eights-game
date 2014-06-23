@@ -1,6 +1,6 @@
 package com.zx80live.examples.crazyeights.actors
 
-import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.cards.{Suit, Card}
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.DiscardEvent
 import com.zx80live.examples.crazyeights.cards.rules.{ReadonlyWorkspace, Workspace}
 
@@ -31,6 +31,8 @@ object Messages {
   case class Exit()
 
   case class Win()
+
+  case class SetSuit(suit: Suit.Value)
 
   /**
    * Initiate new game and send cards for all players
