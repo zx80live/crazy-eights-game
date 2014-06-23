@@ -10,6 +10,7 @@ import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns,
  * AI player actor
  *
  * TODO show AIPlayer's cards for debug mode = enabled
+ * TODO change preferred suit if AI has moved with eitht
  *
  * @author Andrew Proshkin
  */
