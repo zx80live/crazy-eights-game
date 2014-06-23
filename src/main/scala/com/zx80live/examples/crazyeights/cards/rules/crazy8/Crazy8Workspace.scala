@@ -87,11 +87,11 @@ class Crazy8Workspace(cards: List[Card] = deck54, shuffle: Boolean = true) exten
       _discardPile = cards ::: _discardPile
 
       if (validateDiscardByEight(cards))
-        Right(EightDiscardEvent)
+        Right(new EightDiscardEvent)
       else if (validateDiscardByJoker(cards))
-        Right(JokerDiscardEvent)
+        Right(new JokerDiscardEvent)
       else
-        Right(SuccessDiscardEvent)
+        Right(new SuccessDiscardEvent)
     }
   }
 

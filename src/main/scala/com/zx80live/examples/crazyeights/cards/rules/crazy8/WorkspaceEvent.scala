@@ -13,10 +13,10 @@ class DealEvent extends WorkspaceEvent
 
 class DiscardEvent
 
-object JokerDiscardEvent extends DiscardEvent
+class JokerDiscardEvent extends DiscardEvent
 
-object EightDiscardEvent extends DiscardEvent
+class EightDiscardEvent extends DiscardEvent
 
-object SuccessDiscardEvent extends DiscardEvent
+class SuccessDiscardEvent extends DiscardEvent
 
-object SuccessDealEvent extends DealEvent
+class SuccessDealEvent extends DealEvent

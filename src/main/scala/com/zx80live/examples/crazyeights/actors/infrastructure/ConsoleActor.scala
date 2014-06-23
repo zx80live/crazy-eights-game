@@ -5,13 +5,13 @@ import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8MovePatterns
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.{EightDiscardEvent, Crazy8DiscardsValidator, Crazy8MovePatterns}
 
 /**
  *
  * @author Andrew Proshkin
  */
-class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns {
+class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with Crazy8DiscardsValidator {
   var cards: List[Card] = Nil
   var workspace: Option[ReadonlyWorkspace] = None
 
@@ -22,6 +22,11 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns {
       cards = cards diff correctDiscardCards
       workspace = Some(ws)
       log.info(s"discard event: $event")
+//      event match {
+//        case _:EightDiscardEvent() => None
+//        //case _ => None
+//      }
+
       enterCommand()
 
     case WrongDiscard(wrongMoveCards, ws, msg) =>
