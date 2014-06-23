@@ -86,7 +86,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
     }
     else {
 
-      log.info("\nenter pass|p|draw|d|exit|e or comma-separated cards:>")
+      log.info("\nenter pass|p|draw|d|exit|e|suggest|sg or comma-separated cards:>")
       scala.io.StdIn.readLine() match {
 
         case "draw" | "d" =>
