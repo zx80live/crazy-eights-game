@@ -1,4 +1,4 @@
-package com.zx80live.examples.crazyeights.infrastructure
+package com.zx80live.examples.crazyeights.actors.infrastructure
 
 /**
  *

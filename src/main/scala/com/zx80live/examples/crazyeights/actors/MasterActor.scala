@@ -1,15 +1,24 @@
 package com.zx80live.examples.crazyeights.actors
 
+import java.util.concurrent.TimeUnit
+
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
-import com.zx80live.examples.crazyeights.actors.Messages.{Deal, NewGame, WorkspaceStatus}
+import akka.pattern.pipe
+import scala.concurrent.ExecutionContext.Implicits.global
+import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, Crazy8Workspace}
+
+import scala.concurrent.Future
+import scala.concurrent.duration.Duration
 
 /**
  *
  * @author Andrew Proshkin
  */
 class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
+
+  implicit val timeout = Duration.create(2, TimeUnit.SECONDS)
 
   private var workspace: Workspace = new Crazy8Workspace
   private var players: List[ActorRef] = Nil
@@ -32,12 +41,22 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
           log.info(workspace.toString)
 
           players = Nil
-          list foreach { playersCards =>
+          list.tail foreach { playersCards =>
             val player = context.actorOf(Props[AIPlayerActor])
             players = player :: players
 
             player ! Deal(playersCards)
           }
+
+          val f = Future({
+            Some(list.head)
+          }) recover {
+            case t =>
+              log.error(s"can't create deal for human player $t")
+              None
+          }
+
+          f pipeTo sender
 
 
         case Left(e) => log.error(e.toString)
