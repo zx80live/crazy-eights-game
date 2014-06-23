@@ -28,6 +28,8 @@ object Messages {
    */
   case class BroadcastMessage(msg: String)
 
+  case class Exit()
+
   /**
    * Initiate new game and send cards for all players
    *

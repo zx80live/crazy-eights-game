@@ -98,8 +98,10 @@ class ConsoleActor extends Actor with ActorLogging {
   }
 
   private def enterMoveCards(): Either[Any, List[Card]] = {
-    log.info("\nyour-move[enter pass|draw or comma-separated cards]:>")
+    log.info("\nenter pass|p|draw|d|exit|e or comma-separated cards:>")
     scala.io.StdIn.readLine() match {
+      case "exit" | "e" =>
+        Left(Exit())
       case "draw" | "d" =>
         Left(Draw())
       case "pass" | "p" =>
