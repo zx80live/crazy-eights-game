@@ -3,13 +3,11 @@ package com.zx80live.examples.crazyeights.actors
 import java.util.concurrent.TimeUnit
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
-import akka.pattern.pipe
-import scala.concurrent.ExecutionContext.Implicits.global
 import com.zx80live.examples.crazyeights.actors.Messages._
+import com.zx80live.examples.crazyeights.actors.infrastructure.ConsoleActor
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, Crazy8Workspace}
 
-import scala.concurrent.Future
 import scala.concurrent.duration.Duration
 
 /**
@@ -48,16 +46,10 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
             player ! Deal(playersCards)
           }
 
-          val f = Future({
-            Some(list.head)
-          }) recover {
-            case t =>
-              log.error(s"can't create deal for human player $t")
-              None
-          }
 
-          f pipeTo sender
-
+          val human = context.actorOf(Props[ConsoleActor])
+          players = human :: players
+          human ! "GetCmd"
 
         case Left(e) => log.error(e.toString)
       }
