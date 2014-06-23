@@ -30,6 +30,8 @@ object Messages {
 
   case class Exit()
 
+  case class Win()
+
   /**
    * Initiate new game and send cards for all players
    *
