@@ -107,6 +107,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
           sender ! Pass()
 
         case "exit" | "e" =>
+          //TODO refactoring (find safe shutdown feature)
           sender ! Exit()
           System.exit(1)
 
