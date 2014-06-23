@@ -15,6 +15,14 @@ import scala.util.matching.Regex
  */
 object ConversionUtils {
 
+  implicit def string2Int(str: String): Option[Int] = {
+    try {
+      Some(str.toInt)
+    } catch {
+      case _: Throwable => None
+    }
+  }
+
   /**
    * TODO refactoring duplicate code
    *

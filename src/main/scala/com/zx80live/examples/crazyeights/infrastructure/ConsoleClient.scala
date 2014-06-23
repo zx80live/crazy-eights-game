@@ -23,7 +23,13 @@ object ConsoleClient extends App with GameHelp {
   while (ok) {
     scala.io.StdIn.readLine("cmd:>") match {
       case r"new (\d+)$count" =>
-        master ! NewGame(2)
+        val playersCount: Option[Int] = count
+        playersCount match {
+          case Some(value: Int) =>
+            master ! NewGame(value)
+          case None => master ! NewGame()
+        }
+
 
       case "status" | "stat" | "st" =>
         master ! WorkspaceStatus()
