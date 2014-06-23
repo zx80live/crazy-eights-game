@@ -13,6 +13,9 @@ import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns,
 import scala.concurrent.duration.Duration
 
 /**
+ * Temporary prototype of Master actor
+ *
+ * TODO refactoring dirty code and mutable states
  *
  * @author Andrew Proshkin
  */
@@ -23,10 +26,8 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
   private var workspace: Workspace = new Crazy8Workspace
   private var players: List[ActorRef] = Nil
 
+  private var currentPlayerIndex: Option[Int] = None
 
-  //  override def receive: Receive = {
-  //
-  //  }
 
   @scala.throws[Exception](classOf[Exception])
   override def onReceive(message: Any): Unit = {
@@ -60,6 +61,7 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
       case Pass(None) =>
         log.info(s"accept pass user${sender.path}")
 
+
       case Draw() =>
         log.info(s"accept draw")
 
@@ -89,14 +91,14 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
             players = Nil
             list.tail foreach { playersCards =>
-              val player = context.actorOf(Props[AIPlayerActor])
+              val player = context.actorOf(Props[AIPlayerActor], s"player-${players.length}")
               players = player :: players
 
               player ! Deal(playersCards)
             }
 
 
-            val human = context.actorOf(Props[ConsoleActor])
+            val human = context.actorOf(Props[ConsoleActor], s"player-human")
             players = human :: players
             human ! DealAndNextMove(list.head, workspace)
 
