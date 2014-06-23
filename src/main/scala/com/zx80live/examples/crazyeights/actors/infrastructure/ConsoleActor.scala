@@ -18,7 +18,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
   private def getNewSuit(): Option[Suit.Value] = {
     log.info("\nenter new suit [♠, ♥, ♦, ♣] or empty string to keep current:>")
     scala.io.StdIn.readLine() match {
-      case str =>
+      case str if str.length > 0 =>
         suit"$str": Option[Suit.Value]
       case _ => None
     }
@@ -40,6 +40,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
             case Some(suit) =>
               sender ! SetSuit(suit)
             case _ =>
+              log.info("keep current suit")
               enterCommand()
           }
 

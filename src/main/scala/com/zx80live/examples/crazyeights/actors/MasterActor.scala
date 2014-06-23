@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.actors.infrastructure.ConsoleActor
+import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.cards.Rank.Eight
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, Crazy8Workspace}
 
@@ -23,6 +25,14 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
 
 
   override def receive: Receive = {
+    case SetSuit(suit) =>
+      workspace.currentCard match {
+        case Card(Eight, _) =>
+          log.info(s"DO CHANGE SUIT TO $suit")
+        case _ =>
+          log.error(s"can't change $suit because current card is not eight")
+      }
+      sender ! NextMove(workspace)
     case Exit() =>
       log.info(s"//TODO exit")
 
