@@ -50,7 +50,7 @@ trait GameHelp {
         |----------------------------------------------------------------
         | new [count]       - new game with players, example "new 2"
         |
-        | status            - print game status
+        | status|stat|st    - print game status
         |
         | cards             - print your cards
         |
