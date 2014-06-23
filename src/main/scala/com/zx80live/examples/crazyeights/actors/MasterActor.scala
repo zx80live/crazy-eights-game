@@ -54,6 +54,7 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
         case Left(e) => log.error(e.toString)
       }
 
+    case Some(text) => log.info(s"accept some string: $text")
     case text: String => log.info(s"accept string: $text")
     case e@_ => log.error(s"accept unsupported message: $e")
   }

@@ -2,6 +2,7 @@ package com.zx80live.examples.crazyeights.actors.infrastructure
 
 import akka.actor.{Actor, ActorLogging}
 import akka.pattern.pipe
+import com.zx80live.examples.crazyeights.actors.Messages.Deal
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -12,6 +13,8 @@ import scala.concurrent.Future
  */
 class ConsoleActor extends Actor with ActorLogging {
   override def receive: Receive = {
+    case Deal(list) =>
+
     case "GetCmd" =>
       scala.io.StdIn.readLine("human-command:>") match {
         case cmd@_ =>

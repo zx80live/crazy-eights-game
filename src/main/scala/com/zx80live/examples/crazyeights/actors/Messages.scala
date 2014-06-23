@@ -9,6 +9,8 @@ import com.zx80live.examples.crazyeights.cards.Card
  */
 object Messages {
 
+  case class Command(str: String)
+
   case class CreateHumanPlayer()
 
   case class WorkspaceStatus()
