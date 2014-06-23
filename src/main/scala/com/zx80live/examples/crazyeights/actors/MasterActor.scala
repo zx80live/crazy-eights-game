@@ -125,7 +125,7 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
           case Left(e) => log.error(e.toString)
         }
-      case Win =>
+      case Win() =>
         log.info(s"PLAYER $sender WIN!")
         exitGame()
 
