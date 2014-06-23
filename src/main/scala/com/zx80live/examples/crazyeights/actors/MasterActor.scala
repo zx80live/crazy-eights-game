@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.actors.infrastructure.ConsoleActor
+import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, Crazy8Workspace}
 
@@ -37,6 +38,12 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
 
     case Draw() =>
       log.info(s"accept draw")
+      workspace.drawCard() match {
+        case Some(card) =>
+          log.info(s"draw from ws $card")
+        case _ =>
+          log.error(s"stockpile is empty, ws = $workspace")
+      }
 
     case WorkspaceStatus() =>
       log.info(workspace.toString)

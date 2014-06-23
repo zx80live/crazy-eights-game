@@ -19,7 +19,7 @@ trait Workspace extends ReadonlyWorkspace {
   def deal(playersCount: Int): Either[DealException, List[List[Card]]]
 
 
-  def drawCard(implicit eventListener: WorkspaceEventListener): Option[Card]
+  def drawCard(implicit eventListener: WorkspaceEventListener = defaultListener): Option[Card]
 
   def discardCards(cards: List[Card]): Either[DiscardException, DiscardEvent]
 
