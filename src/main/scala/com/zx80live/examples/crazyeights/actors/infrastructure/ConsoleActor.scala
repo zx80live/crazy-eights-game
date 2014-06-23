@@ -5,7 +5,7 @@ import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
-import com.zx80live.examples.crazyeights.cards.rules.crazy8.{EightDiscardEvent, Crazy8DiscardsValidator, Crazy8MovePatterns}
+import com.zx80live.examples.crazyeights.cards.rules.crazy8._
 
 /**
  *
@@ -22,12 +22,19 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
       cards = cards diff correctDiscardCards
       workspace = Some(ws)
       log.info(s"discard event: $event")
-//      event match {
-//        case _:EightDiscardEvent() => None
-//        //case _ => None
-//      }
+      event match {
+        case _: SuccessDiscardEvent =>
+          enterCommand()
+        case _: EightDiscardEvent =>
+          log.warning("TODO change eight suit")
+          enterCommand()
+        case _: JokerDiscardEvent => None
+          log.info("pass move because there was joker")
+          sender ! Pass(Some("WithJoker"))
 
-      enterCommand()
+        case _ => None
+      }
+
 
     case WrongDiscard(wrongMoveCards, ws, msg) =>
       workspace = Some(ws)
