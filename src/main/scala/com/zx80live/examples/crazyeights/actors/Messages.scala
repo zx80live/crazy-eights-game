@@ -1,7 +1,7 @@
 package com.zx80live.examples.crazyeights.actors
 
 import com.zx80live.examples.crazyeights.cards.Card
-import com.zx80live.examples.crazyeights.cards.rules.Workspace
+import com.zx80live.examples.crazyeights.cards.rules.{ReadonlyWorkspace, Workspace}
 
 /**
  * Messages for actors
@@ -10,7 +10,7 @@ import com.zx80live.examples.crazyeights.cards.rules.Workspace
  */
 object Messages {
 
-  case class DealAndNextMove(cards: List[Card], workspace: Workspace)
+  case class DealAndNextMove(cards: List[Card], workspace: ReadonlyWorkspace)
 
   case class CreateHumanPlayer()
 
