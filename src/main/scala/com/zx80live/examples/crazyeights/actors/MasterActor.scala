@@ -41,10 +41,7 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
         }
         sender ! NextMove(workspace)
       case Exit() =>
-        log.info(s"Bye!")
-        getContext().system.deadLetters
-        //TODO refactoring (find safe shutdown feature)
-        System.exit(0)
+        exitGame()
 
       case Discard(list) =>
         log.info(s"accept discard $list")
@@ -128,6 +125,9 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
           case Left(e) => log.error(e.toString)
         }
+      case Win =>
+        log.info(s"PLAYER $sender WIN!")
+        exitGame()
 
       case Some(text) => log.info(s"accept some string: $text")
       case text: String => log.info(s"accept string: $text")
@@ -136,4 +136,11 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
   }
 
 
+  //TODO refactoring (find safe shutdown feature)
+  private def exitGame() {
+    log.info(s"Bye!")
+    getContext().system.deadLetters
+
+    System.exit(0)
+  }
 }
