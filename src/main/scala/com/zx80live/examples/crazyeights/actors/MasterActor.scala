@@ -49,7 +49,7 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
 
           val human = context.actorOf(Props[ConsoleActor])
           players = human :: players
-          human ! "GetCmd"
+          human ! Deal(list.head)
 
         case Left(e) => log.error(e.toString)
       }

@@ -2,7 +2,8 @@ package com.zx80live.examples.crazyeights.actors.infrastructure
 
 import akka.actor.{Actor, ActorLogging}
 import akka.pattern.pipe
-import com.zx80live.examples.crazyeights.actors.Messages.Deal
+import com.zx80live.examples.crazyeights.actors.Messages.{DealAndNextMove, NextMove}
+import com.zx80live.examples.crazyeights.cards.rules.Workspace
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -12,10 +13,13 @@ import scala.concurrent.Future
  * @author Andrew Proshkin
  */
 class ConsoleActor extends Actor with ActorLogging {
-  override def receive: Receive = {
-    case Deal(list) =>
+  var workspace: Option[Workspace] = None
 
-    case "GetCmd" =>
+  override def receive: Receive = {
+    //case DealAndNextMove(list, ws) =>
+
+
+    case NextMove(ws) =>
       scala.io.StdIn.readLine("human-command:>") match {
         case cmd@_ =>
           val f = Future({

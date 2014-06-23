@@ -1,6 +1,7 @@
 package com.zx80live.examples.crazyeights.actors
 
 import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.cards.rules.Workspace
 
 /**
  * Messages for actors
@@ -9,7 +10,7 @@ import com.zx80live.examples.crazyeights.cards.Card
  */
 object Messages {
 
-  case class Command(str: String)
+  case class DealAndNextMove(cards: List[Card], workspace: Workspace)
 
   case class CreateHumanPlayer()
 
@@ -70,7 +71,7 @@ object Messages {
    * send from: Master
    * to: Player
    */
-  case class NextMove(currentCard: Card)
+  case class NextMove(workspace: Workspace)
 
   /**
    * Broadcast message with some user move
