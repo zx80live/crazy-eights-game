@@ -8,6 +8,7 @@ import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.Rank.Eight
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, Crazy8Workspace}
+import com.zx80live.examples.crazyeights.util.PrettyListView
 
 import scala.concurrent.duration.Duration
 
@@ -18,7 +19,7 @@ import scala.concurrent.duration.Duration
  *
  * @author Andrew Proshkin
  */
-class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging {
+class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging with PrettyListView {
 
   implicit val timeout = Duration.create(2, TimeUnit.SECONDS)
 
@@ -44,10 +45,10 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
         exitGame()
 
       case Discard(list) =>
-        log.info(s"accept discard $list")
+        log.info(s"accept discard ${prettyList(list)} from ${sender.path}")
         workspace.discardCards(list) match {
           case Left(e) =>
-            log.error(s"accept wrong discard: $list")
+            log.error(s"accept wrong discard ${prettyList(list)} from ${sender.path}")
             sender ! WrongDiscard(list, workspace, e.getMessage)
           case Right(evt) =>
             log.info(s"accept $evt")
@@ -129,9 +130,9 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
         log.info(s"PLAYER $sender WIN!")
         exitGame()
 
-      case Some(text) => log.info(s"accept some string: $text")
-      case text: String => log.info(s"accept string: $text")
-      case e@_ => log.error(s"accept unsupported message: $e")
+      case Some(text) => log.info(s"accept some string: $text from $sender")
+      case text: String => log.info(s"accept string: $text from $sender")
+      case e@_ => log.error(s"accept unsupported message: $e from $sender")
     }
   }
 

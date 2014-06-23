@@ -5,6 +5,7 @@ import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, JokerDiscardEvent, SuccessDiscardEvent}
+import com.zx80live.examples.crazyeights.util.PrettyListView
 
 /**
  * AI player actor
@@ -14,7 +15,7 @@ import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns,
  *
  * @author Andrew Proshkin
  */
-class AIPlayerActor extends Actor with Player with Crazy8MovePatterns with ActorLogging {
+class AIPlayerActor extends Actor with Player with Crazy8MovePatterns with ActorLogging with PrettyListView {
   var workspace: Option[ReadonlyWorkspace] = None
   var cards: List[Card] = Nil
 
@@ -22,7 +23,7 @@ class AIPlayerActor extends Actor with Player with Crazy8MovePatterns with Actor
     case Deal(list, ws) =>
       cards = list
       workspace = Some(ws)
-      log.info(s"accept deal cards: $list")
+      log.info(s"accept deal cards: ${prettyList(list)}")
 
     case SuccessDiscard(correctDiscardCards, ws, event) =>
       cards = cards diff correctDiscardCards
@@ -65,8 +66,11 @@ class AIPlayerActor extends Actor with Player with Crazy8MovePatterns with Actor
   private def movePreferred() = {
     findPreferred(workspace.get.currentCard, cards) match {
       case xs if xs.length > 0 =>
+        log.info(s"discard request ${prettyList(cards)}")
         sender ! Discard(xs)
-      case _ => sender ! Draw()
+      case _ =>
+        log.info(s"draw request")
+        sender ! Draw()
     }
   }
 

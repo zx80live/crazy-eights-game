@@ -6,12 +6,13 @@ import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8._
 import com.zx80live.examples.crazyeights.cards.{Card, Suit}
+import com.zx80live.examples.crazyeights.util.PrettyListView
 
 /**
  *
  * @author Andrew Proshkin
  */
-class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with Crazy8DiscardsValidator with GameHelp {
+class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with Crazy8DiscardsValidator with GameHelp with PrettyListView {
   var cards: List[Card] = Nil
   var workspace: Option[ReadonlyWorkspace] = None
 
@@ -100,9 +101,6 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
     }
   }
 
-  private def prettyList(list: List[_]): String = {
-    list.map(_.toString.trim).mkString(",")
-  }
 
   private def enterCommand(postProcessedText: String = ""): Unit = {
     printStatus(postProcessedText)
