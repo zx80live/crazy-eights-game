@@ -1,9 +1,9 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.{Suit, Card}
 import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DealException, DiscardException, WorkspaceException}
 import com.zx80live.examples.crazyeights.cards.rules.{Workspace, WorkspaceEventListener}
+import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 
 
 /**
@@ -120,6 +120,11 @@ class Crazy8Workspace(cards: List[Card] = deck54, shuffle: Boolean = true) exten
   //TODO refactoring
   //TODO test
   override def setCurrentSuit(suit: Suit.Value): Either[WorkspaceException, Boolean] = {
-    Right(true)
+    currentCard match {
+      case Card(Rank.Eight, _) =>
+        _discardPile = Card(Rank.Eight, suit) :: _discardPile.tail
+        Right(true)
+      case _ => Left(new WorkspaceException("can't change suit of current card that is not eight"))
+    }
   }
 }

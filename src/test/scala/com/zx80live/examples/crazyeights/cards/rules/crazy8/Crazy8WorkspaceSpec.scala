@@ -6,7 +6,7 @@ import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 import com.zx80live.examples.crazyeights.cards.rules.WorkspaceEventListener
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DealException, DiscardException}
-import com.zx80live.examples.crazyeights.cards.{Card, Rank}
+import com.zx80live.examples.crazyeights.cards.{Suit, Card, Rank}
 import org.scalatest.{Matchers, WordSpec}
 
 /**
@@ -157,6 +157,21 @@ class Crazy8WorkspaceSpec extends WordSpec with Matchers with Crazy8WorkspaceBui
 
     "stack overflow" in {
 
+    }
+  }
+
+  "setCurrentSuit" when {
+    "correct cases" in {
+      new Crazy8Workspace(cards"8♦,2♦,4♣".get, false).setCurrentSuit(Suit.Hearts) match {
+        case Right(true) => true shouldEqual true
+        case _ => true shouldEqual false
+      }
+    }
+    "incorrect cases" in {
+      new Crazy8Workspace(cards"2♦,8♦,4♣".get, false).setCurrentSuit(Suit.Hearts) match {
+        case Left(e) => true shouldEqual true
+        case _ => true shouldEqual false
+      }
     }
   }
 }
