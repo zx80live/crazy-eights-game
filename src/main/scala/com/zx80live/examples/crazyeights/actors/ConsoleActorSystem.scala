@@ -1,7 +1,6 @@
-package com.zx80live.examples.crazyeights.actors.infrastructure
+package com.zx80live.examples.crazyeights.actors
 
 import akka.actor.{ActorSystem, Props}
-import com.zx80live.examples.crazyeights.actors.MasterActor
 import com.zx80live.examples.crazyeights.actors.Messages.NewGame
 import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
 

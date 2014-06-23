@@ -1,4 +1,4 @@
-package com.zx80live.examples.crazyeights.actors.infrastructure
+package com.zx80live.examples.crazyeights.actors
 
 import akka.actor.{Actor, ActorLogging}
 import com.zx80live.examples.crazyeights.actors.Messages._
@@ -86,12 +86,9 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
     }
     else {
 
-      log.info("\nenter help|pass|p|draw|d|exit|e|suggest|sg or comma-separated cards:>")
+      log.info("\nenter pass|p|draw|d|exit|e|suggest|sg or comma-separated cards:>")
       scala.io.StdIn.readLine() match {
 
-        case "help" | "h" | "?" =>
-          printHelp()
-          enterCommand()
 
         case "about" =>
           printAbout()
@@ -122,7 +119,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
           log.warning("pass move")
           sender ! Pass()
 
-        case "exit" | "e" =>
+        case "exit" | "e" | "q" | "quit" =>
           sender ! Exit()
 
         case xs@_ =>

@@ -18,6 +18,10 @@ class AIPlayerActor extends Actor with Player with Crazy8MovePatterns with Actor
       log.info(s"accept deal cards: $list")
       cards = list
 
+    case NextMove(ws) =>
+      log.info(s"accept next move")
+      sender ! Pass()
+
     case text: String =>
       log.info(s"accept string: $text")
 

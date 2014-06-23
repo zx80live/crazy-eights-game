@@ -3,8 +3,8 @@ package com.zx80live.examples.crazyeights.actors
 import java.util.concurrent.TimeUnit
 
 import akka.actor._
+import com.zx80live.examples.crazyeights.actors.ConsoleActor
 import com.zx80live.examples.crazyeights.actors.Messages._
-import com.zx80live.examples.crazyeights.actors.infrastructure.ConsoleActor
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.Rank.Eight
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
@@ -26,7 +26,7 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
   private var workspace: Workspace = new Crazy8Workspace
   private var players: List[ActorRef] = Nil
 
-  private var currentPlayerIndex: Option[Int] = None
+  private var playersIterator: Iterator[ActorRef] = Nil.iterator
 
 
   @scala.throws[Exception](classOf[Exception])
@@ -60,6 +60,16 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
       case Pass(None) =>
         log.info(s"accept pass user${sender.path}")
+        if (playersIterator.hasNext) {
+          val nextPlayer = playersIterator.next()
+          nextPlayer ! NextMove(workspace)
+          log.info(s"move to next $nextPlayer")
+        } else {
+          playersIterator = players.iterator
+          val nextPlayer = playersIterator.next()
+          nextPlayer ! NextMove(workspace)
+          log.info(s"move to first $nextPlayer")
+        }
 
 
       case Draw() =>
@@ -100,6 +110,8 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
             val human = context.actorOf(Props[ConsoleActor], s"player-human")
             players = human :: players
+            playersIterator = players.iterator
+            playersIterator.next
             human ! DealAndNextMove(list.head, workspace)
 
           case Left(e) => log.error(e.toString)
