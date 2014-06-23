@@ -29,8 +29,10 @@ class MasterActor extends Actor with Crazy8MovePatterns with ActorLogging {
       workspace.discardCards(list) match {
         case Left(e) =>
           log.error(s"accept wrong discard: $list")
+          sender ! WrongDiscard(list, workspace, e.getMessage)
         case Right(evt) =>
           log.info(s"accept $evt")
+          sender ! SuccessDiscard(list, workspace, evt)
       }
 
     case Pass(None) =>

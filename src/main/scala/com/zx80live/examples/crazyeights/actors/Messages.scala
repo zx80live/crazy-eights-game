@@ -1,6 +1,7 @@
 package com.zx80live.examples.crazyeights.actors
 
 import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.cards.rules.crazy8.DiscardEvent
 import com.zx80live.examples.crazyeights.cards.rules.{ReadonlyWorkspace, Workspace}
 
 /**
@@ -9,6 +10,10 @@ import com.zx80live.examples.crazyeights.cards.rules.{ReadonlyWorkspace, Workspa
  * @author Andrew Proshkin
  */
 object Messages {
+
+  case class WrongDiscard(cards: List[Card], workspace: ReadonlyWorkspace, msg: String = "")
+
+  case class SuccessDiscard(cards: List[Card], workspace: ReadonlyWorkspace, evt: DiscardEvent)
 
   case class DealAndNextMove(cards: List[Card], workspace: ReadonlyWorkspace)
 
