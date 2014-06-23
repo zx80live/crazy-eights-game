@@ -18,12 +18,11 @@ object Messages {
   /**
    * Initiate new game and send cards for all players
    *
-   * send from: Master
-   * to: Players
+   * to: Master
    *
-   * @param cards - player's cards
+   * @param playersCount - players count
    */
-  case class NewGame(cards: List[Card])
+  case class NewGame(playersCount: Int = 2)
 
   /**
    * Cards are moved from player
