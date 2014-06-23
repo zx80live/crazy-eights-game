@@ -80,8 +80,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
     case m@_ => log.error(s"unsupported message $m")
   }
 
-  private def printStatus(): Unit = {
-
+  private def printStatus(postProcessedText: String = ""): Unit = {
     workspace match {
       case Some(ws) =>
         log.info(
@@ -93,20 +92,20 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
             |    currentCard: ${ws.currentCard.toString.trim}
             |  }
             |  your cards:    ${prettyList(cards)}
+            |  $postProcessedText
           """.stripMargin)
 
       case None =>
         log.info(s"Workspace: None")
     }
-    log.info(s"your cards: $cards")
   }
 
   private def prettyList(list: List[_]): String = {
     list.map(_.toString.trim).mkString(",")
   }
 
-  private def enterCommand(): Unit = {
-    printStatus()
+  private def enterCommand(postProcessedText: String = ""): Unit = {
+    printStatus(postProcessedText)
 
     if (checkWin()) {
       //TODO synchronized check Win with MasterActor state
@@ -115,7 +114,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
     }
     else {
 
-      log.info("\nenter pass|p|draw|d|exit|e|suggest|sg or comma-separated cards:>")
+      log.info("enter pass|p|draw|d|exit|e|suggest|sg or comma-separated cards:>")
       scala.io.StdIn.readLine() match {
 
 
@@ -136,13 +135,13 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
           sender ! Draw()
 
         case "suggest" | "sg" =>
-          findPreferred(workspace.get.currentCard, cards) match {
+          val txt = findPreferred(workspace.get.currentCard, cards) match {
             case preferred if preferred.length > 0 =>
-              log.info(s"\nthe preferred move is: $preferred")
+              s"suggest move:  ${prettyList(preferred)}"
             case _ =>
-              log.info("\ncan't find preferred move, use commands draw|pass")
+              "suggest move:  None, use commands draw|pass"
           }
-          enterCommand()
+          enterCommand(txt)
 
         case "pass" | "p" =>
           log.warning("pass move")
