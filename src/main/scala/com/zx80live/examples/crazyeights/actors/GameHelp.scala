@@ -51,6 +51,11 @@ trait GameHelp {
         | draw|d            - request for getting cards from stockpile
         | exit|quit|e|q     - exit from game
         |----------------------------------------------------------------
+        | card DSL:
+        |----------------------------------------------------------------
+        | You can enter:
+        |   5♠,5♦,5♥,5♣,★ , ☆   - unicode cards
+        |   5S,5B,5H,5C,WJ,BJ   - ASCII-codes
         |
       """.stripMargin)
   }

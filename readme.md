@@ -49,7 +49,18 @@ The game supports follows prompt commands:
 Example: create game for two players:
      > new 2
 
-Game supports 1 to 4 players.    
+Game supports 1 to 4 players.
+    
+       
+Cards DSL:
+-----------------------------
+You can enter in command prompt:
+    
+    5♠,5♦,5♥,5♣,★ , ☆  - unicode cards
+       
+    5S,5B,5H,5C,WJ,BJ   - ASCII-codes
+
+Full codes see: com.zx80live.examples.crazyeights.cards.CardsHelper
  
 Game AI
 -----------------------------
