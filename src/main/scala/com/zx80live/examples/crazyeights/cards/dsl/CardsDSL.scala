@@ -166,4 +166,5 @@ object CardsDSL {
       validator.validateMove(left, right)
     }
   }
+
 }
