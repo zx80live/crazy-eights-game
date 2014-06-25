@@ -2,7 +2,7 @@ package com.zx80live.examples.crazyeights.actors
 
 import akka.actor.{Actor, ActorLogging}
 import com.zx80live.examples.crazyeights.actors.Messages._
-import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
+import com.zx80live.examples.crazyeights.cards.dsl.CardsDSL._
 import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8._
 import com.zx80live.examples.crazyeights.cards.{Card, Suit}

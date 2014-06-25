@@ -11,7 +11,7 @@ class Crazy8ShuffleConditionSpec extends WordSpec with Matchers {
 
   import com.zx80live.examples.crazyeights.cards.Rank._
   import com.zx80live.examples.crazyeights.cards.Suit._
-  import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
+  import com.zx80live.examples.crazyeights.cards.dsl.CardsDSL._
   import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8ShuffleCondition._
 
   "acceptShuffle" when {

@@ -4,7 +4,7 @@ import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import com.zx80live.examples.crazyeights.cards.Rank._
 import com.zx80live.examples.crazyeights.cards.Suit._
-import com.zx80live.examples.crazyeights.cards.dsl.ConversionUtils._
+import com.zx80live.examples.crazyeights.cards.dsl.CardsDSL._
 import org.scalatest.{Matchers, WordSpec}
 
 /**
