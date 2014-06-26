@@ -1,8 +1,8 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
 import com.zx80live.examples.crazyeights.cards.Card
-import com.zx80live.examples.crazyeights.cards.dsl.MoveValidator
 import com.zx80live.examples.crazyeights.cards.dsl.CardsDSL._
+import com.zx80live.examples.crazyeights.cards.rules.DiscardValidator
 
 /**
  *
@@ -10,24 +10,23 @@ import com.zx80live.examples.crazyeights.cards.dsl.CardsDSL._
  */
 object Crazy8GameContext {
 
-  implicit val moveValidator = new Crazy8DiscardsValidator with MoveValidator {
-    override def validateMove(discard: List[Card], cards: List[Card]): Boolean = {
-      validateDiscard(cards.head, discard)
-    }
-  }
+  implicit val moveValidator = new Crazy8DiscardsValidator {}
 
   implicit class MoveStringCards(left: String) {
-    def -->(right: String)(implicit validator: MoveValidator): Boolean = {
-      val c1: Option[List[Card]] = cards"$left"
-      val c2: Option[List[Card]] = cards"$right"
+    def -->(right: String)(implicit validator: DiscardValidator): Boolean = {
+      val discard: Option[List[Card]] = cards"$left"
+      val current: Option[Card] = card"$right"
 
-      (if (c1.isDefined) c1.get else Nil) --> (if (c2.isDefined) c2.get else Nil)
+      if (discard.isDefined && current.isDefined)
+        discard.get --> current.get
+      else
+        false
     }
   }
 
   implicit class MoveCards(left: List[Card]) {
-    def -->(right: List[Card])(implicit validator: MoveValidator): Boolean = {
-      validator.validateMove(left, right)
+    def -->(right: Card)(implicit validator: DiscardValidator): Boolean = {
+      validator.validateDiscard(right, left)
     }
   }
 
