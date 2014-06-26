@@ -190,4 +190,18 @@ class Crazy8DiscardsValidatorSpec extends WordSpec with Matchers with Crazy8Disc
       "2♥, 3♥, 4♥" --> "☆" shouldEqual false
     }
   }
+
+  "validate rank implicitly" in {
+    "5♦" isRank "5" shouldEqual true
+    "5♦,5♠" isRank "5" shouldEqual true
+    "5♦,5♠,5♣" isRank "5" shouldEqual true
+    "5♦,5♠,5♣,5♠" isRank "5" shouldEqual true
+
+    "" isRank "" shouldEqual false
+    "" isRank "5" shouldEqual false
+    "7♦" isRank "5" shouldEqual false
+    "5♦,7♠" isRank "5" shouldEqual false
+    "5♦,5♠,5♣,5♠" isRank "" shouldEqual false
+  }
+
 }
