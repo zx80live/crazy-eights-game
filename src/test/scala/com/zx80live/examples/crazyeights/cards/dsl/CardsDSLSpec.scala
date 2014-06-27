@@ -11,7 +11,7 @@ import org.scalatest._
  *
  * @author Andrew Proshkin
  */
-class ConversionUtilsSpec extends WordSpec with Matchers {
+class CardsDSLSpec extends WordSpec with Matchers {
 
   "string2Rank" when {
     "converts correct rankStrings into Some(_)" in {
