@@ -1,6 +1,4 @@
-package com.zx80live.examples.crazyeights.cards.rules
-
-import com.zx80live.examples.crazyeights.cards.Card
+package com.zx80live.examples.crazyeights.cards.dsl
 
 /**
  * Condition for cards shuffle

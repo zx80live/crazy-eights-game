@@ -4,8 +4,8 @@ import java.util.concurrent.TimeUnit
 
 import akka.actor._
 import com.zx80live.examples.crazyeights.actors.Messages._
-import com.zx80live.examples.crazyeights.cards.Card
-import com.zx80live.examples.crazyeights.cards.Rank.Eight
+import com.zx80live.examples.crazyeights.cards.dsl.{Card, Rank}
+import Rank.Eight
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, Crazy8Workspace}
 import com.zx80live.examples.crazyeights.util.PrettyListView

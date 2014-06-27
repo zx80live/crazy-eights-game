@@ -1,8 +1,8 @@
 package com.zx80live.examples.crazyeights.actors
 
+import com.zx80live.examples.crazyeights.cards.dsl.{Card, Suit}
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.DiscardEvent
 import com.zx80live.examples.crazyeights.cards.rules.{ReadonlyWorkspace, Workspace}
-import com.zx80live.examples.crazyeights.cards.{Card, Suit}
 
 /**
  * Messages for actors
@@ -124,6 +124,6 @@ object Messages {
    * send from: Master
    * to: Player
    */
-  //type Card = com.zx80live.examples.crazyeights.cards.Card
+  //type Card = com.zx80live.examples.crazyeights.cards.dsl.Card
 
 }

@@ -1,9 +1,10 @@
-package com.zx80live.examples.crazyeights.cards
+package com.zx80live.examples.crazyeights.cards.dsl
 
-
-import com.zx80live.examples.crazyeights.cards.rules.{DefaultCondition, ShuffleCondition}
+import com.zx80live.examples.crazyeights.cards.rules.DefaultCondition
 
 import scala.util.Random
+import Rank._
+import Suit._
 
 /**
  * Helper contains sets for standard ranks, suits and 54-cards decks.
@@ -11,9 +12,6 @@ import scala.util.Random
  * @author Andrew Proshkin
  */
 object CardsHelper {
-
-  import com.zx80live.examples.crazyeights.cards.Rank._
-  import com.zx80live.examples.crazyeights.cards.Suit._
 
   val rankStrings: List[String] = "2" :: "3" :: "4" :: "5" :: "6" :: "7" :: "8" :: "9" :: "10" :: "J" :: "Q" :: "K" :: "A" :: "★" :: "☆" :: Nil
   val suitStrings: List[String] = "♠" :: "♥" :: "♦" :: "♣" :: Nil

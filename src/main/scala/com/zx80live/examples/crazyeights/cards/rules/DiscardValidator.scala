@@ -1,6 +1,6 @@
 package com.zx80live.examples.crazyeights.cards.rules
 
-import com.zx80live.examples.crazyeights.cards.{Card, Rank}
+import com.zx80live.examples.crazyeights.cards.dsl.{Card, Rank}
 
 /**
  *

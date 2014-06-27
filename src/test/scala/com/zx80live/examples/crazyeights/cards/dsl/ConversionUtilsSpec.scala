@@ -1,10 +1,9 @@
 package com.zx80live.examples.crazyeights.cards.dsl
 
-import com.zx80live.examples.crazyeights.cards.CardsHelper._
-import com.zx80live.examples.crazyeights.cards.Rank._
-import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.dsl.CardsDSL._
-import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
+import com.zx80live.examples.crazyeights.cards.dsl.CardsHelper._
+import com.zx80live.examples.crazyeights.cards.dsl.Rank._
+import com.zx80live.examples.crazyeights.cards.dsl.Suit._
 import org.scalatest._
 
 /**
