@@ -1,9 +1,12 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.dsl.CardsDSL._
-import com.zx80live.examples.crazyeights.cards.dsl.CardsHelper._
-import com.zx80live.examples.crazyeights.cards.dsl.Rank._
-import com.zx80live.examples.crazyeights.cards.dsl.Suit._
+import com.zx80live.examples.crazyeights.cards.Rank
+import com.zx80live.examples.crazyeights.cards.Suit
+import com.zx80live.examples.crazyeights.cards._
+import CardsDSL._
+import CardsHelper._
+import Rank._
+import Suit._
 import com.zx80live.examples.crazyeights.cards.dsl._
 import com.zx80live.examples.crazyeights.cards.rules.WorkspaceEventListener
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DealException, DiscardException}

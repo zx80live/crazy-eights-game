@@ -1,10 +1,10 @@
-package com.zx80live.examples.crazyeights.cards.dsl
+package com.zx80live.examples.crazyeights.cards
 
+import com.zx80live.examples.crazyeights.cards.Rank._
+import com.zx80live.examples.crazyeights.cards.Suit._
 import com.zx80live.examples.crazyeights.cards.rules.DefaultCondition
 
 import scala.util.Random
-import Rank._
-import Suit._
 
 /**
  * Helper contains sets for standard ranks, suits and 54-cards decks.

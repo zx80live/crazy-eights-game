@@ -1,4 +1,4 @@
-package com.zx80live.examples.crazyeights.cards.dsl
+package com.zx80live.examples.crazyeights.cards
 
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.IllegalCardFormatException
 

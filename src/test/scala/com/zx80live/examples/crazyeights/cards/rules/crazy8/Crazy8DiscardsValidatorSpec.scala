@@ -1,6 +1,7 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.dsl.CardsDSL._
+import com.zx80live.examples.crazyeights.cards.CardsDSL
+import CardsDSL._
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8GameContext._
 import org.scalatest.{Matchers, WordSpec}
 

@@ -1,6 +1,5 @@
 package com.zx80live.examples.crazyeights.cards
 
-import com.zx80live.examples.crazyeights.cards.dsl.CardsHelper
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8ShuffleCondition
 import org.scalatest.{Matchers, WordSpec}
 import CardsHelper._

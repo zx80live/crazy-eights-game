@@ -1,8 +1,7 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.dsl.{CardsHelper, Rank, Suit}
+import com.zx80live.examples.crazyeights.cards.{Rank, CardsHelper, Suit, CardsDSL}
 import CardsHelper._
-import com.zx80live.examples.crazyeights.cards.dsl.{Rank, Suit}
 import org.scalatest.{Matchers, WordSpec}
 
 /**
@@ -13,7 +12,7 @@ class Crazy8ShuffleConditionSpec extends WordSpec with Matchers {
 
   import Rank._
   import Suit._
-  import com.zx80live.examples.crazyeights.cards.dsl.CardsDSL._
+  import CardsDSL._
   import com.zx80live.examples.crazyeights.cards.rules.crazy8.Crazy8ShuffleCondition._
 
   "acceptShuffle" when {

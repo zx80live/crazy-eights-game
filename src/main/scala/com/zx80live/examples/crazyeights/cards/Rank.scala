@@ -1,4 +1,4 @@
-package com.zx80live.examples.crazyeights.cards.dsl
+package com.zx80live.examples.crazyeights.cards
 
 /**
  * Card's rank for 54-deck

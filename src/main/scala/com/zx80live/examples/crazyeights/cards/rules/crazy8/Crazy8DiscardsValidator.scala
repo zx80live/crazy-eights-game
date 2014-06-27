@@ -1,6 +1,6 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.dsl.{Card, Rank, Suit}
+import com.zx80live.examples.crazyeights.cards.{Rank, Suit, Card}
 import com.zx80live.examples.crazyeights.cards.rules.DiscardValidator
 
 /**

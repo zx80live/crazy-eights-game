@@ -1,9 +1,8 @@
-package com.zx80live.examples.crazyeights.cards.dsl
+package com.zx80live.examples.crazyeights.cards
 
-import com.zx80live.examples.crazyeights.cards.dsl.Rank._
-import com.zx80live.examples.crazyeights.cards.dsl.Suit._
+import com.zx80live.examples.crazyeights.cards.Rank._
+import com.zx80live.examples.crazyeights.cards.Suit._
 
-import scala.language.implicitConversions
 import scala.util.matching.Regex
 
 /**
@@ -13,6 +12,8 @@ import scala.util.matching.Regex
  * @author Andrew Proshkin
  */
 object CardsDSL {
+
+  import scala.language.implicitConversions
 
   implicit def string2Int(str: String): Option[Int] = {
     try {
@@ -150,7 +151,6 @@ object CardsDSL {
       case (value) => Some(value)
     }
   }
-
 
 
 }
