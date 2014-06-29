@@ -398,4 +398,14 @@ class CardsDSLSpec extends WordSpec with Matchers {
     rank"100" shouldEqual None
   }
 
+  "suit interpolation" in {
+    suit"♠" shouldEqual Some(Suit.Spades)
+    suit"♥" shouldEqual Some(Suit.Hearts)
+    suit"♦" shouldEqual Some(Suit.Diamonds)
+    suit"♣" shouldEqual Some(Suit.Clubs)
+
+    suit"" shouldEqual None
+    suit"100" shouldEqual None
+  }
+
 }

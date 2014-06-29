@@ -43,7 +43,6 @@ object CardsDSL {
       buff.toString(): Option[Rank.Value]
     }
 
-    //TODO test
     def suit(args: Any*): Option[Suit.Value] = {
       val strings = sc.parts.iterator
       val buff = new StringBuilder(strings.next())
