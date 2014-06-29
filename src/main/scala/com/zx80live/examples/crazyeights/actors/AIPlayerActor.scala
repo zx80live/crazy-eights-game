@@ -66,7 +66,7 @@ class AIPlayerActor extends Actor with Crazy8MovePatterns with ActorLogging with
   private def movePreferred() = {
     findPreferred(workspace.get.currentCard, cards) match {
       case xs if xs.length > 0 =>
-        log.info(s"discard request ${prettyList(cards)}")
+        log.info(s"request: ${prettyList(cards)} --[discard]--> ${prettyList(xs)}")
         sender ! Discard(xs)
       case _ =>
         log.info(s"draw request")
