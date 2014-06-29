@@ -33,7 +33,6 @@ object CardsDSL {
   implicit class CardsConversionHelper(sc: StringContext) {
     def r = new Regex(sc.parts.mkString, sc.parts.tail.map(_ => "x"): _*)
 
-    //TODO test
     def rank(args: Any*): Option[Rank.Value] = {
       val strings = sc.parts.iterator
       val buff = new StringBuilder(strings.next())

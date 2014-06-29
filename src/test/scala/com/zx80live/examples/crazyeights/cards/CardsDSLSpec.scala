@@ -389,4 +389,13 @@ class CardsDSLSpec extends WordSpec with Matchers {
   }
 
 
+  "rank interpolation" in {
+    CardsHelper.ranks foreach { r =>
+      rank"${r.toString}" shouldEqual Some(r)
+    }
+
+    rank"" shouldEqual None
+    rank"100" shouldEqual None
+  }
+
 }
