@@ -133,11 +133,10 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
   }
 
   private def actionNewGame(playersCount: Int) = {
-    log.info(s"accept NewGame($playersCount)")
-    log.info("create new workspace")
+    log.info(s"create new workspace with $playersCount players")
     workspace = new Crazy8Workspace
     log.info(workspace.toString)
-    log.info(s"deals cards for playersCount = $playersCount")
+    log.info(s"deals cards for players..")
     workspace.deal(playersCount) match {
       case Right(list) =>
         log.info(s"create players cards for 1 human and ${list.length - 1} AI:")
