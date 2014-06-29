@@ -2,7 +2,7 @@
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %logger{36} %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %logger{0} %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -10,7 +10,7 @@
         <file>logs/crazy-eights.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %logger{0} - %msg%n</pattern>
         </encoder>
     </appender>
 
