@@ -21,5 +21,16 @@ class CircularListSpec extends WordSpec with Matchers {
     list.next shouldEqual 4
     list.next shouldEqual 5
     list.next shouldEqual 1
+
+    list.add(6).add(7)
+    println(list.toString)
+    list.next shouldEqual 2
+    list.next shouldEqual 3
+    list.next shouldEqual 4
+    list.next shouldEqual 5
+    list.next shouldEqual 6
+    list.next shouldEqual 7
+    list.next shouldEqual 1
+
   }
 }
