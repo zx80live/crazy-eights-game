@@ -9,7 +9,7 @@ import org.scalatest.{Matchers, WordSpec}
 class CircularListSpec extends WordSpec with Matchers {
 
   "test" in {
-    val list = new CircularList(List(1,2,3,4,5))
+    val list = CircularList(List(1,2,3,4,5))
     list.next shouldEqual 1
     list.next shouldEqual 2
     list.next shouldEqual 3

@@ -10,11 +10,15 @@ class CircularList[T](list: List[T]) {
   def next = {
     if (!iterator.hasNext)
       iterator = list.iterator
-    iterator.next
+    iterator.next()
   }
 
   def prev = ???
 
   override def toString = list.toString()
 
+}
+
+object CircularList {
+  def apply[T](list: List[T]) = new CircularList[T](list)
 }
