@@ -4,10 +4,10 @@ import java.util.concurrent.TimeUnit
 
 import akka.actor._
 import com.zx80live.examples.crazyeights.actors.Messages._
-import com.zx80live.examples.crazyeights.cards.{Card, Rank}
-import Rank.Eight
+import com.zx80live.examples.crazyeights.cards.Rank.Eight
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, Crazy8Workspace}
+import com.zx80live.examples.crazyeights.cards.{Card, Rank}
 import com.zx80live.examples.crazyeights.util.PrettyListView
 
 import scala.concurrent.duration.Duration
@@ -28,6 +28,12 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
   private var playersIterator: Iterator[ActorRef] = Nil.iterator
 
+  private def nextPlayer() = {
+    if (!playersIterator.hasNext)
+      playersIterator = players.iterator
+
+    playersIterator.next()
+  }
 
   @scala.throws[Exception](classOf[Exception])
   override def onReceive(message: Any): Unit = {
