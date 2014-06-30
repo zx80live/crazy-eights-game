@@ -28,13 +28,6 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
   private var playersIterator: Iterator[ActorRef] = Nil.iterator
 
-  private def nextPlayer() = {
-    if (!playersIterator.hasNext)
-      playersIterator = players.iterator
-
-    playersIterator.next()
-  }
-
   @scala.throws[Exception](classOf[Exception])
   override def onReceive(message: Any): Unit = {
 
