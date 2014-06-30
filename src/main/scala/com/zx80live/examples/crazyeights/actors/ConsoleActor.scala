@@ -16,7 +16,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
   var cards: List[Card] = Nil
   var workspace: Option[ReadonlyWorkspace] = None
 
-  private def getNewSuit(): Option[Suit.Value] = {
+  private def getNewSuit: Option[Suit.Value] = {
     log.info("\nenter new suit [♠, ♥, ♦, ♣] or empty string to keep current:>")
     scala.io.StdIn.readLine() match {
       case str if str.length > 0 =>
