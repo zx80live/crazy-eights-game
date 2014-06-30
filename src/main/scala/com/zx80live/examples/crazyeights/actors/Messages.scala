@@ -1,4 +1,4 @@
-package com.zx80live.examples.crazyeights.actors.newgame
+package com.zx80live.examples.crazyeights.actors
 
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.DiscardEvent
 import com.zx80live.examples.crazyeights.cards.{Card, Suit}

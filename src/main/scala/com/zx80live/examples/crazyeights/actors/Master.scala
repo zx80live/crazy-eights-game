@@ -1,9 +1,9 @@
-package com.zx80live.examples.crazyeights.actors.newgame
+package com.zx80live.examples.crazyeights.actors
 
 import java.util.concurrent.TimeUnit
 
 import akka.actor.{ActorLogging, ActorRef, Props, UntypedActor}
-import com.zx80live.examples.crazyeights.actors.newgame.Messages._
+import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8Workspace, WrongDiscardEvent}
 import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}

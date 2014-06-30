@@ -1,9 +1,8 @@
-package com.zx80live.examples.crazyeights.actors.newgame
+package com.zx80live.examples.crazyeights.actors
 
-import com.zx80live.examples.crazyeights.actors.GameHelp
-import com.zx80live.examples.crazyeights.actors.newgame.Messages.{SetSuit, Discard, Pass, Draw}
-import com.zx80live.examples.crazyeights.cards.{Suit, Card}
+import com.zx80live.examples.crazyeights.actors.Messages._
 import com.zx80live.examples.crazyeights.cards.CardsDSL._
+import com.zx80live.examples.crazyeights.cards.{Card, Suit}
 
 /**
  *
