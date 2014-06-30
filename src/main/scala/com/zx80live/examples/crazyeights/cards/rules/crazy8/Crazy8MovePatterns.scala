@@ -1,6 +1,6 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.{Suit, Rank, Card}
+import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
 
 
 /**
@@ -10,8 +10,8 @@ import com.zx80live.examples.crazyeights.cards.{Suit, Rank, Card}
  */
 trait Crazy8MovePatterns {
 
-  import Rank.Eight
-  import Suit.Special
+  import com.zx80live.examples.crazyeights.cards.Rank.Eight
+  import com.zx80live.examples.crazyeights.cards.Suit.Special
   import com.zx80live.examples.crazyeights.util.CollectionUtils._
 
   /**
@@ -114,7 +114,6 @@ trait Crazy8MovePatterns {
     val result = preferredBecauseJoker orElse maxPreferred orElse findEight(cards) orElse findJoker(cards)
 
     result match {
-      //TODO warning
       case Some(x: Card) => List(x)
       case Some(xs: List[_]) if xs.forall(_.isInstanceOf[Card]) => xs.asInstanceOf[List[Card]]
       case _ => List()
