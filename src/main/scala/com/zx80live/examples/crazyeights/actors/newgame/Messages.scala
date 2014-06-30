@@ -15,7 +15,7 @@ object Messages {
 
   case class Discard(cards: List[Card])
 
-  case class SetSuit(suit: Suit.Value)
+  case class SetSuit(suit: Option[Suit.Value])
 
   case class Draw()
 

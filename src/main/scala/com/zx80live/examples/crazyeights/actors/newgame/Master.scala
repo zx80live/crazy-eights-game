@@ -37,11 +37,11 @@ class Master extends UntypedActor with ActorLogging with ConsoleRenderer {
     case _ => actionUnsupportedMessage(message)
   }
 
-  def actionSetSuit(suit: Suit.Value) = {
+  def actionSetSuit(suit: Option[Suit.Value]) = {
     workspace.currentCard match {
-      case Card(Rank.Eight, _) =>
+      case Card(Rank.Eight, _) if suit.isDefined =>
         log.info(s"set suit($suit) from ${sender().path.name}")
-        workspace.setCurrentSuit(suit)
+        workspace.setCurrentSuit(suit.get)
       case _ =>
         log.error(s"can't change suit($suit) because current card is not eight")
     }

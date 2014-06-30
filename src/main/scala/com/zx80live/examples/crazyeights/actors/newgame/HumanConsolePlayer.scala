@@ -1,8 +1,8 @@
 package com.zx80live.examples.crazyeights.actors.newgame
 
 import com.zx80live.examples.crazyeights.actors.GameHelp
-import com.zx80live.examples.crazyeights.actors.newgame.Messages.{Discard, Pass, Draw}
-import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.actors.newgame.Messages.{SetSuit, Discard, Pass, Draw}
+import com.zx80live.examples.crazyeights.cards.{Suit, Card}
 import com.zx80live.examples.crazyeights.cards.CardsDSL._
 
 /**
@@ -59,5 +59,16 @@ class HumanConsolePlayer extends Player with GameHelp {
             actionNextMove(c)
         }
     }
+  }
+
+
+  override def actionSetSuit(current: Card, xs: List[Card]) = {
+    log.info("\nenter new suit [♠, ♥, ♦, ♣] or empty string to keep current:>")
+    val suit: Option[Suit.Value] = scala.io.StdIn.readLine() match {
+      case str if str.length > 0 =>
+        suit"$str": Option[Suit.Value]
+      case _ => None
+    }
+    sender ! SetSuit(suit)
   }
 }

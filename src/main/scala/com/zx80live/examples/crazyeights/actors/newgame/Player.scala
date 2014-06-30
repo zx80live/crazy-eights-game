@@ -2,8 +2,9 @@ package com.zx80live.examples.crazyeights.actors.newgame
 
 import akka.actor.{Actor, ActorLogging}
 import com.zx80live.examples.crazyeights.actors.newgame.Messages._
-import com.zx80live.examples.crazyeights.cards.Card
+import com.zx80live.examples.crazyeights.cards.CardsDSL._
 import com.zx80live.examples.crazyeights.cards.rules.crazy8._
+import com.zx80live.examples.crazyeights.cards.{Card, Suit}
 import com.zx80live.examples.crazyeights.util.ConsoleRenderer
 
 /**
@@ -58,21 +59,16 @@ class Player extends Actor with ActorLogging with ConsoleRenderer with Crazy8Mov
     log.info(s"$evt for discard(${toString(xs)})")
     evt match {
       case f: WrongDiscardEvent => actionNextMove(current)
-      case s: EightDiscardEvent => actionSetSuit(current, xs)
+      case s: EightDiscardEvent =>
+        diffCards(xs)
+        actionSetSuit(current, xs)
+        actionPass()
       case _ => diffCards(xs); actionPass()
     }
   }
 
   def actionSetSuit(current: Card, xs: List[Card]) = {
-    log.warning("TODO implements set suit")
-    //    log.info("\nenter new suit [♠, ♥, ♦, ♣] or empty string to keep current:>")
-    //    scala.io.StdIn.readLine() match {
-    //      case str if str.length > 0 =>
-    //        suit"$str": Option[Suit.Value]
-    //      case _ => None
-    //    }
-    diffCards(xs)
-    actionPass()
+    log.info("player keep current suit")
   }
 
   def actionUnsupportedMessage(m: Any) = log.warning(s"unsupported message: $m")
