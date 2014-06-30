@@ -96,10 +96,6 @@ trait Crazy8MovePatterns {
   /**
    * Find best preferred move pattern from available patterns
    *
-   * example {{
-   * //TODO example
-   * }}
-   *
    * @param curr - current card
    * @param cards - player's cards
    * @return best preferred move pattern
