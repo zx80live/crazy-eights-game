@@ -29,13 +29,17 @@ class Player extends Actor with ActorLogging with PrettyListView with Crazy8Move
   }
 
   def actionNextMove(c: Card) = {
-    findPreferred(c, cards) match {
-      case xs if xs.length > 0 =>
-        log.info(s"current($c), discard(${prettyList(xs)})")
-        sender ! Discard(xs)
-      case _ =>
-        log.info(s"current($c), draw request")
-        sender ! Draw()
+    if (cards.length != 0) {
+      findPreferred(c, cards) match {
+        case xs if xs.length > 0 =>
+          log.info(s"current($c), discard(${prettyList(xs)})")
+          sender ! Discard(xs)
+        case _ =>
+          log.info(s"current($c), draw request")
+          sender ! Draw()
+      }
+    } else {
+      sender ! EmptyCards()
     }
   }
 

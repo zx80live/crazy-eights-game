@@ -19,4 +19,6 @@ object Messages {
 
   case class Pass(msg: String = "")
 
+  case class EmptyCards()
+
 }
