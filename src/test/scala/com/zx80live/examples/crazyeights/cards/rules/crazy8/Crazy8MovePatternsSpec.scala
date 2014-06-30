@@ -59,6 +59,10 @@ class Crazy8MovePatternsSpec extends WordSpec with Matchers with Crazy8MovePatte
     "best move - by current rank" in {
       findPreferred(card"2♥".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(cards"2♦, 2♣, 2♠".get)
     }
+
+    "best move - any" in {
+      findPreferred(card"☆".get, cards" 2♦, 3♣, 2♣, A♦, 8♦, 8♠, 2♠, A♣, ☆ ".get) should equal(cards"2♦".get)
+    }
   }
 
   "findAnyNonSpecial" in {

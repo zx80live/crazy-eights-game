@@ -128,6 +128,8 @@ trait Crazy8MovePatterns {
   /**
    * Used if there was some joker
    *
+   * //TODO optimize: get any non-preferred card (instead duplicate cards)
+   *
    * @param cards - player cards
    * @return
    */
