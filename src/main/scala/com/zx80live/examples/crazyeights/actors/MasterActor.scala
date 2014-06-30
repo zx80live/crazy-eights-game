@@ -8,7 +8,7 @@ import com.zx80live.examples.crazyeights.cards.{Suit, Card}
 import com.zx80live.examples.crazyeights.cards.Rank.Eight
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, Crazy8Workspace}
-import com.zx80live.examples.crazyeights.util.PrettyListView
+import com.zx80live.examples.crazyeights.util.{CircularList, PrettyListView}
 
 import scala.concurrent.duration.Duration
 
@@ -24,9 +24,8 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
   implicit val timeout = Duration.create(2, TimeUnit.SECONDS)
 
   private var workspace: Workspace = new Crazy8Workspace
-  private var players: List[ActorRef] = Nil
 
-  private var playersIterator: Iterator[ActorRef] = Nil.iterator
+  private var players = new CircularList[ActorRef]()
 
   @scala.throws[Exception](classOf[Exception])
   override def onReceive(message: Any): Unit = {
@@ -45,30 +44,19 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
 
       case Pass(None) =>
-        log.info(s"accept pass user${sender.path}")
-        if (playersIterator.hasNext) {
-          val nextPlayer = playersIterator.next()
-          nextPlayer ! NextMove(workspace)
-          log.info(s"move to next $nextPlayer")
-        } else {
-          playersIterator = players.iterator
-          val nextPlayer = playersIterator.next()
-          nextPlayer ! NextMove(workspace)
-          log.info(s"move to first $nextPlayer")
-        }
+        log.info(s"accept pass from ${sender.path}")
+        val nextPlayer = players.next
+        nextPlayer ! NextMove(workspace)
+
+        log.info(s"move to next $nextPlayer")
+
 
       case Pass(Some("WithJoker")) =>
         log.info(s"accept pass user${sender.path}")
-        if (playersIterator.hasNext) {
-          val nextPlayer = playersIterator.next()
-          nextPlayer ! NextMove(workspace, canAnyCardMove = true)
-          log.info(s"move to next $nextPlayer")
-        } else {
-          playersIterator = players.iterator
-          val nextPlayer = playersIterator.next()
-          nextPlayer ! NextMove(workspace, canAnyCardMove = true)
-          log.info(s"move to first $nextPlayer")
-        }
+        val nextPlayer = players.next
+        nextPlayer ! NextMove(workspace, canAnyCardMove = true)
+        log.info(s"move to next $nextPlayer")
+
 
       case WorkspaceStatus() => actionWorkspaceStatus()
 
@@ -136,20 +124,22 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
         log.info("workspace state:")
         log.info(workspace.toString)
 
-        players = Nil
+        players = new CircularList[ActorRef]()
+
+        //players = Nil
         list.tail foreach { playersCards =>
           val player = context.actorOf(Props[AIPlayerActor], s"player-${players.length}")
-          players = player :: players
-
+          //players = player :: players
+          players.insert(player)
           player ! Deal(playersCards, workspace)
         }
 
 
         val human = context.actorOf(Props[ConsoleActor], s"player-human")
-        players = human :: players
-        playersIterator = players.iterator
-        playersIterator.next
-        human ! DealAndNextMove(list.head, workspace)
+        players.insert(human)
+        human ! Deal(list.head, workspace)
+
+        players.next ! NextMove(workspace)
 
       case Left(e) =>
         log.error(e.toString)

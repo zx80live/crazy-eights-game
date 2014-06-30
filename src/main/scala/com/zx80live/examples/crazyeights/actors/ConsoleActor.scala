@@ -27,6 +27,11 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
 
   override def receive: Receive = {
 
+    case Deal(list, ws) =>
+      cards = list
+      workspace = Some(ws)
+      log.info(s"accept deal cards: ${prettyList(list)}")
+
     case SuccessDiscard(correctDiscardCards, ws, event) =>
       cards = cards diff correctDiscardCards
       workspace = Some(ws)

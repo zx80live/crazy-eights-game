@@ -18,8 +18,17 @@ class CircularList[T](xs: List[T] = Nil) {
     e
   }
 
+  //TODO test
+  def length = list.length
+
   def add(e: T): CircularList[T] = {
     list = list :+ e
+    this
+  }
+
+  //TODO test
+  def insert(e: T): CircularList[T] = {
+    list = e :: list
     this
   }
 
