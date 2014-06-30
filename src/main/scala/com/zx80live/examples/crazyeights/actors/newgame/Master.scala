@@ -40,7 +40,7 @@ class Master extends UntypedActor with ActorLogging with PrettyListView {
   def actionSetSuit(suit: Suit.Value) = {
     workspace.currentCard match {
       case Card(Rank.Eight, _) =>
-        log.info(s"set suit($suit) from ${sender()}")
+        log.info(s"set suit($suit) from ${sender().path.name}")
         workspace.setCurrentSuit(suit)
       case _ =>
         log.error(s"can't change suit($suit) because current card is not eight")
@@ -83,10 +83,10 @@ class Master extends UntypedActor with ActorLogging with PrettyListView {
     workspace.discardCards(cards) match {
       case Left(e) =>
         val evt = new WrongDiscardEvent
-        log.error(s"$evt(${prettyList(cards)}) from ${sender().path}")
+        log.error(s"$evt(${prettyList(cards)}) from ${sender().path.name}")
         sender ! DiscardResult(workspace.currentCard, cards, evt)
       case Right(evt) =>
-        log.info(s"$evt(${prettyList(cards)}) from ${sender().path}")
+        log.info(s"$evt(${prettyList(cards)}) from ${sender().path.name}")
         sender ! DiscardResult(workspace.currentCard, cards, evt)
       //log.info("switch to the next player")
       //actionPass()
@@ -96,7 +96,7 @@ class Master extends UntypedActor with ActorLogging with PrettyListView {
   def actionDraw() = {
     workspace.drawCard() match {
       case Some(card) =>
-        log.info(s"draw $card to ${sender()}")
+        log.info(s"draw $card to ${sender().path.name}")
         sender ! DrawResult(Some(card), workspace.currentCard)
       case _ =>
         log.error(s"can't draw card, ws = $workspace")
@@ -111,7 +111,7 @@ class Master extends UntypedActor with ActorLogging with PrettyListView {
 
   def actionPass() = {
     val nextPlayer = players.next
-    log.info(s"accept pass from ${sender().path}, move to ${nextPlayer.path}")
+    log.info(s"accept pass from ${sender().path.name}, move to ${nextPlayer.path.name}")
     nextPlayer ! NextMove(workspace.currentCard)
   }
 
