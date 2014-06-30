@@ -11,6 +11,13 @@ import com.zx80live.examples.crazyeights.cards.{Card, Suit}
 class HumanConsolePlayer extends Player with GameHelp {
 
   override def actionNextMove(c: Card): Unit = {
+    if (cards.length > 0)
+      enterCommand(c)
+    else
+      sender ! EmptyCards()
+  }
+
+  private def enterCommand(c: Card) = {
     log.info(s"your cards: ${toString(cards)}, current($c)")
     log.info("enter pass|p|draw|d|exit|e|suggest|sg or comma-separated cards:>")
 
