@@ -7,8 +7,6 @@ import com.zx80live.examples.crazyeights.cards.rules.{Workspace, WorkspaceEventL
 
 
 /**
- * TODO ERROR! currentCard may be Nine!
- *
  * TODO use Set[Card] instead List[Card] in all occurrences
  *
  * @author Andrew Proshkin
