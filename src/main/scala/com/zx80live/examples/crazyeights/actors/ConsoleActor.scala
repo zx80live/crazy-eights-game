@@ -6,14 +6,14 @@ import com.zx80live.examples.crazyeights.cards.{Card, Suit, CardsDSL}
 import CardsDSL._
 import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8._
-import com.zx80live.examples.crazyeights.util.PrettyListView
+import com.zx80live.examples.crazyeights.util.ConsoleRenderer
 
 /**
  *
  * @author Andrew Proshkin
  */
 @Deprecated
-class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with Crazy8DiscardsValidator with GameHelp with PrettyListView {
+class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with Crazy8DiscardsValidator with GameHelp with ConsoleRenderer {
   var cards: List[Card] = Nil
   var workspace: Option[ReadonlyWorkspace] = None
 
@@ -31,7 +31,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
     case Deal(list, ws) =>
       cards = list
       workspace = Some(ws)
-      log.info(s"accept deal cards: ${prettyList(list)}")
+      log.info(s"accept deal cards: ${toString(list)}")
 
     case SuccessDiscard(correctDiscardCards, ws, event) =>
       cards = cards diff correctDiscardCards
@@ -94,11 +94,11 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
           s"""
             |
             |  Workspace(shuffle: ${ws.isShuffle}) {
-            |    stockpile:   ${prettyList(ws.stockPile)}
-            |    discardPile: ${prettyList(ws.discardPile)}
+            |    stockpile:   ${toString(ws.stockPile)}
+            |    discardPile: ${toString(ws.discardPile)}
             |    currentCard: ${ws.currentCard.toString.trim}
             |  }
-            |  your cards:    ${prettyList(cards)}
+            |  your cards:    ${toString(cards)}
             |  $postProcessedText
           """.stripMargin)
 
@@ -136,7 +136,7 @@ class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with 
         case "suggest" | "sg" =>
           val txt = findPreferred(workspace.get.currentCard, cards) match {
             case preferred if preferred.length > 0 =>
-              s"suggest move:  ${prettyList(preferred)}"
+              s"suggest move:  ${toString(preferred)}"
             case _ =>
               "suggest move:  None, use commands draw|pass"
           }

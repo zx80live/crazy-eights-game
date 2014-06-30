@@ -12,7 +12,7 @@ import com.zx80live.examples.crazyeights.cards.CardsDSL._
 class HumanConsolePlayer extends Player with GameHelp {
 
   override def actionNextMove(c: Card): Unit = {
-    log.info(s"your cards: ${prettyList(cards)}, current($c)")
+    log.info(s"your cards: ${toString(cards)}, current($c)")
     log.info("enter pass|p|draw|d|exit|e|suggest|sg or comma-separated cards:>")
 
     scala.io.StdIn.readLine() match {
@@ -36,7 +36,7 @@ class HumanConsolePlayer extends Player with GameHelp {
       case "suggest" | "sg" =>
         findPreferred(c, cards) match {
           case preferred if preferred.length > 0 =>
-            log.info(s"suggest move:  ${prettyList(preferred)}")
+            log.info(s"suggest move:  ${toString(preferred)}")
           case _ =>
             log.info("suggest move:  None, use commands draw|pass")
         }

@@ -8,7 +8,7 @@ import com.zx80live.examples.crazyeights.cards.{Suit, Card}
 import com.zx80live.examples.crazyeights.cards.Rank.Eight
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, Crazy8Workspace}
-import com.zx80live.examples.crazyeights.util.{CircularList, PrettyListView}
+import com.zx80live.examples.crazyeights.util.{CircularList, ConsoleRenderer}
 
 import scala.concurrent.duration.Duration
 
@@ -20,7 +20,7 @@ import scala.concurrent.duration.Duration
  * @author Andrew Proshkin
  */
 @Deprecated
-class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging with PrettyListView {
+class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging with ConsoleRenderer {
 
   implicit val timeout = Duration.create(2, TimeUnit.SECONDS)
 
@@ -81,10 +81,10 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
   }
 
   private def actionDiscard(list: List[Card]) = {
-    log.info(s"accept discard ${prettyList(list)} from ${sender().path}")
+    log.info(s"accept discard ${toString(list)} from ${sender().path}")
     workspace.discardCards(list) match {
       case Left(e) =>
-        log.error(s"accept wrong discard ${prettyList(list)} from ${sender().path}")
+        log.error(s"accept wrong discard ${toString(list)} from ${sender().path}")
         sender ! WrongDiscard(list, workspace, e.getMessage)
       case Right(evt) =>
         log.info(s"accept $evt")

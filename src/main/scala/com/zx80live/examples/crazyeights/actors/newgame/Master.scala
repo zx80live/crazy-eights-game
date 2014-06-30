@@ -7,7 +7,7 @@ import com.zx80live.examples.crazyeights.actors.newgame.Messages._
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8Workspace, WrongDiscardEvent}
 import com.zx80live.examples.crazyeights.cards.{Card, Rank, Suit}
-import com.zx80live.examples.crazyeights.util.{CircularList, PrettyListView}
+import com.zx80live.examples.crazyeights.util.{CircularList, ConsoleRenderer}
 
 import scala.concurrent.duration.Duration
 
@@ -15,7 +15,7 @@ import scala.concurrent.duration.Duration
  *
  * @author Andrew Proshkin
  */
-class Master extends UntypedActor with ActorLogging with PrettyListView {
+class Master extends UntypedActor with ActorLogging with ConsoleRenderer {
 
   implicit val timeout = Duration.create(2, TimeUnit.SECONDS)
 
@@ -83,10 +83,10 @@ class Master extends UntypedActor with ActorLogging with PrettyListView {
     workspace.discardCards(cards) match {
       case Left(e) =>
         val evt = new WrongDiscardEvent
-        log.error(s"$evt(${prettyList(cards)}) from ${sender().path.name}")
+        log.error(s"$evt(${toString(cards)}) from ${sender().path.name}")
         sender ! DiscardResult(workspace.currentCard, cards, evt)
       case Right(evt) =>
-        log.info(s"$evt(${prettyList(cards)}) from ${sender().path.name}")
+        log.info(s"$evt(${toString(cards)}) from ${sender().path.name}")
         sender ! DiscardResult(workspace.currentCard, cards, evt)
       //log.info("switch to the next player")
       //actionPass()
