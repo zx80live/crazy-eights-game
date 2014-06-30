@@ -101,7 +101,7 @@ trait Crazy8MovePatterns {
    * @return best preferred move pattern
    */
   def findPreferred(curr: Card, cards: List[Card]): List[Card] = {
-    val preferredBecauseJocker: Option[List[Card]] =
+    val preferredBecauseJoker: Option[List[Card]] =
       if (curr.suit == Special)
         findAnyNonSpecial(cards)
       else
@@ -109,9 +109,9 @@ trait Crazy8MovePatterns {
 
     val preferredBySuit: Option[List[Card]] = findPreferredBySuit(curr, cards).headOption
     val preferredByRank: Option[List[Card]] = findPreferredByRank(curr, cards)
-    val maxPreferred: Option[Seq[Card]] = maxList(preferredBySuit, preferredByRank)
+    val maxPreferred: Option[List[Card]] = maxList(preferredBySuit, preferredByRank)
 
-    val result = preferredBecauseJocker orElse maxPreferred orElse findEight(cards) orElse findJoker(cards)
+    val result = preferredBecauseJoker orElse maxPreferred orElse findEight(cards) orElse findJoker(cards)
 
     result match {
       //TODO warning
