@@ -15,6 +15,7 @@ import com.zx80live.examples.crazyeights.util.PrettyListView
  *
  * @author Andrew Proshkin
  */
+@Deprecated
 class AIPlayerActor extends Actor with Crazy8MovePatterns with ActorLogging with PrettyListView {
   var workspace: Option[ReadonlyWorkspace] = None
   var cards: List[Card] = Nil

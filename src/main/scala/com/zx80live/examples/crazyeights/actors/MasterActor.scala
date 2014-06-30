@@ -19,6 +19,7 @@ import scala.concurrent.duration.Duration
  *
  * @author Andrew Proshkin
  */
+@Deprecated
 class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging with PrettyListView {
 
   implicit val timeout = Duration.create(2, TimeUnit.SECONDS)

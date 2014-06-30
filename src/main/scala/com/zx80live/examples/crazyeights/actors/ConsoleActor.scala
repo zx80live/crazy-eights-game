@@ -12,6 +12,7 @@ import com.zx80live.examples.crazyeights.util.PrettyListView
  *
  * @author Andrew Proshkin
  */
+@Deprecated
 class ConsoleActor extends Actor with ActorLogging with Crazy8MovePatterns with Crazy8DiscardsValidator with GameHelp with PrettyListView {
   var cards: List[Card] = Nil
   var workspace: Option[ReadonlyWorkspace] = None
