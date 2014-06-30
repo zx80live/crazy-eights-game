@@ -1,8 +1,7 @@
 package com.zx80live.examples.crazyeights.actors.newgame
 
 import akka.actor.{Actor, ActorLogging}
-import com.zx80live.examples.crazyeights.actors.Messages._
-import com.zx80live.examples.crazyeights.actors.newgame.Messages.{DiscardResult, DrawResult, NextMove}
+import com.zx80live.examples.crazyeights.actors.newgame.Messages._
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.rules.crazy8._
 import com.zx80live.examples.crazyeights.util.PrettyListView
@@ -32,10 +31,10 @@ class Player extends Actor with ActorLogging with PrettyListView with Crazy8Move
     if (cards.length != 0) {
       findPreferred(c, cards) match {
         case xs if xs.length > 0 =>
-          log.info(s"current($c), discard(${prettyList(xs)})")
+          log.info(s"discard(${prettyList(xs)}) --> current($c)")
           sender ! Discard(xs)
         case _ =>
-          log.info(s"current($c), draw request")
+          log.info(s"draw request for current($c)")
           sender ! Draw()
       }
     } else {
@@ -59,8 +58,15 @@ class Player extends Actor with ActorLogging with PrettyListView with Crazy8Move
     log.info(s"$evt for discard(${prettyList(xs)})")
     evt match {
       case f: WrongDiscardEvent => actionNextMove(current)
-      case _ => actionPass()
+      case s: EightDiscardEvent => actionSetSuit(current, xs)
+      case _ => diffCards(xs); actionPass()
     }
+  }
+
+  def actionSetSuit(current: Card, xs: List[Card]) = {
+    log.warning("TODO implements set suit")
+    diffCards(xs)
+    actionPass()
   }
 
   def actionUnsupportedMessage(m: Any) = log.warning(s"unsupported message: $m")
@@ -68,6 +74,15 @@ class Player extends Actor with ActorLogging with PrettyListView with Crazy8Move
   def actionPass() = {
     log.info("pass request")
     sender ! Pass()
+  }
+
+  def actionExit() {
+    log.info("exit request")
+    sender ! Exit()
+  }
+
+  def diffCards(xs: List[Card]) = {
+    cards = cards diff xs
   }
 }
 

@@ -9,7 +9,7 @@ import com.zx80live.examples.crazyeights.cards.rules.{ReadonlyWorkspace, Workspa
  *
  * @author Andrew Proshkin
  */
-object Messages {
+object OldMessages {
 
   case class WrongDiscard(cards: List[Card], workspace: ReadonlyWorkspace, msg: String = "")
 

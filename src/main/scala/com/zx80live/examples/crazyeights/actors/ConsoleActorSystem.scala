@@ -1,9 +1,9 @@
 package com.zx80live.examples.crazyeights.actors
 
 import akka.actor.{ActorSystem, Props}
-import com.zx80live.examples.crazyeights.actors.Messages.NewGame
-import com.zx80live.examples.crazyeights.cards.CardsDSL
-import CardsDSL._
+import com.zx80live.examples.crazyeights.actors.newgame.Master
+import com.zx80live.examples.crazyeights.actors.newgame.Messages.NewGame
+import com.zx80live.examples.crazyeights.cards.CardsDSL._
 
 
 /**
@@ -13,7 +13,7 @@ import CardsDSL._
 object ConsoleActorSystem extends App with GameHelp {
 
   val system = ActorSystem("ConsoleActorSystem")
-  val master = system.actorOf(Props[MasterActor], name = "master")
+  val master = system.actorOf(Props[Master], name = "master")
 
   //master ! NewGame(2)
   var ok = true

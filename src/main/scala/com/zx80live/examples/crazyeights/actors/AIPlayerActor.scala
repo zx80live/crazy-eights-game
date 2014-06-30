@@ -1,7 +1,7 @@
 package com.zx80live.examples.crazyeights.actors
 
 import akka.actor.{Actor, ActorLogging}
-import com.zx80live.examples.crazyeights.actors.Messages._
+import com.zx80live.examples.crazyeights.actors.OldMessages._
 import com.zx80live.examples.crazyeights.cards.Card
 import com.zx80live.examples.crazyeights.cards.rules.ReadonlyWorkspace
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.{Crazy8MovePatterns, JokerDiscardEvent, SuccessDiscardEvent}

@@ -3,7 +3,7 @@ package com.zx80live.examples.crazyeights.actors
 import java.util.concurrent.TimeUnit
 
 import akka.actor._
-import com.zx80live.examples.crazyeights.actors.Messages._
+import com.zx80live.examples.crazyeights.actors.OldMessages._
 import com.zx80live.examples.crazyeights.cards.{Suit, Card}
 import com.zx80live.examples.crazyeights.cards.Rank.Eight
 import com.zx80live.examples.crazyeights.cards.rules.Workspace
