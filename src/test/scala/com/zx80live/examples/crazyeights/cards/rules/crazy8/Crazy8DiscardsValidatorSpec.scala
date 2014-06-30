@@ -182,7 +182,7 @@ class Crazy8DiscardsValidatorSpec extends WordSpec with Matchers with Crazy8Disc
       // by rank group
       "5♦,A♠" --> "5♦" shouldEqual false
       "7♦,8♣" --> "5♦" shouldEqual false
-      //"5♦,8♠,5♣,5♠" -> "5♦" shouldEqual false //TODO test fail
+      "5♦,8♠,5♣,5♠" --> "5♦" shouldEqual false
       // by suit group
       "4♣, 4♦, 4♠" --> "2♥" shouldEqual false
       "2♥, 3♥, 4♥" --> "2♥" shouldEqual false
