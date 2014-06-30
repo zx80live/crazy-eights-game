@@ -43,7 +43,7 @@ class Crazy8WorkspaceBuilderSpec extends WordSpec with Matchers with Crazy8Works
         stockpile.contains(discardPile.head) shouldBe false
         discardPile.head.rank should not be Eight
         discardPile.head.suit should not be Special
-      case _ => true shouldBe false //TODO refactoring
+      case _ => true shouldBe false
     }
   }
 }
