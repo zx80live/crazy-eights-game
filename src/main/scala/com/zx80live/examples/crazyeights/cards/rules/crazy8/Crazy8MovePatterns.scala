@@ -116,7 +116,7 @@ trait Crazy8MovePatterns {
     result match {
       //TODO warning
       case Some(x: Card) => List(x)
-      case Some(xs: List[Card]) => xs
+      case Some(xs: List[_]) if xs.forall(_.isInstanceOf[Card]) => xs.asInstanceOf[List[Card]]
       case _ => List()
     }
   }
