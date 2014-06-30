@@ -44,7 +44,7 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
 
       case Pass(None) =>
-        log.info(s"accept pass from ${sender.path}")
+        log.info(s"accept pass from ${sender().path}")
         val nextPlayer = players.next
         nextPlayer ! NextMove(workspace)
 
@@ -52,7 +52,7 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
 
       case Pass(Some("WithJoker")) =>
-        log.info(s"accept pass user${sender.path}")
+        log.info(s"accept pass user${sender().path}")
         val nextPlayer = players.next
         nextPlayer ! NextMove(workspace, canAnyCardMove = true)
         log.info(s"move to next $nextPlayer")
@@ -62,9 +62,9 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
       case Win() => actionWin()
 
-      case Some(text) => log.info(s"accept some string: $text from $sender")
-      case text: String => log.info(s"accept string: $text from $sender")
-      case e@_ => log.error(s"accept unsupported message: $e from $sender")
+      case Some(text) => log.info(s"accept some string: $text from ${sender()}")
+      case text: String => log.info(s"accept string: $text from ${sender()}")
+      case e@_ => log.error(s"accept unsupported message: $e from ${sender()}")
     }
   }
 
@@ -80,10 +80,10 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
   }
 
   private def actionDiscard(list: List[Card]) = {
-    log.info(s"accept discard ${prettyList(list)} from ${sender.path}")
+    log.info(s"accept discard ${prettyList(list)} from ${sender().path}")
     workspace.discardCards(list) match {
       case Left(e) =>
-        log.error(s"accept wrong discard ${prettyList(list)} from ${sender.path}")
+        log.error(s"accept wrong discard ${prettyList(list)} from ${sender().path}")
         sender ! WrongDiscard(list, workspace, e.getMessage)
       case Right(evt) =>
         log.info(s"accept $evt")
@@ -105,7 +105,7 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
   }
 
   private def actionWin() = {
-    log.info(s"PLAYER $sender WIN!")
+    log.info(s"PLAYER ${sender()} WIN!")
     exitGame()
   }
 
