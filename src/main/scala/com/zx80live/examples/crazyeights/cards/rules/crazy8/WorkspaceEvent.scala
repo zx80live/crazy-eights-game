@@ -23,4 +23,6 @@ class EightDiscardEvent extends DiscardEvent
 
 class SuccessDiscardEvent extends DiscardEvent
 
+class WrongDiscardEvent extends DiscardEvent
+
 class SuccessDealEvent extends DealEvent
