@@ -1,9 +1,9 @@
 package com.zx80live.examples.crazyeights.cards.rules.crazy8
 
-import com.zx80live.examples.crazyeights.cards.{Suit, Rank, Card, CardsHelper}
-import CardsHelper._
+import com.zx80live.examples.crazyeights.cards.CardsHelper._
 import com.zx80live.examples.crazyeights.cards.rules.crazy8.Exceptions.{DealException, DiscardException, WorkspaceException}
 import com.zx80live.examples.crazyeights.cards.rules.{Workspace, WorkspaceEventListener}
+import com.zx80live.examples.crazyeights.cards.{Card, CardsHelper, Rank, Suit}
 
 
 /**
@@ -71,13 +71,14 @@ class Crazy8Workspace(cards: List[Card] = deck54, shuffle: Boolean = true) exten
     }
   }
 
-  /** TODO test
-    * TODO event (Joker, Eight, Success)
-    * Discard player's cards.
-    *
-    * @param cards - player's cards
-    * @return
-    */
+  /**
+   * Discard player's cards.
+   *
+   * TODO test
+   *
+   * @param cards - player's cards
+   * @return
+   */
   override def discardCards(cards: List[Card]): Either[DiscardException, DiscardEvent] = {
     if (!validateDiscard(currentCard, cards)) {
       Left(new DiscardException(s"$cards is not valid for current $currentCard"))
