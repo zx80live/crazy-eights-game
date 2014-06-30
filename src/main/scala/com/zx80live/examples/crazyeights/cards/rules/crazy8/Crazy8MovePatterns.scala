@@ -109,7 +109,7 @@ trait Crazy8MovePatterns {
 
     val preferredBySuit: Option[List[Card]] = findPreferredBySuit(curr, cards).headOption
     val preferredByRank: Option[List[Card]] = findPreferredByRank(curr, cards)
-    val maxPreferred: Option[Seq[Card]] = maxSeq(preferredBySuit, preferredByRank)
+    val maxPreferred: Option[Seq[Card]] = maxList(preferredBySuit, preferredByRank)
 
     val result = preferredBecauseJocker orElse maxPreferred orElse findEight(cards) orElse findJoker(cards)
 
