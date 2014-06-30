@@ -25,16 +25,18 @@ class Master extends UntypedActor with ActorLogging with ConsoleRenderer {
 
 
   @scala.throws[Exception](classOf[Exception])
-  override def onReceive(message: Any): Unit = message match {
-    case NewGame(count) => actionNewGame(count)
-    case Discard(cards) => actionDiscard(cards)
-    case Draw() => actionDraw()
-    case EmptyCards() => actionEmptyCards()
-    case Pass() => actionPass()
-    case SetSuit(suit) => actionSetSuit(suit)
-    case Exit() => actionExit()
+  override def onReceive(message: Any): Unit = {
+    message match {
+      case NewGame(count) => actionNewGame(count)
+      case Discard(cards) => actionDiscard(cards)
+      case Draw() => actionDraw()
+      case EmptyCards() => actionEmptyCards()
+      case Pass() => actionPass()
+      case SetSuit(suit) => actionSetSuit(suit)
+      case Exit() => actionExit()
 
-    case _ => actionUnsupportedMessage(message)
+      case _ => actionUnsupportedMessage(message)
+    }
   }
 
   def actionSetSuit(suit: Option[Suit.Value]) = {
@@ -51,13 +53,12 @@ class Master extends UntypedActor with ActorLogging with ConsoleRenderer {
   def actionNewGame(count: Int) = {
     log.info(s"create new workspace with $count players")
     workspace = new Crazy8Workspace
-    log.info(workspace.toString)
     log.info(s"deals cards for players..")
     workspace.deal(count) match {
       case Right(list) =>
         log.info(s"create players cards for 1 human and ${list.length - 1} AI:")
         log.info("workspace state:")
-        log.info(workspace.toString)
+        log.info(s"${toString(workspace)}")
 
         players = new CircularList[ActorRef]()
 

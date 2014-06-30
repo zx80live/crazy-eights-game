@@ -16,8 +16,8 @@ trait ConsoleRenderer {
     s"""
             |  Workspace(shuffle: ${ws.isShuffle}) {
             |    stockpile:   ${toString(ws.stockPile)}
-            |    discardPile: ${toString(ws.discardPile)}
-            |    currentCard: ${ws.currentCard.toString.trim}
+            |    discards:    ${toString(ws.discardPile)}
+            |    current:     [${ws.currentCard.toString.trim}]
             |  }
           """.stripMargin
   }

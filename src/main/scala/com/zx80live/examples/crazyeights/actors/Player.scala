@@ -31,10 +31,10 @@ class Player extends Actor with ActorLogging with ConsoleRenderer with Crazy8Mov
     if (cards.length != 0) {
       findPreferred(c, cards) match {
         case xs if xs.length > 0 =>
-          log.info(s"discard(${toString(xs)}) --> current($c)")
+          log.info(s"(${toString(cards)}) [$c]: discard(${toString(xs)})")
           sender ! Discard(xs)
         case _ =>
-          log.info(s"draw request for current($c)")
+          log.info(s"(${toString(cards)}) [$c]: draw")
           sender ! Draw()
       }
     } else {
@@ -43,7 +43,7 @@ class Player extends Actor with ActorLogging with ConsoleRenderer with Crazy8Mov
   }
 
   def actionDrawResult(draw: Option[Card], current: Card, msg: String) = {
-    log.info(s"draw($draw), current($current) $msg")
+    log.info(s"accept draw($draw), current($current) $msg")
     draw match {
       case Some(c) =>
         cards = c :: cards
@@ -55,7 +55,7 @@ class Player extends Actor with ActorLogging with ConsoleRenderer with Crazy8Mov
   }
 
   def actionDiscardResult(current: Card, xs: List[Card], evt: DiscardEvent) = {
-    log.info(s"$evt for discard(${toString(xs)})")
+    log.info(s"$evt(${toString(xs)})")
     evt match {
       case f: WrongDiscardEvent => actionNextMove(current)
       case s: EightDiscardEvent =>
@@ -67,18 +67,18 @@ class Player extends Actor with ActorLogging with ConsoleRenderer with Crazy8Mov
   }
 
   def actionSetSuit(current: Card, xs: List[Card]) = {
-    log.info("player keep current suit")
+    log.info(s"keep current suit [$current]")
   }
 
-  def actionUnsupportedMessage(m: Any) = log.warning(s"unsupported message: $m")
+  def actionUnsupportedMessage(m: Any) = log.warning(s"unsupported($m)")
 
   def actionPass() = {
-    log.info("pass request")
+    log.info("pass")
     sender ! Pass()
   }
 
   def actionExit() {
-    log.info("exit request")
+    log.info("exit")
     sender ! Exit()
   }
 
