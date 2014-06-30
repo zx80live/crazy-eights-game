@@ -126,10 +126,8 @@ class MasterActor extends UntypedActor with Crazy8MovePatterns with ActorLogging
 
         players = new CircularList[ActorRef]()
 
-        //players = Nil
         list.tail foreach { playersCards =>
           val player = context.actorOf(Props[AIPlayerActor], s"player-${players.length}")
-          //players = player :: players
           players.insert(player)
           player ! Deal(playersCards, workspace)
         }
