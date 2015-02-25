@@ -6,22 +6,22 @@ Author:  Andrew Proshkin (zx80live@gmail.com, skype: zx80live)
 
 Requirements
 -----------------------------
-Scala: 2.11.1
-JRE:   8
-SBT:   0.13.5 (or Typesafe Activator 1.2.2)
+- Scala: 2.11.1
+- JRE:   8
+- SBT:   0.13.5 (or Typesafe Activator 1.2.2)
 
 
 Build and tests
 -----------------------------
 Build and testing:
-    > sbt update clean compile test
+    `> sbt update clean compile test`
     or
-    > activator update clean compile test
+    `> activator update clean compile test`
 
 Run game:
-    > sbt run
+    `> sbt run`
     or
-    > activator run
+    `> activator run`
     
     
 Game console interface
@@ -29,25 +29,25 @@ Game console interface
 The game supports follows prompt commands:
 
   system commands:
-      
-    help|h|?          - print help
-    about             - about version, author
-    rules|r           - print game rules
-    new [count]       - new game with players, example "new 2"
-    exit|e|quit|q|end - end of game and exit
+     
+    > help|h|?          - print help
+    > about             - about version, author
+    > rules|r           - print game rules
+    > new [count]       - new game with players, example "new 2"
+    > exit|e|quit|q|end - end of game and exit
   
   game commands:
   
-    pass|p            - pass current move
-    status|stat|st    - print game status
-    suggest|sg        - suggest preferred move (if exists)
-    A♠,5♦,K♥,4♥,☆     - comma-separated cards for discard (user's move)
-    draw|d            - request for getting cards from stockpile
-    exit|quit|e|q     - exit from game
+    > pass|p            - pass current move
+    > status|stat|st    - print game status
+    > suggest|sg        - suggest preferred move (if exists)
+    > A♠,5♦,K♥,4♥,☆     - comma-separated cards for discard (user's move)
+    > draw|d            - request for getting cards from stockpile
+    > exit|quit|e|q     - exit from game
     
 
 Example: create game for two players:
-     > new 2
+    `> new 2`
 
 Game supports 1 to 4 players.
     
@@ -56,11 +56,11 @@ Cards DSL:
 -----------------------------
 You can enter in command prompt:
     
-    5♠,5♦,5♥,5♣,★ , ☆  - unicode cards
+    `5♠,5♦,5♥,5♣,★ , ☆ ` - unicode cards
        
-    5S,5B,5H,5C,WJ,BJ   - ASCII-codes
+    `5S,5B,5H,5C,WJ,BJ`   - ASCII-codes
 
-Full codes see: com.zx80live.examples.crazyeights.cards.CardsHelper
+Full codes see: `com.zx80live.examples.crazyeights.cards.CardsHelper`
  
 Game AI
 -----------------------------
@@ -68,7 +68,7 @@ AI released by Crazy8MOvePatterns that find preferred moves for current game sta
 
 Game logging
 -----------------------------
-Game logs locate in /logs/crazy-eights.log
+Game logs locate in `/logs/crazy-eights.log`
    
    
 Used techniques, scala features
@@ -103,12 +103,12 @@ Development focus on priority:
 
       1.1.2 Convenient cards DSL - based on implicit conversion interpolated strings
         to Card Model API. Support card unicode representation.
-
+```
           example {{{
             val card:Option[Card] = card"A♠"
             val cards:Option[List[Card]] = card"A♠,5♦,K♥,4♥,☆"
           }}}
-
+```
     2) Game Logic API
         - @see com.zx80live.examples.crazyeights.cards.rules
         - //TODO create another rules for other games like "CrazyEights"
