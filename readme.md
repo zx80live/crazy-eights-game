@@ -1,7 +1,6 @@
 Project "Crazy Eights Game"
 ==============================================================
 Version: 1.0
-Author:  Andrew Proshkin (zx80live@gmail.com, skype: zx80live)
 
 
 Requirements
