@@ -103,12 +103,12 @@ Development focus on priority:
 
       1.1.2 Convenient cards DSL - based on implicit conversion interpolated strings
         to Card Model API. Support card unicode representation.
-```
-          example {{{
+
+          ```example {{{
             val card:Option[Card] = card"A♠"
             val cards:Option[List[Card]] = card"A♠,5♦,K♥,4♥,☆"
-          }}}
-```
+          }}}```
+
     2) Game Logic API
         - @see com.zx80live.examples.crazyeights.cards.rules
         - //TODO create another rules for other games like "CrazyEights"
