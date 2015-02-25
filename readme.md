@@ -94,14 +94,14 @@ Short release description
 -----------------------------
 
 Development focus on priority:
-    1. Game API:
-      1.1 Card Model API, support 54 cards deck. (API must be moved into external sbt lib)
-          - @see com.zx80live.examples.crazyeights.cards:
-            -- dsl.ConversionUtils._ allows to convert interpolated string to Card implicitly
+1. Game API:
+1.1 Card Model API, support 54 cards deck. (API must be moved into external sbt lib)
+  - @see com.zx80live.examples.crazyeights.cards:
+    -- dsl.ConversionUtils._ allows to convert interpolated string to Card implicitly
 
              
 
-      1.1.2 Convenient cards DSL - based on implicit conversion interpolated strings
+1.1.2 Convenient cards DSL - based on implicit conversion interpolated strings
         to Card Model API. Support card unicode representation.
 
           ```example {{{
